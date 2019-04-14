@@ -33,6 +33,8 @@
 #include <sstream>
 #include <vector>
 #include <list>
+
+#include "prjmodel_api.hpp"
 //#include "../../utilities/core/Logger.hpp"
 //#include "../../utilities/core/Filesystem.hpp"
 
@@ -41,7 +43,7 @@
 namespace openstudio {
 namespace contam {
 
-class Reader
+class PRJMODEL_API Reader
 {
 public:
   //explicit Reader(openstudio::filesystem::ifstream &file);

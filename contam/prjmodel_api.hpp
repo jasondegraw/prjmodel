@@ -30,14 +30,23 @@
 #ifndef AIRFLOW_AIRFLOWAPI_HPP
 #define AIRFLOW_AIRFLOWAPI_HPP
 
-  #if (_WIN32 || _MSC_VER) && SHARED_OS_LIBS
-    #ifdef openstudio_airflow_EXPORTS
-      #define AIRFLOW_API __declspec(dllexport)
-    #else
-      #define AIRFLOW_API __declspec(dllimport)
-    #endif
-  #else
-    #define AIRFLOW_API
-  #endif
+#if (_WIN32 || _MSC_VER)
+#ifdef prjmodel_EXPORTS
+#define PRJMODEL_API __declspec(dllexport)
+#else
+#define PRJMODEL_API __declspec(dllimport)
+#endif
+#else
+#define PRJMODEL_API
+#endif
+
+#ifdef _MSC_VER
+#pragma warning(disable: 4251)
+#endif
+
+#define VERSIONMAJOR 0
+#define VERSIONMINOR 1
+#define VERSIONPATCH 0
+
 
 #endif

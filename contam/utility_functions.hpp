@@ -1,5 +1,5 @@
 /***********************************************************************************************************************
-*  Copyright (c) 2008-2019, Jason W. DeGraw. All rights reserved.
+*  Copyright (c) 2019, Jason W. DeGraw. All rights reserved.
 *
 *  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
 *  following conditions are met:
@@ -52,10 +52,52 @@ inline std::vector <std::string> split(const std::string& string, char delimiter
         results.push_back(std::string());
       }
     } else {
-      if (keep_empty) {
-        while (std::getline(stream, substring, delimiter)) { // Loop and fill the results vector
+      while (std::getline(stream, substring, delimiter)) { // Loop and fill the results vector
+        if (!substring.empty()) {
           results.push_back(substring);
         }
+      }
+    }
+  }
+  return results;
+}
+
+inline std::vector <std::string> split(const std::string& str, bool keep_empty = false)
+{
+  std::vector<std::string> results;
+  size_t first=0, last;
+  size_t len = str.length();
+  if (len > 0) { // Only do work if there is work to do
+    last = str.find_first_of(" \t\n\v\f\r");
+    if (keep_empty) {
+      while (last != std::string::npos) {
+        std::string substring = str.substr(first, last-first);
+        results.push_back(substring);
+        if (last + 1 == len) {
+          first = last + 1;
+          break;
+        }
+        first = last + 1;
+        last = str.find_first_of(" \t\n\v\f\r", first);
+      }
+      std::string substring = str.substr(first, std::string::npos);
+      results.push_back(substring);
+    } else {
+      while (last != std::string::npos) {
+        std::string substring = str.substr(first, last - first);
+        if (!substring.empty()) {
+          results.push_back(substring);
+        }
+        if (last + 1 == len) {
+          first = last + 1;
+          break;
+        }
+        first = last + 1;
+        last = str.find_first_of(" \t\n\v\f\r", first);
+      }
+      std::string substring = str.substr(first, std::string::npos);
+      if (!substring.empty()) {
+        results.push_back(substring);
       }
     }
   }

@@ -27,8 +27,8 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#ifndef AIRFLOW_CONTAM_PRJDEFINES_HPP
-#define AIRFLOW_CONTAM_PRJDEFINES_HPP
+#ifndef PRJDEFINES_HPP
+#define PRJDEFINES_HPP
 
 #include <string>
 #include <sstream>

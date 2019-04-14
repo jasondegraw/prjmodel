@@ -1,12 +1,12 @@
 #include_directories(${PROJECT_BINARY_DIR})
 #include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-set(target_name libprjmodel)
+set(target_name prjmodel)
 
 project(${target_name})
 
 set(${target_name}_src
-  AirflowAPI.hpp
+  prjmodel_api.hpp
   #contam/ForwardTranslator.hpp
   #contam/ForwardTranslator.cpp
   Logging.hpp
@@ -78,7 +78,7 @@ set(${target_name}_src
 #  openstudio_osversion
 #)
 
-add_library(${target_name}
+add_library(${target_name} SHARED
   ${${target_name}_src}
   #  ${EMBEDDED_OUTPUT}
 )

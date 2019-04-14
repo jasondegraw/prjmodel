@@ -1,5 +1,6 @@
 /***********************************************************************************************************************
 *  OpenStudio(R), Copyright (c) 2008-2019, Alliance for Sustainable Energy, LLC, and other contributors. All rights reserved.
+*  Copyright (c) 2019, Jason W. DeGraw. All rights reserved.
 *
 *  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
 *  following conditions are met:
@@ -57,12 +58,14 @@ Reader::~Reader()
 
 double Reader::readDouble()
 {
+  double d;
   const auto string = readString();
   try {
-    return std::stod(string);
+    d = std::stod(string);
   } catch (...) {
     LOG_FATAL("Floating point (double) conversion error at line " + std::to_string(m_lineNumber) + " for \"" + string + "\"");
   }
+  return d;
 }
 
 std::string Reader::readString()
