@@ -9,14 +9,14 @@ set(${target_name}_src
   prjmodel_api.hpp
   #contam/ForwardTranslator.hpp
   #contam/ForwardTranslator.cpp
-  Logging.hpp
-  PrjReader.hpp
-  PrjReader.cpp
+  logging.hpp
+  reader.hpp
+  reader.cpp
   #SimFile.hpp
   #SimFile.cpp
   #WindPressure.hpp
   #WindPressure.cpp
-  PrjDefines.hpp
+  defines.hpp
   #PrjModel.hpp
   #PrjModel.cpp
   #PrjModelImpl.hpp

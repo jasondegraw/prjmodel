@@ -35,10 +35,9 @@
 #include <list>
 
 #include "prjmodel_api.hpp"
-//#include "../../utilities/core/Logger.hpp"
 //#include "../../utilities/core/Filesystem.hpp"
 
-#include "PrjDefines.hpp"
+#include "defines.hpp"
 
 namespace openstudio {
 namespace contam {

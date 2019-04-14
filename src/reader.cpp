@@ -28,8 +28,8 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "PrjReader.hpp"
-#include "Logging.hpp"
+#include "reader.hpp"
+#include "logging.hpp"
 #include <iostream>
 #include <stdlib.h>
 
