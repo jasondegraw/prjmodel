@@ -27,12 +27,14 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#ifndef AIRFLOW_CONTAM_PRJREADER_HPP
-#define AIRFLOW_CONTAM_PRJREADER_HPP
+#ifndef PRJREADER_HPP
+#define PRJREADER_HPP
 
 #include <sstream>
-#include "../../utilities/core/Logger.hpp"
-#include "../../utilities/core/Filesystem.hpp"
+#include <vector>
+#include <list>
+//#include "../../utilities/core/Logger.hpp"
+//#include "../../utilities/core/Filesystem.hpp"
 
 #include "PrjDefines.hpp"
 
@@ -42,7 +44,7 @@ namespace contam {
 class Reader
 {
 public:
-  explicit Reader(openstudio::filesystem::ifstream &file);
+  //explicit Reader(openstudio::filesystem::ifstream &file);
   explicit Reader(const std::string& string, int starting=0);
   ~Reader();
 
@@ -73,6 +75,12 @@ public:
   template <class T> T read();
   template <class T> T readNumber();
 
+protected:
+  void debug(std::string& mesg);
+  void warning(std::string& mesg);
+  void error(std::string& mesg);
+  void fatal(std::string& mesg);
+
 private:
   std::string readStdString();
   std::string readLineString();
@@ -81,7 +89,10 @@ private:
   int m_lineNumber;
   std::list<std::string> m_entries;
 
-  REGISTER_LOGGER("openstudio.contam.Reader");
+  std::vector<std::string> m_warnings;
+  std::vector<std::string> m_errors;
+
+  //REGISTER_LOGGER("openstudio.contam.Reader");
 };
 
 template <class T> std::vector<T> Reader::readSectionVector(std::string name)

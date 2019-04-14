@@ -28,20 +28,23 @@
 ***********************************************************************************************************************/
 
 #include "PrjReader.hpp"
+#include "Logging.hpp"
 #include <iostream>
 #include <stdlib.h>
 
-#include "../../utilities/core/Logger.hpp"
-#include "../../utilities/core/FilesystemHelpers.hpp"
-#include "../../utilities/core/StringHelpers.hpp"
+//#include "../../utilities/core/Logger.hpp"
+//#include "../../utilities/core/FilesystemHelpers.hpp"
+//#include "../../utilities/core/StringHelpers.hpp"
+
+#include "utility_functions.hpp"
 
 namespace openstudio {
 namespace contam {
 
-Reader::Reader( openstudio::filesystem::ifstream &file )
-  : m_stream(openstudio::filesystem::read_as_string(file)), m_lineNumber(0)
-{
-}
+//Reader::Reader( openstudio::filesystem::ifstream &file )
+//  : m_stream(openstudio::filesystem::read_as_string(file)), m_lineNumber(0)
+//{
+//}
 
 Reader::Reader(const std::string& string, int starting) : m_lineNumber(starting)
 {
@@ -56,9 +59,9 @@ double Reader::readDouble()
 {
   const auto string = readString();
   try {
-    return openstudio::string_conversions::to<double>(string);
-  } catch (const std::bad_cast &) {
-    LOG_AND_THROW("Floating point (double) conversion error at line " << m_lineNumber << " for \"" << string << "\"");
+    return std::stod(string);
+  } catch (...) {
+    LOG_FATAL("Floating point (double) conversion error at line " + std::to_string(m_lineNumber) + " for \"" + string + "\"");
   }
 }
 
@@ -68,29 +71,28 @@ std::string Reader::readString()
     while(m_entries.size() == 0) {
       std::string input;
       std::getline(m_stream, input);
-      LOG(Debug, "Line read: " << input);
+      LOG_DEBUG("Line read: " + input);
       if(!m_stream) {
-        LOG_AND_THROW("Failed to read input at line " << m_lineNumber);
+        LOG_FATAL("Failed to read input at line " + std::to_string(m_lineNumber));
       }
       m_lineNumber++;
       while(input[0]=='!') {
         std::getline(m_stream, input);
-        LOG(Debug, "Line read: " << input);
+        LOG_DEBUG("Line read: " + input);
         if(!m_stream) {
-          LOG_AND_THROW("Failed to read input at line " << m_lineNumber);
+          LOG_FATAL("Failed to read input at line " + std::to_string(m_lineNumber));
         }
         m_lineNumber++;
       }
 
-      std::vector<std::string> strs;
-      boost::split(strs,input,boost::is_any_of(" "));
+      std::vector<std::string> strs = split(input,' ');
 
       m_entries.clear();
       for (const auto &s : strs) {
-        std::string s2 = boost::replace_all_copy(s, " ", "");
-        boost::replace_all(s2, "\r", "");
-        boost::replace_all(s2, "\n", "");
-        boost::replace_all(s2, "\t", "");
+        std::string s2 = s; // boost::replace_all_copy(s, " ", "");
+        //boost::replace_all(s2, "\r", "");
+        //boost::replace_all(s2, "\n", "");
+        //boost::replace_all(s2, "\t", "");
         if (!s2.empty()) {
           m_entries.push_back(s2);
         }
@@ -101,7 +103,7 @@ std::string Reader::readString()
     if(out[0] == '!') {
       m_entries.clear();
     } else {
-      LOG(Debug, "String return: " << out);
+      LOG_DEBUG("String return: " + out);
       return out;
     }
   }
@@ -114,7 +116,7 @@ int Reader::readInt()
   try {
     value = std::stoi(string);
   }catch(const std::exception&){
-    LOG_AND_THROW("Integer conversion error at line " << m_lineNumber << " for \"" << string << "\"");
+    LOG_FATAL("Integer conversion error at line " + std::to_string(m_lineNumber) + " for \"" + string + "\"");
   }
   return value;
 }
@@ -126,7 +128,7 @@ unsigned int Reader::readUInt()
   try {
     value = std::stoul(string);
   } catch (const std::exception&) {
-    LOG_AND_THROW("Unsigned Integer conversion error at line " << m_lineNumber << " for \"" << string << "\"");
+    LOG_FATAL("Unsigned Integer conversion error at line " + std::to_string(m_lineNumber) + " for \"" + string + "\"");
   }
   return value;
 }
@@ -139,16 +141,16 @@ std::string Reader::readLine()
   }
   std::string input;
   std::getline(m_stream, input);
-  LOG(Debug, "Line read: " << input);
+  LOG_DEBUG( "Line read: " + input);
   if(!m_stream) {
-    LOG_AND_THROW("Failed to read input at line " << m_lineNumber);
+    LOG_FATAL("Failed to read input at line " + std::to_string(m_lineNumber));
   }
   m_lineNumber++;
   while(input[0]=='!') {
     std::getline(m_stream, input);
-    LOG(Debug, "Line read: " << input);
+    LOG_DEBUG("Line read: " + input);
     if(!m_stream) {
-      LOG_AND_THROW("Failed to read input at line " << m_lineNumber);
+      LOG_FATAL("Failed to read input at line " + std::to_string(m_lineNumber));
     }
     m_lineNumber++;
   }
@@ -158,24 +160,24 @@ std::string Reader::readLine()
 void Reader::read999()
 {
   std::string input = readLine();
-  if(!boost::starts_with(input, "-999")) {
-    LOG_AND_THROW("Failed to read -999 at line " << m_lineNumber);
+  if(!starts_with(input, "-999")) {
+    LOG_FATAL("Failed to read -999 at line " + std::to_string(m_lineNumber));
   }
 }
 
 void Reader::read999(std::string mesg)
 {
   std::string input = readLine();
-  if (!boost::starts_with(input, "-999")) {
-    LOG_AND_THROW(mesg << " at line " << m_lineNumber);
+  if (!starts_with(input, "-999")) {
+    LOG_FATAL(mesg + " at line " + std::to_string(m_lineNumber));
   }
 }
 
 void Reader::readEnd()
 {
   std::string input = readLine();
-  if (!boost::starts_with(input, "* end project file.")) {
-    LOG_AND_THROW("Failed to read file end at line " << m_lineNumber);
+  if (!starts_with(input, "* end project file.")) {
+    LOG_FATAL("Failed to read file end at line " + std::to_string(m_lineNumber));
   }
 }
 
@@ -191,7 +193,7 @@ std::string Reader::readSection()
     std::string input;
     std::getline(m_stream, input);
     if(!m_stream) {
-      LOG_AND_THROW("Failed to read input at line " << m_lineNumber);
+      LOG_FATAL("Failed to read input at line " + std::to_string(m_lineNumber));
     }
     m_lineNumber++;
     section += std::string(input + '\n');
@@ -213,6 +215,30 @@ std::vector<int> Reader::readIntVector(bool terminated)
     read999("Failed to find section termination");
   }
   return vector;
+}
+
+void Reader::debug(std::string& mesg)
+{
+  std::cout << mesg << std::endl;
+}
+
+void Reader::warning(std::string& mesg)
+{
+  m_warnings.push_back(mesg);
+  std::cout << mesg << std::endl;
+}
+
+void Reader::error(std::string& mesg)
+{
+  m_errors.push_back(mesg);
+  std::cout << mesg << std::endl;
+}
+
+void Reader::fatal(std::string& mesg)
+{
+  m_errors.push_back(mesg);
+  std::cout << mesg << std::endl;
+  throw std::runtime_error(mesg);
 }
 
 template <> int Reader::read<int>()
@@ -244,7 +270,7 @@ template <> std::string Reader::readNumber<std::string>()
 {
   std::string string = readString();
   if(!openstudio::contam::is_valid<double>(string)) {
-    LOG_AND_THROW("Invalid number \"" << string << "\" on line " << m_lineNumber);
+    LOG_FATAL("Invalid number \"" + string + "\" on line " + std::to_string(m_lineNumber));
   }
   return string;
 }
