@@ -27,8 +27,8 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#ifndef PRJREADER_HPP
-#define PRJREADER_HPP
+#ifndef PRJMODEL_READER_HPP
+#define PRJMODEL_READER_HPP
 
 #include <sstream>
 #include <vector>
@@ -39,8 +39,7 @@
 
 #include "defines.hpp"
 
-namespace openstudio {
-namespace contam {
+namespace prjmodel {
 
 class PRJMODEL_API Reader
 {
@@ -72,9 +71,9 @@ public:
   //    template <class T, template <class T> class V> V<T> readSectionVector(STRING name);
   //    template <class T> QVector<T> readSectionQVector(STRING name=STRING_INIT);
   //    template <class T> std::vector<T> readSectionStdVector(STRING name=STRING_INIT);
-  template <class T> std::vector<std::shared_ptr<T> > readElementVector(std::string name = std::string());
-  template <class T> T read();
-  template <class T> T readNumber();
+  template <typename T> std::vector<std::shared_ptr<T> > readElementVector(std::string name = std::string());
+  template <typename T> T read();
+  template <typename T> T readNumber();
 
 protected:
   void debug(std::string& mesg);
@@ -96,7 +95,7 @@ private:
   //REGISTER_LOGGER("openstudio.contam.Reader");
 };
 
-template <class T> std::vector<T> Reader::readSectionVector(std::string name)
+template <typename T> std::vector<T> Reader::readSectionVector(std::string name)
 {
   int n = readInt();
   std::vector<T> vector;
@@ -191,7 +190,7 @@ template <class T> std::vector<T> Reader::readSectionVector(std::string name)
 //    return vector;
 //}
 
-template <class T> std::vector<std::shared_ptr<T> > Reader::readElementVector(std::string name)
+template <typename T> std::vector<std::shared_ptr<T> > Reader::readElementVector(std::string name)
 {
   int n = readInt();
   std::vector<std::shared_ptr<T> > vector;
@@ -226,7 +225,6 @@ template <class T> QVector<QSharedPointer<T> > Reader::readElementQVector(std::s
 }
 */
 
-} // contam
-} // openstudio
+} // prjmodel
 
-#endif // AIRFLOW_CONTAM_PRJREADER_HPP
+#endif // PRJMODEL_READER_HPP

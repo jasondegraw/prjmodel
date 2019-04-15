@@ -39,8 +39,7 @@
 
 #include "utility_functions.hpp"
 
-namespace openstudio {
-namespace contam {
+namespace prjmodel {
 
 //Reader::Reader( openstudio::filesystem::ifstream &file )
 //  : m_stream(openstudio::filesystem::read_as_string(file)), m_lineNumber(0)
@@ -266,17 +265,16 @@ template <> std::string Reader::read<std::string>()
 
 template <> double Reader::readNumber<double>()
 {
-  return readInt();
+  return readDouble();
 }
 
 template <> std::string Reader::readNumber<std::string>()
 {
   std::string string = readString();
-  if(!openstudio::contam::is_valid<double>(string)) {
+  if(!is_valid<double>(string)) {
     LOG_FATAL("Invalid number \"" + string + "\" on line " + std::to_string(m_lineNumber));
   }
   return string;
 }
 
-} // contam
-} // openstudio
+} // prjmodel

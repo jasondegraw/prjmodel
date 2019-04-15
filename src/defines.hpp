@@ -27,15 +27,15 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#ifndef PRJDEFINES_HPP
-#define PRJDEFINES_HPP
+#ifndef PRJMODEL_DEFINES_HPP
+#define PRJMODEL_DEFINES_HPP
 
 #include <string>
 #include <sstream>
 
 using PRJFLOAT = std::string;
 
-namespace openstudio::contam {
+namespace prjmodel {
 
 template<typename DesiredType, typename InputType>
 DesiredType to(const InputType &inp)
@@ -232,4 +232,4 @@ enum ZoneFlags {
 }
 }
 
-#endif // AIRFLOW_CONTAM_PRJDEFINES_HPP
+#endif // PRJMODEL_DEFINES_HPP
