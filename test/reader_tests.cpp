@@ -11,8 +11,8 @@ TEST_CASE("Test basic reading", "[Reader]")
   CHECK(reader.readDouble() == 0.000998165);
   CHECK(reader.readString() == "0.65");
   CHECK(reader.readInt() == 75);
-  CHECK(reader.readString() == "0.0181269");
-  //CHECK(reader.readNumber<std::string>() == "0.0181269");
+  //CHECK(reader.readString() == "0.0181269");
+  CHECK(reader.readNumber<std::string>() == "0.0181269");
   //CHECK(reader.readNumber<double>() == 0.0181269);
   CHECK(reader.readString() == "0");
   CHECK(reader.readString() == "4");

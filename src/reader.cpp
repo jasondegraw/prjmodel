@@ -243,32 +243,32 @@ void Reader::fatal(std::string& mesg)
   throw std::runtime_error(mesg);
 }
 
-template <> int Reader::read<int>()
+template <> int PRJMODEL_API Reader::read<int>()
 {
   return readInt();
 }
 
-template <> unsigned int Reader::read<unsigned int>()
+template <> unsigned int PRJMODEL_API Reader::read<unsigned int>()
 {
   return readUInt();
 }
 
-template <> double Reader::read<double>()
+template <> double PRJMODEL_API Reader::read<double>()
 {
   return readDouble();
 }
 
-template <> std::string Reader::read<std::string>()
+template <> std::string PRJMODEL_API Reader::read<std::string>()
 {
   return readString();
 }
 
-template <> double Reader::readNumber<double>()
+template <> double PRJMODEL_API Reader::readNumber<double>()
 {
   return readDouble();
 }
 
-template <> std::string Reader::readNumber<std::string>()
+template <> std::string PRJMODEL_API Reader::readNumber<std::string>()
 {
   std::string string = readString();
   if(!is_valid<double>(string)) {
