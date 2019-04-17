@@ -30,10 +30,10 @@
 #include <algorithm>
 
 #include "PrjAirflowElementsImpl.hpp"
-#include "../../utilities/core/StringHelpers.hpp"
 
-namespace openstudio {
-namespace contam {
+#include "../src/utility_functions.hpp"
+
+namespace prjmodel {
 namespace detail {
 
 void PlrOrfImpl::setDefaults()
@@ -126,8 +126,8 @@ std::string PlrOrfImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_orfc " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' ' + ANY_TO_STR(m_area)
-    + ' ' + ANY_TO_STR(m_dia) + ' ' + ANY_TO_STR(m_coef) + ' ' + ANY_TO_STR(m_Re) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' ' + PRJFLOAT_TO_STR(m_area)
+    + ' ' + PRJFLOAT_TO_STR(m_dia) + ' ' + PRJFLOAT_TO_STR(m_coef) + ' ' + PRJFLOAT_TO_STR(m_Re) + ' '
     + ANY_TO_STR(m_u_A) + ' ' + ANY_TO_STR(m_u_D) + '\n';
   return string;
 }
@@ -187,12 +187,12 @@ void PlrOrfImpl::setDesc(const std::string &desc)
 
 double PlrOrfImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrOrfImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -203,12 +203,12 @@ bool PlrOrfImpl::setLam(const std::string &lam)
 
 double PlrOrfImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrOrfImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -219,12 +219,12 @@ bool PlrOrfImpl::setTurb(const std::string &turb)
 
 double PlrOrfImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrOrfImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -235,12 +235,12 @@ bool PlrOrfImpl::setExpt(const std::string &expt)
 
 double PlrOrfImpl::area() const
 {
-  return openstudio::string_conversions::to<double>(m_area);
+  return to<double>(m_area);
 }
 
 bool PlrOrfImpl::setArea(const double area)
 {
-  m_area = openstudio::string_conversions::number(area);
+  m_area = to_float(area);
   return true;
 }
 
@@ -251,12 +251,12 @@ bool PlrOrfImpl::setArea(const std::string &area)
 
 double PlrOrfImpl::dia() const
 {
-  return openstudio::string_conversions::to<double>(m_dia);
+  return to<double>(m_dia);
 }
 
 bool PlrOrfImpl::setDia(const double dia)
 {
-  m_dia = openstudio::string_conversions::number(dia);
+  m_dia = to_float(dia);
   return true;
 }
 
@@ -267,12 +267,12 @@ bool PlrOrfImpl::setDia(const std::string &dia)
 
 double PlrOrfImpl::coef() const
 {
-  return openstudio::string_conversions::to<double>(m_coef);
+  return to<double>(m_coef);
 }
 
 bool PlrOrfImpl::setCoef(const double coef)
 {
-  m_coef = openstudio::string_conversions::number(coef);
+  m_coef = to_float(coef);
   return true;
 }
 
@@ -283,12 +283,12 @@ bool PlrOrfImpl::setCoef(const std::string &coef)
 
 double PlrOrfImpl::Re() const
 {
-  return openstudio::string_conversions::to<double>(m_Re);
+  return to<double>(m_Re);
 }
 
 bool PlrOrfImpl::setRe(const double Re)
 {
-  m_Re = openstudio::string_conversions::number(Re);
+  m_Re = to_float(Re);
   return true;
 }
 
@@ -421,9 +421,9 @@ std::string PlrLeakImpl::write(std::string datatype)
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + ' ' + datatype + ' ' + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' '
-    + ANY_TO_STR(m_coef) + ' ' + ANY_TO_STR(m_pres) + ' ' + ANY_TO_STR(m_area1) + ' '
-    + ANY_TO_STR(m_area2) + ' ' + ANY_TO_STR(m_area3) + ' ' + ANY_TO_STR(m_u_A1) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_coef) + ' ' + PRJFLOAT_TO_STR(m_pres) + ' ' + PRJFLOAT_TO_STR(m_area1) + ' '
+    + PRJFLOAT_TO_STR(m_area2) + ' ' + PRJFLOAT_TO_STR(m_area3) + ' ' + ANY_TO_STR(m_u_A1) + ' '
     + ANY_TO_STR(m_u_A2) + ' ' + ANY_TO_STR(m_u_A3) + ' ' + ANY_TO_STR(m_u_dP) + '\n';
   return string;
 }
@@ -486,12 +486,12 @@ void PlrLeakImpl::setDesc(const std::string &desc)
 
 double PlrLeakImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrLeakImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -502,12 +502,12 @@ bool PlrLeakImpl::setLam(const std::string &lam)
 
 double PlrLeakImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrLeakImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -518,12 +518,12 @@ bool PlrLeakImpl::setTurb(const std::string &turb)
 
 double PlrLeakImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrLeakImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -534,12 +534,12 @@ bool PlrLeakImpl::setExpt(const std::string &expt)
 
 double PlrLeakImpl::coef() const
 {
-  return openstudio::string_conversions::to<double>(m_coef);
+  return to<double>(m_coef);
 }
 
 bool PlrLeakImpl::setCoef(const double coef)
 {
-  m_coef = openstudio::string_conversions::number(coef);
+  m_coef = to_float(coef);
   return true;
 }
 
@@ -550,12 +550,12 @@ bool PlrLeakImpl::setCoef(const std::string &coef)
 
 double PlrLeakImpl::pres() const
 {
-  return openstudio::string_conversions::to<double>(m_pres);
+  return to<double>(m_pres);
 }
 
 bool PlrLeakImpl::setPres(const double pres)
 {
-  m_pres = openstudio::string_conversions::number(pres);
+  m_pres = to_float(pres);
   return true;
 }
 
@@ -566,12 +566,12 @@ bool PlrLeakImpl::setPres(const std::string &pres)
 
 double PlrLeakImpl::area1() const
 {
-  return openstudio::string_conversions::to<double>(m_area1);
+  return to<double>(m_area1);
 }
 
 bool PlrLeakImpl::setArea1(const double area1)
 {
-  m_area1 = openstudio::string_conversions::number(area1);
+  m_area1 = to_float(area1);
   return true;
 }
 
@@ -582,12 +582,12 @@ bool PlrLeakImpl::setArea1(const std::string &area1)
 
 double PlrLeakImpl::area2() const
 {
-  return openstudio::string_conversions::to<double>(m_area2);
+  return to<double>(m_area2);
 }
 
 bool PlrLeakImpl::setArea2(const double area2)
 {
-  m_area2 = openstudio::string_conversions::number(area2);
+  m_area2 = to_float(area2);
   return true;
 }
 
@@ -598,12 +598,12 @@ bool PlrLeakImpl::setArea2(const std::string &area2)
 
 double PlrLeakImpl::area3() const
 {
-  return openstudio::string_conversions::to<double>(m_area3);
+  return to<double>(m_area3);
 }
 
 bool PlrLeakImpl::setArea3(const double area3)
 {
-  m_area3 = openstudio::string_conversions::number(area3);
+  m_area3 = to_float(area3);
   return true;
 }
 
@@ -730,8 +730,8 @@ std::string PlrConnImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_conn " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' ' + ANY_TO_STR(m_area)
-    + ' ' + ANY_TO_STR(m_coef) + ' ' + ANY_TO_STR(m_u_A) + '\n';
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' ' + PRJFLOAT_TO_STR(m_area)
+    + ' ' + PRJFLOAT_TO_STR(m_coef) + ' ' + ANY_TO_STR(m_u_A) + '\n';
   return string;
 }
 
@@ -787,12 +787,12 @@ void PlrConnImpl::setDesc(const std::string &desc)
 
 double PlrConnImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrConnImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -803,12 +803,12 @@ bool PlrConnImpl::setLam(const std::string &lam)
 
 double PlrConnImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrConnImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -819,12 +819,12 @@ bool PlrConnImpl::setTurb(const std::string &turb)
 
 double PlrConnImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrConnImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -835,12 +835,12 @@ bool PlrConnImpl::setExpt(const std::string &expt)
 
 double PlrConnImpl::area() const
 {
-  return openstudio::string_conversions::to<double>(m_area);
+  return to<double>(m_area);
 }
 
 bool PlrConnImpl::setArea(const double area)
 {
-  m_area = openstudio::string_conversions::number(area);
+  m_area = to_float(area);
   return true;
 }
 
@@ -851,12 +851,12 @@ bool PlrConnImpl::setArea(const std::string &area)
 
 double PlrConnImpl::coef() const
 {
-  return openstudio::string_conversions::to<double>(m_coef);
+  return to<double>(m_coef);
 }
 
 bool PlrConnImpl::setCoef(const double coef)
 {
-  m_coef = openstudio::string_conversions::number(coef);
+  m_coef = to_float(coef);
   return true;
 }
 
@@ -939,7 +939,7 @@ std::string PlrGeneralImpl::write(std::string dataType)
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + ' ' + dataType + ' ' + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + '\n';
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + '\n';
   return string;
 }
 
@@ -992,12 +992,12 @@ void PlrGeneralImpl::setDesc(const std::string &desc)
 
 double PlrGeneralImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrGeneralImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -1008,12 +1008,12 @@ bool PlrGeneralImpl::setLam(const std::string &lam)
 
 double PlrGeneralImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrGeneralImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -1024,12 +1024,12 @@ bool PlrGeneralImpl::setTurb(const std::string &turb)
 
 double PlrGeneralImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrGeneralImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -1120,8 +1120,8 @@ std::string PlrTest1Impl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_test1 " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' '
-    + ANY_TO_STR(m_dP) + ' ' + ANY_TO_STR(m_Flow) + ' ' + ANY_TO_STR(m_u_P) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_dP) + ' ' + PRJFLOAT_TO_STR(m_Flow) + ' ' + ANY_TO_STR(m_u_P) + ' '
     + ANY_TO_STR(m_u_F) + '\n';
   return string;
 }
@@ -1179,12 +1179,12 @@ void PlrTest1Impl::setDesc(const std::string &desc)
 
 double PlrTest1Impl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrTest1Impl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -1195,12 +1195,12 @@ bool PlrTest1Impl::setLam(const std::string &lam)
 
 double PlrTest1Impl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrTest1Impl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -1211,12 +1211,12 @@ bool PlrTest1Impl::setTurb(const std::string &turb)
 
 double PlrTest1Impl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrTest1Impl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -1227,12 +1227,12 @@ bool PlrTest1Impl::setExpt(const std::string &expt)
 
 double PlrTest1Impl::dP() const
 {
-  return openstudio::string_conversions::to<double>(m_dP);
+  return to<double>(m_dP);
 }
 
 bool PlrTest1Impl::setDP(const double dP)
 {
-  m_dP = openstudio::string_conversions::number(dP);
+  m_dP = to_float(dP);
   return true;
 }
 
@@ -1243,12 +1243,12 @@ bool PlrTest1Impl::setDP(const std::string &dP)
 
 double PlrTest1Impl::Flow() const
 {
-  return openstudio::string_conversions::to<double>(m_Flow);
+  return to<double>(m_Flow);
 }
 
 bool PlrTest1Impl::setFlow(const double Flow)
 {
-  m_Flow = openstudio::string_conversions::number(Flow);
+  m_Flow = to_float(Flow);
   return true;
 }
 
@@ -1375,8 +1375,8 @@ std::string PlrTest2Impl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_test2 " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' ' + ANY_TO_STR(m_dP1)
-    + ' ' + ANY_TO_STR(m_F1) + ' ' + ANY_TO_STR(m_dP2) + ' ' + ANY_TO_STR(m_F2) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' ' + PRJFLOAT_TO_STR(m_dP1)
+    + ' ' + PRJFLOAT_TO_STR(m_F1) + ' ' + PRJFLOAT_TO_STR(m_dP2) + ' ' + PRJFLOAT_TO_STR(m_F2) + ' '
     + ANY_TO_STR(m_u_P1) + ' ' + ANY_TO_STR(m_u_F1) + ' ' + ANY_TO_STR(m_u_P2) + ' ' + ANY_TO_STR(m_u_F2)
     + '\n';
   return string;
@@ -1439,12 +1439,12 @@ void PlrTest2Impl::setDesc(const std::string &desc)
 
 double PlrTest2Impl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrTest2Impl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -1455,12 +1455,12 @@ bool PlrTest2Impl::setLam(const std::string &lam)
 
 double PlrTest2Impl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrTest2Impl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -1471,12 +1471,12 @@ bool PlrTest2Impl::setTurb(const std::string &turb)
 
 double PlrTest2Impl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrTest2Impl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -1487,12 +1487,12 @@ bool PlrTest2Impl::setExpt(const std::string &expt)
 
 double PlrTest2Impl::dP1() const
 {
-  return openstudio::string_conversions::to<double>(m_dP1);
+  return to<double>(m_dP1);
 }
 
 bool PlrTest2Impl::setDP1(const double dP1)
 {
-  m_dP1 = openstudio::string_conversions::number(dP1);
+  m_dP1 = to_float(dP1);
   return true;
 }
 
@@ -1503,12 +1503,12 @@ bool PlrTest2Impl::setDP1(const std::string &dP1)
 
 double PlrTest2Impl::F1() const
 {
-  return openstudio::string_conversions::to<double>(m_F1);
+  return to<double>(m_F1);
 }
 
 bool PlrTest2Impl::setF1(const double F1)
 {
-  m_F1 = openstudio::string_conversions::number(F1);
+  m_F1 = to_float(F1);
   return true;
 }
 
@@ -1519,12 +1519,12 @@ bool PlrTest2Impl::setF1(const std::string &F1)
 
 double PlrTest2Impl::dP2() const
 {
-  return openstudio::string_conversions::to<double>(m_dP2);
+  return to<double>(m_dP2);
 }
 
 bool PlrTest2Impl::setDP2(const double dP2)
 {
-  m_dP2 = openstudio::string_conversions::number(dP2);
+  m_dP2 = to_float(dP2);
   return true;
 }
 
@@ -1535,12 +1535,12 @@ bool PlrTest2Impl::setDP2(const std::string &dP2)
 
 double PlrTest2Impl::F2() const
 {
-  return openstudio::string_conversions::to<double>(m_F2);
+  return to<double>(m_F2);
 }
 
 bool PlrTest2Impl::setF2(const double F2)
 {
-  m_F2 = openstudio::string_conversions::number(F2);
+  m_F2 = to_float(F2);
   return true;
 }
 
@@ -1671,8 +1671,8 @@ std::string PlrCrackImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_crack " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' '
-    + ANY_TO_STR(m_length) + ' ' + ANY_TO_STR(m_width) + ' ' + ANY_TO_STR(m_u_L) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_length) + ' ' + PRJFLOAT_TO_STR(m_width) + ' ' + ANY_TO_STR(m_u_L) + ' '
     + ANY_TO_STR(m_u_W) + '\n';
   return string;
 }
@@ -1730,12 +1730,12 @@ void PlrCrackImpl::setDesc(const std::string &desc)
 
 double PlrCrackImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrCrackImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -1746,12 +1746,12 @@ bool PlrCrackImpl::setLam(const std::string &lam)
 
 double PlrCrackImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrCrackImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -1762,12 +1762,12 @@ bool PlrCrackImpl::setTurb(const std::string &turb)
 
 double PlrCrackImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrCrackImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -1778,12 +1778,12 @@ bool PlrCrackImpl::setExpt(const std::string &expt)
 
 double PlrCrackImpl::length() const
 {
-  return openstudio::string_conversions::to<double>(m_length);
+  return to<double>(m_length);
 }
 
 bool PlrCrackImpl::setLength(const double length)
 {
-  m_length = openstudio::string_conversions::number(length);
+  m_length = to_float(length);
   return true;
 }
 
@@ -1794,12 +1794,12 @@ bool PlrCrackImpl::setLength(const std::string &length)
 
 double PlrCrackImpl::width() const
 {
-  return openstudio::string_conversions::to<double>(m_width);
+  return to<double>(m_width);
 }
 
 bool PlrCrackImpl::setWidth(const double width)
 {
-  m_width = openstudio::string_conversions::number(width);
+  m_width = to_float(width);
   return true;
 }
 
@@ -1921,8 +1921,8 @@ std::string PlrStairImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_stair " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' '
-    + ANY_TO_STR(m_Ht) + ' ' + ANY_TO_STR(m_Area) + ' ' + ANY_TO_STR(m_peo) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_Ht) + ' ' + PRJFLOAT_TO_STR(m_Area) + ' ' + PRJFLOAT_TO_STR(m_peo) + ' '
     + ANY_TO_STR(m_tread) + ' ' + ANY_TO_STR(m_u_A) + ' ' + ANY_TO_STR(m_u_D) + '\n';
   return string;
 }
@@ -1982,12 +1982,12 @@ void PlrStairImpl::setDesc(const std::string &desc)
 
 double PlrStairImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrStairImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -1998,12 +1998,12 @@ bool PlrStairImpl::setLam(const std::string &lam)
 
 double PlrStairImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrStairImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -2014,12 +2014,12 @@ bool PlrStairImpl::setTurb(const std::string &turb)
 
 double PlrStairImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrStairImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -2030,12 +2030,12 @@ bool PlrStairImpl::setExpt(const std::string &expt)
 
 double PlrStairImpl::Ht() const
 {
-  return openstudio::string_conversions::to<double>(m_Ht);
+  return to<double>(m_Ht);
 }
 
 bool PlrStairImpl::setHt(const double Ht)
 {
-  m_Ht = openstudio::string_conversions::number(Ht);
+  m_Ht = to_float(Ht);
   return true;
 }
 
@@ -2046,12 +2046,12 @@ bool PlrStairImpl::setHt(const std::string &Ht)
 
 double PlrStairImpl::area() const
 {
-  return openstudio::string_conversions::to<double>(m_Area);
+  return to<double>(m_Area);
 }
 
 bool PlrStairImpl::setArea(const double Area)
 {
-  m_Area = openstudio::string_conversions::number(Area);
+  m_Area = to_float(Area);
   return true;
 }
 
@@ -2062,12 +2062,12 @@ bool PlrStairImpl::setArea(const std::string &Area)
 
 double PlrStairImpl::people() const
 {
-  return openstudio::string_conversions::to<double>(m_peo);
+  return to<double>(m_peo);
 }
 
 bool PlrStairImpl::setPeople(const double peo)
 {
-  m_peo = openstudio::string_conversions::number(peo);
+  m_peo = to_float(peo);
   return true;
 }
 
@@ -2204,8 +2204,8 @@ std::string PlrShaftImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_shaft " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' ' + ANY_TO_STR(m_Ht)
-    + ' ' + ANY_TO_STR(m_area) + ' ' + ANY_TO_STR(m_perim) + ' ' + ANY_TO_STR(m_rough) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' ' + PRJFLOAT_TO_STR(m_Ht)
+    + ' ' + PRJFLOAT_TO_STR(m_area) + ' ' + PRJFLOAT_TO_STR(m_perim) + ' ' + PRJFLOAT_TO_STR(m_rough) + ' '
     + ANY_TO_STR(m_u_A) + ' ' + ANY_TO_STR(m_u_D) + ' ' + ANY_TO_STR(m_u_P) + ' ' + ANY_TO_STR(m_u_R)
     + '\n';
   return string;
@@ -2268,12 +2268,12 @@ void PlrShaftImpl::setDesc(const std::string &desc)
 
 double PlrShaftImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrShaftImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -2284,12 +2284,12 @@ bool PlrShaftImpl::setLam(const std::string &lam)
 
 double PlrShaftImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool PlrShaftImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -2300,12 +2300,12 @@ bool PlrShaftImpl::setTurb(const std::string &turb)
 
 double PlrShaftImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool PlrShaftImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -2316,12 +2316,12 @@ bool PlrShaftImpl::setExpt(const std::string &expt)
 
 double PlrShaftImpl::Ht() const
 {
-  return openstudio::string_conversions::to<double>(m_Ht);
+  return to<double>(m_Ht);
 }
 
 bool PlrShaftImpl::setHt(const double Ht)
 {
-  m_Ht = openstudio::string_conversions::number(Ht);
+  m_Ht = to_float(Ht);
   return true;
 }
 
@@ -2332,12 +2332,12 @@ bool PlrShaftImpl::setHt(const std::string &Ht)
 
 double PlrShaftImpl::area() const
 {
-  return openstudio::string_conversions::to<double>(m_area);
+  return to<double>(m_area);
 }
 
 bool PlrShaftImpl::setArea(const double area)
 {
-  m_area = openstudio::string_conversions::number(area);
+  m_area = to_float(area);
   return true;
 }
 
@@ -2348,12 +2348,12 @@ bool PlrShaftImpl::setArea(const std::string &area)
 
 double PlrShaftImpl::perim() const
 {
-  return openstudio::string_conversions::to<double>(m_perim);
+  return to<double>(m_perim);
 }
 
 bool PlrShaftImpl::setPerim(const double perim)
 {
-  m_perim = openstudio::string_conversions::number(perim);
+  m_perim = to_float(perim);
   return true;
 }
 
@@ -2364,12 +2364,12 @@ bool PlrShaftImpl::setPerim(const std::string &perim)
 
 double PlrShaftImpl::rough() const
 {
-  return openstudio::string_conversions::to<double>(m_rough);
+  return to<double>(m_rough);
 }
 
 bool PlrShaftImpl::setRough(const double rough)
 {
-  m_rough = openstudio::string_conversions::number(rough);
+  m_rough = to_float(rough);
   return true;
 }
 
@@ -2492,8 +2492,8 @@ std::string PlrBackDamperImpl::write(std::string dataType)
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + ' ' + dataType + ' ' + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_Cp) + ' ' + ANY_TO_STR(m_xp) + ' ' + ANY_TO_STR(m_Cn)
-    + ' ' + ANY_TO_STR(m_xn) + '\n';
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_Cp) + ' ' + PRJFLOAT_TO_STR(m_xp) + ' ' + PRJFLOAT_TO_STR(m_Cn)
+    + ' ' + PRJFLOAT_TO_STR(m_xn) + '\n';
   return string;
 }
 
@@ -2548,12 +2548,12 @@ void PlrBackDamperImpl::setDesc(const std::string &desc)
 
 double PlrBackDamperImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool PlrBackDamperImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -2564,12 +2564,12 @@ bool PlrBackDamperImpl::setLam(const std::string &lam)
 
 double PlrBackDamperImpl::Cp() const
 {
-  return openstudio::string_conversions::to<double>(m_Cp);
+  return to<double>(m_Cp);
 }
 
 bool PlrBackDamperImpl::setCp(const double Cp)
 {
-  m_Cp = openstudio::string_conversions::number(Cp);
+  m_Cp = to_float(Cp);
   return true;
 }
 
@@ -2580,12 +2580,12 @@ bool PlrBackDamperImpl::setCp(const std::string &Cp)
 
 double PlrBackDamperImpl::xp() const
 {
-  return openstudio::string_conversions::to<double>(m_xp);
+  return to<double>(m_xp);
 }
 
 bool PlrBackDamperImpl::setXp(const double xp)
 {
-  m_xp = openstudio::string_conversions::number(xp);
+  m_xp = to_float(xp);
   return true;
 }
 
@@ -2596,12 +2596,12 @@ bool PlrBackDamperImpl::setXp(const std::string &xp)
 
 double PlrBackDamperImpl::Cn() const
 {
-  return openstudio::string_conversions::to<double>(m_Cn);
+  return to<double>(m_Cn);
 }
 
 bool PlrBackDamperImpl::setCn(const double Cn)
 {
-  m_Cn = openstudio::string_conversions::number(Cn);
+  m_Cn = to_float(Cn);
   return true;
 }
 
@@ -2612,12 +2612,12 @@ bool PlrBackDamperImpl::setCn(const std::string &Cn)
 
 double PlrBackDamperImpl::xn() const
 {
-  return openstudio::string_conversions::to<double>(m_xn);
+  return to<double>(m_xn);
 }
 
 bool PlrBackDamperImpl::setXn(const double xn)
 {
-  m_xn = openstudio::string_conversions::number(xn);
+  m_xn = to_float(xn);
   return true;
 }
 
@@ -2686,7 +2686,7 @@ std::string QfrQuadraticImpl::write(std::string dataType)
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + ' ' + dataType + ' ' + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_a) + ' ' + ANY_TO_STR(m_b) + '\n';
+  string += PRJFLOAT_TO_STR(m_a) + ' ' + PRJFLOAT_TO_STR(m_b) + '\n';
   return string;
 }
 
@@ -2738,12 +2738,12 @@ void QfrQuadraticImpl::setDesc(const std::string &desc)
 
 double QfrQuadraticImpl::a() const
 {
-  return openstudio::string_conversions::to<double>(m_a);
+  return to<double>(m_a);
 }
 
 bool QfrQuadraticImpl::setA(const double a)
 {
-  m_a = openstudio::string_conversions::number(a);
+  m_a = to_float(a);
   return true;
 }
 
@@ -2754,12 +2754,12 @@ bool QfrQuadraticImpl::setA(const std::string &a)
 
 double QfrQuadraticImpl::b() const
 {
-  return openstudio::string_conversions::to<double>(m_b);
+  return to<double>(m_b);
 }
 
 bool QfrQuadraticImpl::setB(const double b)
 {
-  m_b = openstudio::string_conversions::number(b);
+  m_b = to_float(b);
   return true;
 }
 
@@ -2858,8 +2858,8 @@ std::string QfrCrackImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " qfr_crack " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_a) + ' ' + ANY_TO_STR(m_b) + ' ' + ANY_TO_STR(m_length) + ' ' + ANY_TO_STR(m_width)
-    + ' ' + ANY_TO_STR(m_depth) + ' ' + ANY_TO_STR(m_nB) + ' ' + ANY_TO_STR(m_u_L) + ' '
+  string += PRJFLOAT_TO_STR(m_a) + ' ' + PRJFLOAT_TO_STR(m_b) + ' ' + PRJFLOAT_TO_STR(m_length) + ' ' + PRJFLOAT_TO_STR(m_width)
+    + ' ' + PRJFLOAT_TO_STR(m_depth) + ' ' + ANY_TO_STR(m_nB) + ' ' + ANY_TO_STR(m_u_L) + ' '
     + ANY_TO_STR(m_u_W) + ' ' + ANY_TO_STR(m_u_D) + '\n';
   return string;
 }
@@ -2919,12 +2919,12 @@ void QfrCrackImpl::setDesc(const std::string &desc)
 
 double QfrCrackImpl::a() const
 {
-  return openstudio::string_conversions::to<double>(m_a);
+  return to<double>(m_a);
 }
 
 bool QfrCrackImpl::setA(const double a)
 {
-  m_a = openstudio::string_conversions::number(a);
+  m_a = to_float(a);
   return true;
 }
 
@@ -2935,12 +2935,12 @@ bool QfrCrackImpl::setA(const std::string &a)
 
 double QfrCrackImpl::b() const
 {
-  return openstudio::string_conversions::to<double>(m_b);
+  return to<double>(m_b);
 }
 
 bool QfrCrackImpl::setB(const double b)
 {
-  m_b = openstudio::string_conversions::number(b);
+  m_b = to_float(b);
   return true;
 }
 
@@ -2951,12 +2951,12 @@ bool QfrCrackImpl::setB(const std::string &b)
 
 double QfrCrackImpl::length() const
 {
-  return openstudio::string_conversions::to<double>(m_length);
+  return to<double>(m_length);
 }
 
 bool QfrCrackImpl::setLength(const double length)
 {
-  m_length = openstudio::string_conversions::number(length);
+  m_length = to_float(length);
   return true;
 }
 
@@ -2967,12 +2967,12 @@ bool QfrCrackImpl::setLength(const std::string &length)
 
 double QfrCrackImpl::width() const
 {
-  return openstudio::string_conversions::to<double>(m_width);
+  return to<double>(m_width);
 }
 
 bool QfrCrackImpl::setWidth(const double width)
 {
-  m_width = openstudio::string_conversions::number(width);
+  m_width = to_float(width);
   return true;
 }
 
@@ -2983,12 +2983,12 @@ bool QfrCrackImpl::setWidth(const std::string &width)
 
 double QfrCrackImpl::depth() const
 {
-  return openstudio::string_conversions::to<double>(m_depth);
+  return to<double>(m_depth);
 }
 
 bool QfrCrackImpl::setDepth(const double depth)
 {
-  m_depth = openstudio::string_conversions::number(depth);
+  m_depth = to_float(depth);
   return true;
 }
 
@@ -3131,8 +3131,8 @@ std::string QfrTest2Impl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " qfr_test2 " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_a) + ' ' + ANY_TO_STR(m_b) + ' ' + ANY_TO_STR(m_dP1) + ' ' + ANY_TO_STR(m_F1)
-    + ' ' + ANY_TO_STR(m_dP2) + ' ' + ANY_TO_STR(m_F2) + ' ' + ANY_TO_STR(m_u_P1) + ' '
+  string += PRJFLOAT_TO_STR(m_a) + ' ' + PRJFLOAT_TO_STR(m_b) + ' ' + PRJFLOAT_TO_STR(m_dP1) + ' ' + PRJFLOAT_TO_STR(m_F1)
+    + ' ' + PRJFLOAT_TO_STR(m_dP2) + ' ' + PRJFLOAT_TO_STR(m_F2) + ' ' + ANY_TO_STR(m_u_P1) + ' '
     + ANY_TO_STR(m_u_F1) + ' ' + ANY_TO_STR(m_u_P2) + ' ' + ANY_TO_STR(m_u_F2) + '\n';
   return string;
 }
@@ -3193,12 +3193,12 @@ void QfrTest2Impl::setDesc(const std::string &desc)
 
 double QfrTest2Impl::a() const
 {
-  return openstudio::string_conversions::to<double>(m_a);
+  return to<double>(m_a);
 }
 
 bool QfrTest2Impl::setA(const double a)
 {
-  m_a = openstudio::string_conversions::number(a);
+  m_a = to_float(a);
   return true;
 }
 
@@ -3209,12 +3209,12 @@ bool QfrTest2Impl::setA(const std::string &a)
 
 double QfrTest2Impl::b() const
 {
-  return openstudio::string_conversions::to<double>(m_b);
+  return to<double>(m_b);
 }
 
 bool QfrTest2Impl::setB(const double b)
 {
-  m_b = openstudio::string_conversions::number(b);
+  m_b = to_float(b);
   return true;
 }
 
@@ -3225,12 +3225,12 @@ bool QfrTest2Impl::setB(const std::string &b)
 
 double QfrTest2Impl::dP1() const
 {
-  return openstudio::string_conversions::to<double>(m_dP1);
+  return to<double>(m_dP1);
 }
 
 bool QfrTest2Impl::setDP1(const double dP1)
 {
-  m_dP1 = openstudio::string_conversions::number(dP1);
+  m_dP1 = to_float(dP1);
   return true;
 }
 
@@ -3241,12 +3241,12 @@ bool QfrTest2Impl::setDP1(const std::string &dP1)
 
 double QfrTest2Impl::F1() const
 {
-  return openstudio::string_conversions::to<double>(m_F1);
+  return to<double>(m_F1);
 }
 
 bool QfrTest2Impl::setF1(const double F1)
 {
-  m_F1 = openstudio::string_conversions::number(F1);
+  m_F1 = to_float(F1);
   return true;
 }
 
@@ -3257,12 +3257,12 @@ bool QfrTest2Impl::setF1(const std::string &F1)
 
 double QfrTest2Impl::dP2() const
 {
-  return openstudio::string_conversions::to<double>(m_dP2);
+  return to<double>(m_dP2);
 }
 
 bool QfrTest2Impl::setDP2(const double dP2)
 {
-  m_dP2 = openstudio::string_conversions::number(dP2);
+  m_dP2 = to_float(dP2);
   return true;
 }
 
@@ -3273,12 +3273,12 @@ bool QfrTest2Impl::setDP2(const std::string &dP2)
 
 double QfrTest2Impl::F2() const
 {
-  return openstudio::string_conversions::to<double>(m_F2);
+  return to<double>(m_F2);
 }
 
 bool QfrTest2Impl::setF2(const double F2)
 {
-  m_F2 = openstudio::string_conversions::number(F2);
+  m_F2 = to_float(F2);
   return true;
 }
 
@@ -3421,9 +3421,9 @@ std::string AfeDorImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " dor_door " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' '
-    + ANY_TO_STR(m_dTmin) + ' ' + ANY_TO_STR(m_ht) + ' ' + ANY_TO_STR(m_wd) + ' '
-    + ANY_TO_STR(m_cd) + ' ' + ANY_TO_STR(m_u_T) + ' ' + ANY_TO_STR(m_u_H) + ' '
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_dTmin) + ' ' + PRJFLOAT_TO_STR(m_ht) + ' ' + PRJFLOAT_TO_STR(m_wd) + ' '
+    + PRJFLOAT_TO_STR(m_cd) + ' ' + ANY_TO_STR(m_u_T) + ' ' + ANY_TO_STR(m_u_H) + ' '
     + ANY_TO_STR(m_u_W) + '\n';
   return string;
 }
@@ -3484,12 +3484,12 @@ void AfeDorImpl::setDesc(const std::string &desc)
 
 double AfeDorImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool AfeDorImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -3500,12 +3500,12 @@ bool AfeDorImpl::setLam(const std::string &lam)
 
 double AfeDorImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool AfeDorImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -3516,12 +3516,12 @@ bool AfeDorImpl::setTurb(const std::string &turb)
 
 double AfeDorImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool AfeDorImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -3532,12 +3532,12 @@ bool AfeDorImpl::setExpt(const std::string &expt)
 
 double AfeDorImpl::dTmin() const
 {
-  return openstudio::string_conversions::to<double>(m_dTmin);
+  return to<double>(m_dTmin);
 }
 
 bool AfeDorImpl::setDTmin(const double dTmin)
 {
-  m_dTmin = openstudio::string_conversions::number(dTmin);
+  m_dTmin = to_float(dTmin);
   return true;
 }
 
@@ -3548,12 +3548,12 @@ bool AfeDorImpl::setDTmin(const std::string &dTmin)
 
 double AfeDorImpl::height() const
 {
-  return openstudio::string_conversions::to<double>(m_ht);
+  return to<double>(m_ht);
 }
 
 bool AfeDorImpl::setHeight(const double ht)
 {
-  m_ht = openstudio::string_conversions::number(ht);
+  m_ht = to_float(ht);
   return true;
 }
 
@@ -3564,12 +3564,12 @@ bool AfeDorImpl::setHeight(const std::string &ht)
 
 double AfeDorImpl::width() const
 {
-  return openstudio::string_conversions::to<double>(m_wd);
+  return to<double>(m_wd);
 }
 
 bool AfeDorImpl::setWidth(const double wd)
 {
-  m_wd = openstudio::string_conversions::number(wd);
+  m_wd = to_float(wd);
   return true;
 }
 
@@ -3580,12 +3580,12 @@ bool AfeDorImpl::setWidth(const std::string &wd)
 
 double AfeDorImpl::cd() const
 {
-  return openstudio::string_conversions::to<double>(m_cd);
+  return to<double>(m_cd);
 }
 
 bool AfeDorImpl::setCd(const double cd)
 {
-  m_cd = openstudio::string_conversions::number(cd);
+  m_cd = to_float(cd);
   return true;
 }
 
@@ -3714,8 +3714,8 @@ std::string DrPl2Impl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " dor_pl2 " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' '
-    + ANY_TO_STR(m_dH) + ' ' + ANY_TO_STR(m_ht) + ' ' + ANY_TO_STR(m_wd) + ' ' + ANY_TO_STR(m_cd)
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_dH) + ' ' + PRJFLOAT_TO_STR(m_ht) + ' ' + PRJFLOAT_TO_STR(m_wd) + ' ' + PRJFLOAT_TO_STR(m_cd)
     + ' ' + ANY_TO_STR(m_u_H) + ' ' + ANY_TO_STR(m_u_W) + '\n';
   return string;
 }
@@ -3775,12 +3775,12 @@ void DrPl2Impl::setDesc(const std::string &desc)
 
 double DrPl2Impl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool DrPl2Impl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -3791,12 +3791,12 @@ bool DrPl2Impl::setLam(const std::string &lam)
 
 double DrPl2Impl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool DrPl2Impl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -3807,12 +3807,12 @@ bool DrPl2Impl::setTurb(const std::string &turb)
 
 double DrPl2Impl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool DrPl2Impl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -3823,12 +3823,12 @@ bool DrPl2Impl::setExpt(const std::string &expt)
 
 double DrPl2Impl::dH() const
 {
-  return openstudio::string_conversions::to<double>(m_dH);
+  return to<double>(m_dH);
 }
 
 bool DrPl2Impl::setDH(const double dH)
 {
-  m_dH = openstudio::string_conversions::number(dH);
+  m_dH = to_float(dH);
   return true;
 }
 
@@ -3839,12 +3839,12 @@ bool DrPl2Impl::setDH(const std::string &dH)
 
 double DrPl2Impl::height() const
 {
-  return openstudio::string_conversions::to<double>(m_ht);
+  return to<double>(m_ht);
 }
 
 bool DrPl2Impl::setHeight(const double ht)
 {
-  m_ht = openstudio::string_conversions::number(ht);
+  m_ht = to_float(ht);
   return true;
 }
 
@@ -3855,12 +3855,12 @@ bool DrPl2Impl::setHeight(const std::string &ht)
 
 double DrPl2Impl::width() const
 {
-  return openstudio::string_conversions::to<double>(m_wd);
+  return to<double>(m_wd);
 }
 
 bool DrPl2Impl::setWidth(const double wd)
 {
-  m_wd = openstudio::string_conversions::number(wd);
+  m_wd = to_float(wd);
   return true;
 }
 
@@ -3871,12 +3871,12 @@ bool DrPl2Impl::setWidth(const std::string &wd)
 
 double DrPl2Impl::cd() const
 {
-  return openstudio::string_conversions::to<double>(m_cd);
+  return to<double>(m_cd);
 }
 
 bool DrPl2Impl::setCd(const double cd)
 {
-  m_cd = openstudio::string_conversions::number(cd);
+  m_cd = to_float(cd);
   return true;
 }
 
@@ -3965,7 +3965,7 @@ std::string AfeFlowImpl::write(std::string dataType)
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + ' ' + dataType + ' ' + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_Flow) + ' ' + ANY_TO_STR(m_u_F) + '\n';
+  string += PRJFLOAT_TO_STR(m_Flow) + ' ' + ANY_TO_STR(m_u_F) + '\n';
   return string;
 }
 
@@ -4017,12 +4017,12 @@ void AfeFlowImpl::setDesc(const std::string &desc)
 
 double AfeFlowImpl::Flow() const
 {
-  return openstudio::string_conversions::to<double>(m_Flow);
+  return to<double>(m_Flow);
 }
 
 bool AfeFlowImpl::setFlow(const double Flow)
 {
-  m_Flow = openstudio::string_conversions::number(Flow);
+  m_Flow = to_float(Flow);
   return true;
 }
 
@@ -4152,12 +4152,12 @@ std::string AfeFanImpl::write()
   std::string string;
   string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " fan_fan " + m_name + '\n';
   string += m_desc + '\n';
-  string += ANY_TO_STR(m_lam) + ' ' + ANY_TO_STR(m_turb) + ' ' + ANY_TO_STR(m_expt) + ' ' + ANY_TO_STR(m_rdens)
-    + ' ' + ANY_TO_STR(m_fdf) + ' ' + ANY_TO_STR(m_sop) + ' ' + ANY_TO_STR(m_off) + '\n';
+  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' ' + PRJFLOAT_TO_STR(m_rdens)
+    + ' ' + PRJFLOAT_TO_STR(m_fdf) + ' ' + PRJFLOAT_TO_STR(m_sop) + ' ' + PRJFLOAT_TO_STR(m_off) + '\n';
   for(int i=0;i<4;i++)
-    string += ANY_TO_STR(m_fpc[i]) + ' ';
+    string += PRJFLOAT_TO_STR(m_fpc[i]) + ' ';
   string += '\n';
-  string += ANY_TO_STR((int)m_data.size()) + ' ' + ANY_TO_STR(m_Sarea) + ' ' + ANY_TO_STR(m_u_Sa) + '\n';
+  string += ANY_TO_STR((int)m_data.size()) + ' ' + PRJFLOAT_TO_STR(m_Sarea) + ' ' + ANY_TO_STR(m_u_Sa) + '\n';
   for(unsigned int i=0;i<m_data.size();i++)
   {
     string += m_data[i].write();
@@ -4235,12 +4235,12 @@ void AfeFanImpl::setDesc(const std::string &desc)
 
 double AfeFanImpl::lam() const
 {
-  return openstudio::string_conversions::to<double>(m_lam);
+  return to<double>(m_lam);
 }
 
 bool AfeFanImpl::setLam(const double lam)
 {
-  m_lam = openstudio::string_conversions::number(lam);
+  m_lam = to_float(lam);
   return true;
 }
 
@@ -4251,12 +4251,12 @@ bool AfeFanImpl::setLam(const std::string &lam)
 
 double AfeFanImpl::turb() const
 {
-  return openstudio::string_conversions::to<double>(m_turb);
+  return to<double>(m_turb);
 }
 
 bool AfeFanImpl::setTurb(const double turb)
 {
-  m_turb = openstudio::string_conversions::number(turb);
+  m_turb = to_float(turb);
   return true;
 }
 
@@ -4267,12 +4267,12 @@ bool AfeFanImpl::setTurb(const std::string &turb)
 
 double AfeFanImpl::expt() const
 {
-  return openstudio::string_conversions::to<double>(m_expt);
+  return to<double>(m_expt);
 }
 
 bool AfeFanImpl::setExpt(const double expt)
 {
-  m_expt = openstudio::string_conversions::number(expt);
+  m_expt = to_float(expt);
   return true;
 }
 
@@ -4283,12 +4283,12 @@ bool AfeFanImpl::setExpt(const std::string &expt)
 
 double AfeFanImpl::rdens() const
 {
-  return openstudio::string_conversions::to<double>(m_rdens);
+  return to<double>(m_rdens);
 }
 
 bool AfeFanImpl::setRdens(const double rdens)
 {
-  m_rdens = openstudio::string_conversions::number(rdens);
+  m_rdens = to_float(rdens);
   return true;
 }
 
@@ -4299,12 +4299,12 @@ bool AfeFanImpl::setRdens(const std::string &rdens)
 
 double AfeFanImpl::fdf() const
 {
-  return openstudio::string_conversions::to<double>(m_fdf);
+  return to<double>(m_fdf);
 }
 
 bool AfeFanImpl::setFdf(const double fdf)
 {
-  m_fdf = openstudio::string_conversions::number(fdf);
+  m_fdf = to_float(fdf);
   return true;
 }
 
@@ -4315,12 +4315,12 @@ bool AfeFanImpl::setFdf(const std::string &fdf)
 
 double AfeFanImpl::sop() const
 {
-  return openstudio::string_conversions::to<double>(m_sop);
+  return to<double>(m_sop);
 }
 
 bool AfeFanImpl::setSop(const double sop)
 {
-  m_sop = openstudio::string_conversions::number(sop);
+  m_sop = to_float(sop);
   return true;
 }
 
@@ -4331,12 +4331,12 @@ bool AfeFanImpl::setSop(const std::string &sop)
 
 double AfeFanImpl::off() const
 {
-  return openstudio::string_conversions::to<double>(m_off);
+  return to<double>(m_off);
 }
 
 bool AfeFanImpl::setOff(const double off)
 {
-  m_off = openstudio::string_conversions::number(off);
+  m_off = to_float(off);
   return true;
 }
 
@@ -4350,7 +4350,7 @@ std::vector<double> AfeFanImpl::fpc() const
   std::vector<double> out;
   for(int i=0;i<4;i++)
   {
-    out.push_back(openstudio::string_conversions::to<double>(m_fpc[i]));
+    out.push_back(to<double>(m_fpc[i]));
   }
   return out;
 }
@@ -4359,7 +4359,7 @@ bool AfeFanImpl::setFpc(const std::vector<double> &fpc)
 {
   for(int i=0;i<4;i++)
   {
-    m_fpc.push_back(openstudio::string_conversions::number(fpc[i]));
+    m_fpc.push_back(to_float(fpc[i]));
   }
   return true;
 }
@@ -4377,12 +4377,12 @@ bool AfeFanImpl::setFpc(const std::vector<std::string> &fpc)
 
 double AfeFanImpl::Sarea() const
 {
-  return openstudio::string_conversions::to<double>(m_Sarea);
+  return to<double>(m_Sarea);
 }
 
 bool AfeFanImpl::setSarea(const double Sarea)
 {
-  m_Sarea = openstudio::string_conversions::number(Sarea);
+  m_Sarea = to_float(Sarea);
   return true;
 }
 
@@ -4715,5 +4715,4 @@ void AfeSupImpl::setSubelements(const std::vector<AirflowSubelementData> &subele
 }
 
 } // detail
-} // contam
-} // openstudio
+} // prjmodel

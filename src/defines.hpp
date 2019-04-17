@@ -73,9 +73,15 @@ bool assign_if_valid(const InputType &input, DestinationType &dest)
   }
 }
 
+template <typename T> PRJFLOAT to_float(T& v)
+{
+  return std::to_string(v);
 }
 
-#define ANY_TO_STR openstudio::toString
+}
+
+#define ANY_TO_STR std::to_string
+#define PRJFLOAT_TO_STR(a) a
 
 // CONTAM icon definitions
 #define FLOW_E      1  /* flow arrow - pointing east */

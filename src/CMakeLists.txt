@@ -25,14 +25,14 @@ set(${target_name}_src
   #PrjObjects.cpp
   #PrjObjectsImpl.hpp
   #PrjObjectsImpl.cpp
-  #PrjSubobjects.hpp
-  #PrjSubobjects.cpp
-  #PrjSubobjectsImpl.hpp
-  #PrjSubobjectsImpl.cpp
-  #PrjAirflowElements.hpp
-  #PrjAirflowElements.cpp
-  #PrjAirflowElementsImpl.hpp
-  #PrjAirflowElementsImpl.cpp
+  ../contam/PrjSubobjects.hpp
+  ../contam/PrjSubobjects.cpp
+  ../contam/PrjSubobjectsImpl.hpp
+  ../contam/PrjSubobjectsImpl.cpp
+  airflowelements.hpp
+  airflowelements.cpp
+  ../contam/PrjAirflowElementsImpl.hpp
+  ../contam/PrjAirflowElementsImpl.cpp
   #SurfaceNetworkBuilder.hpp
   #SurfaceNetworkBuilder.cpp
   utility_functions.hpp

@@ -36,4 +36,12 @@
 #define LOG_DEBUG(mesg)
 #endif
 
+#include <iostream>
+
+inline void fatal(const std::string& mesg)
+{
+  std::cout << mesg << std::endl;
+  throw std::runtime_error(mesg);
+}
+
 #endif

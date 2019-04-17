@@ -27,13 +27,12 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "../../utilities/core/StringHelpers.hpp"
-
 #include "PrjSubobjects.hpp"
 #include "PrjSubobjectsImpl.hpp"
 
-namespace openstudio {
-namespace contam {
+#include "../src/utility_functions.hpp"
+
+namespace prjmodel {
 
 WeatherData::WeatherData() :
   m_impl(std::shared_ptr<detail::WeatherDataImpl>(new detail::WeatherDataImpl))
@@ -341,18 +340,18 @@ void FanDataPoint::read(Reader &input)
 std::string FanDataPoint::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_mF) + ' ' + ANY_TO_STR(m_u_mF) + ' ' + ANY_TO_STR(m_dP) + ' ' + ANY_TO_STR(m_u_dP) + ' ' + ANY_TO_STR(m_rP) + ' ' + ANY_TO_STR(m_u_rP) + '\n';
+  string += PRJFLOAT_TO_STR(m_mF) + ' ' + ANY_TO_STR(m_u_mF) + ' ' + PRJFLOAT_TO_STR(m_dP) + ' ' + ANY_TO_STR(m_u_dP) + ' ' + PRJFLOAT_TO_STR(m_rP) + ' ' + ANY_TO_STR(m_u_rP) + '\n';
   return string;
 }
 
 double FanDataPoint::mF() const
 {
-  return openstudio::string_conversions::to<double>(m_mF);
+  return to<double>(m_mF);
 }
 
 bool FanDataPoint::setMF(const double mF)
 {
-  m_mF = openstudio::string_conversions::number(mF);
+  m_mF = to_float(mF);
   return true;
 }
 
@@ -373,12 +372,12 @@ void FanDataPoint::setU_mF(const int u_mF)
 
 double FanDataPoint::dP() const
 {
-  return openstudio::string_conversions::to<double>(m_dP);
+  return to<double>(m_dP);
 }
 
 bool FanDataPoint::setDP(const double dP)
 {
-  m_dP = openstudio::string_conversions::number(dP);
+  m_dP = to_float(dP);
   return true;
 }
 
@@ -399,12 +398,12 @@ void FanDataPoint::setU_dP(const int u_dP)
 
 double FanDataPoint::rP() const
 {
-  return openstudio::string_conversions::to<double>(m_rP);
+  return to<double>(m_rP);
 }
 
 bool FanDataPoint::setRP(const double rP)
 {
-  m_rP = openstudio::string_conversions::number(rP);
+  m_rP = to_float(rP);
   return true;
 }
 
@@ -457,18 +456,18 @@ void XyDataPoint::read(Reader &input)
 std::string XyDataPoint::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_x) + ' ' + ANY_TO_STR(m_y) + '\n';
+  string += PRJFLOAT_TO_STR(m_x) + ' ' + PRJFLOAT_TO_STR(m_y) + '\n';
   return string;
 }
 
 double XyDataPoint::x() const
 {
-  return openstudio::string_conversions::to<double>(m_x);
+  return to<double>(m_x);
 }
 
 bool XyDataPoint::setX(const double x)
 {
-  m_x = openstudio::string_conversions::number(x);
+  m_x = to_float(x);
   return true;
 }
 
@@ -479,12 +478,12 @@ bool XyDataPoint::setX(const std::string &x)
 
 double XyDataPoint::y() const
 {
-  return openstudio::string_conversions::to<double>(m_y);
+  return to<double>(m_y);
 }
 
 bool XyDataPoint::setY(const double y)
 {
-  m_y = openstudio::string_conversions::number(y);
+  m_y = to_float(y);
   return true;
 }
 
@@ -531,7 +530,7 @@ void AirflowSubelementData::read(Reader &input)
 std::string AirflowSubelementData::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_relHt) + ' ' + ANY_TO_STR(m_filt) + '\n';
+  string += ANY_TO_STR(m_nr) + ' ' + PRJFLOAT_TO_STR(m_relHt) + ' ' + ANY_TO_STR(m_filt) + '\n';
   return string;
 }
 
@@ -547,12 +546,12 @@ void AirflowSubelementData::setNr(const int nr)
 
 double AirflowSubelementData::relHt() const
 {
-  return openstudio::string_conversions::to<double>(m_relHt);
+  return to<double>(m_relHt);
 }
 
 bool AirflowSubelementData::setRelHt(const double relHt)
 {
-  m_relHt = openstudio::string_conversions::number(relHt);
+  m_relHt = to_float(relHt);
   return true;
 }
 
@@ -605,18 +604,18 @@ void PressureCoefficientPoint::read(Reader &input)
 std::string PressureCoefficientPoint::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_azm) + ' ' + ANY_TO_STR(m_coef) + '\n';
+  string += PRJFLOAT_TO_STR(m_azm) + ' ' + PRJFLOAT_TO_STR(m_coef) + '\n';
   return string;
 }
 
 double PressureCoefficientPoint::azm() const
 {
-  return openstudio::string_conversions::to<double>(m_azm);
+  return to<double>(m_azm);
 }
 
 bool PressureCoefficientPoint::setAzm(const double azm)
 {
-  m_azm = openstudio::string_conversions::number(azm);
+  m_azm = to_float(azm);
   return true;
 }
 
@@ -627,12 +626,12 @@ bool PressureCoefficientPoint::setAzm(const std::string &azm)
 
 double PressureCoefficientPoint::coef() const
 {
-  return openstudio::string_conversions::to<double>(m_coef);
+  return to<double>(m_coef);
 }
 
 bool PressureCoefficientPoint::setCoef(const double coef)
 {
-  m_coef = openstudio::string_conversions::number(coef);
+  m_coef = to_float(coef);
   return true;
 }
 
@@ -675,7 +674,7 @@ void SchedulePoint::read(Reader &input)
 std::string SchedulePoint::write()
 {
   std::string string;
-  string += m_time + ' ' + ANY_TO_STR(m_ctrl) + '\n';
+  string += m_time + ' ' + PRJFLOAT_TO_STR(m_ctrl) + '\n';
   return string;
 }
 
@@ -691,12 +690,12 @@ void SchedulePoint::setTime(const std::string &time)
 
 double SchedulePoint::ctrl() const
 {
-  return openstudio::string_conversions::to<double>(m_ctrl);
+  return to<double>(m_ctrl);
 }
 
 bool SchedulePoint::setCtrl(const double ctrl)
 {
-  m_ctrl = openstudio::string_conversions::number(ctrl);
+  m_ctrl = to_float(ctrl);
   return true;
 }
 
@@ -705,5 +704,4 @@ bool SchedulePoint::setCtrl(const std::string &ctrl)
   return assign_if_valid<double>(ctrl, m_ctrl);
 }
 
-} // contam
-} // openstudio
+} // prjmodel

@@ -27,13 +27,12 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "PrjAirflowElements.hpp"
-#include "PrjAirflowElementsImpl.hpp"
+#include "airflowelements.hpp"
+#include "../contam/PrjAirflowElementsImpl.hpp"
 
-#include "../../utilities/core/Logger.hpp"
+#include "logging.hpp"
 
-namespace openstudio {
-namespace contam {
+namespace prjmodel {
 
 AirflowElement::Type AirflowElement::convertTag(std::string string)
 {
@@ -265,8 +264,8 @@ AirflowElement* AirflowElement::readElement(Reader &input)
     }
   case AirflowElement::UNKNOWN:
   default:
-    std::string mesg = "Unknown airflow element type '" + dataType + "' at line " + openstudio::toString(input.lineNumber());
-    LOG_FREE_AND_THROW("openstudio.contam.Reader",mesg);
+    std::string mesg = "Unknown airflow element type '" + dataType + "' at line " + std::to_string(input.lineNumber());
+    LOG_FATAL(mesg);
   }
   return out;
 }
@@ -4191,5 +4190,4 @@ void AfeSup::setSubelements(const std::vector<AirflowSubelementData> &subelement
   m_impl->setSubelements(subelements);
 }
 
-} // contam
-} // openstudio
+} // prjmodel

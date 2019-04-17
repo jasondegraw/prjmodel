@@ -27,15 +27,14 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#ifndef AIRFLOW_CONTAM_PRJSUBOBJECTS_HPP
-#define AIRFLOW_CONTAM_PRJSUBOBJECTS_HPP
+#ifndef PRJMODEL_SUBOBJECTS_HPP
+#define PRJMODEL_SUBOBJECTS_HPP
 
-#include "PrjDefines.hpp"
-#include "PrjReader.hpp"
-#include "../AirflowAPI.hpp"
+#include "../src/defines.hpp"
+#include "../src/reader.hpp"
+#include "../src/prjmodel_api.hpp"
 
-namespace openstudio {
-namespace contam {
+namespace prjmodel {
 
 class Reader;
 namespace detail {
@@ -44,7 +43,7 @@ namespace detail {
 }
 
 /** WeatherData objects contain the simplified weather data associated with a CONTAM model. */
-class AIRFLOW_API WeatherData
+class PRJMODEL_API WeatherData
 {
 public:
   /** @name Constructors and Destructors */
@@ -146,7 +145,7 @@ private:
 /** The Icon object contains basic information about sketchpad icons. This object
 *  is not strictly necessary for creating CONTAM models, but is needed to read
 *  models created in ContamW. */
-class AIRFLOW_API Icon
+class PRJMODEL_API Icon
 {
 public:
   /** @name Constructors and Destructors */
@@ -217,7 +216,7 @@ private:
 
 /** FanDataPoint is an object for defining fan characteristics. It contains a single
 *  pressure and flow rate data point. */
-class AIRFLOW_API FanDataPoint
+class PRJMODEL_API FanDataPoint
 {
 public:
   /** @name Constructors */
@@ -286,7 +285,7 @@ private:
 
 /** The XyDataPoint object is used by a number of the airflow element objects to
 *  store data specific to the element. */
-class AIRFLOW_API XyDataPoint
+class PRJMODEL_API XyDataPoint
 {
 public:
   /** @name Constructors */
@@ -334,7 +333,7 @@ private:
 
 /** The AirflowSubelementData object stores specific details for an
 *  airflow element that is part of a super element. */
-class AIRFLOW_API AirflowSubelementData
+class PRJMODEL_API AirflowSubelementData
 {
 public:
   /** @name Constructors */
@@ -386,7 +385,7 @@ private:
 /** The PressureCoefficientPoint object contains a single wind pressure coefficient
 *  data point. The azimuthal angle is stored in degrees from north with the
 *  corresponding pressure coefficient. */
-class AIRFLOW_API PressureCoefficientPoint
+class PRJMODEL_API PressureCoefficientPoint
 {
 public:
   /** @name Constructors */
@@ -434,7 +433,7 @@ private:
 
 /** SchedulePoint stores the time (in hh:mm:ss format) and control value for
 *  a day schedule data point. */
-class AIRFLOW_API SchedulePoint
+class PRJMODEL_API SchedulePoint
 {
 public:
   /** @name Constructors */
@@ -478,7 +477,6 @@ private:
   PRJFLOAT m_ctrl;  // corresponding control value (R4) [-]
 };
 
-} // contam
-} // openstudio
+} // prjmodel
 
-#endif // AIRFLOW_CONTAM_PRJSUBOBJECTS_HPP
+#endif // PRJMODEL_SUBOBJECTS_HPP

@@ -23,8 +23,8 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#ifndef UTILITY_FUNCTIONS_HPP
-#define UTILITY_FUNCTIONS_HPP
+#ifndef PRJMODEL_UTILITY_FUNCTIONS_HPP
+#define PRJMODEL_UTILITY_FUNCTIONS_HPP
 
 #include <string>
 #include <vector>

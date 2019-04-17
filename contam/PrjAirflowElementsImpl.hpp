@@ -30,12 +30,11 @@
 #ifndef AIRFLOW_CONTAM_PRJAIRFLOWELEMENTSIMPL_HPP
 #define AIRFLOW_CONTAM_PRJAIRFLOWELEMENTSIMPL_HPP
 
-#include "PrjDefines.hpp"
-#include "PrjReader.hpp"
+#include "../src/defines.hpp"
+#include "../src/reader.hpp"
 #include "PrjSubobjects.hpp"
 
-namespace openstudio {
-namespace contam {
+namespace prjmodel {
 namespace detail {
 
 class PlrOrfImpl
@@ -1678,7 +1677,6 @@ private:
 };
 
 } // detail
-} // contam
-} // openstudio
+} // prjmodel
 
 #endif // AIRFLOW_CONTAM_PRJAIRFLOWELEMENTSIMPL_HPP

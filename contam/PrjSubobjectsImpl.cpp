@@ -28,9 +28,10 @@
 ***********************************************************************************************************************/
 
 #include "PrjSubobjectsImpl.hpp"
-#include "../../utilities/core/StringHelpers.hpp"
-namespace openstudio {
-namespace contam {
+
+#include "../src/utility_functions.hpp"
+
+namespace prjmodel {
 namespace detail {
 
 void WeatherDataImpl::setDefaults()
@@ -101,18 +102,18 @@ void WeatherDataImpl::read(Reader &input)
 std::string WeatherDataImpl::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_Tambt) + ' ' + ANY_TO_STR(m_barpres) + ' ' + ANY_TO_STR(m_windspd) + ' ' + ANY_TO_STR(m_winddir) + ' ' + ANY_TO_STR(m_relhum) + ' ' + ANY_TO_STR(m_daytyp) + ' ' + ANY_TO_STR(m_uTa) + ' ' + ANY_TO_STR(m_ubP) + ' ' + ANY_TO_STR(m_uws) + ' ' + ANY_TO_STR(m_uwd) + '\n';
+  string += PRJFLOAT_TO_STR(m_Tambt) + ' ' + PRJFLOAT_TO_STR(m_barpres) + ' ' + PRJFLOAT_TO_STR(m_windspd) + ' ' + PRJFLOAT_TO_STR(m_winddir) + ' ' + PRJFLOAT_TO_STR(m_relhum) + ' ' + ANY_TO_STR(m_daytyp) + ' ' + ANY_TO_STR(m_uTa) + ' ' + ANY_TO_STR(m_ubP) + ' ' + ANY_TO_STR(m_uws) + ' ' + ANY_TO_STR(m_uwd) + '\n';
   return string;
 }
 
 double WeatherDataImpl::Tambt() const
 {
-  return openstudio::string_conversions::to<double>(m_Tambt);
+  return to<double>(m_Tambt);
 }
 
 bool WeatherDataImpl::setTambt(const double Tambt)
 {
-  m_Tambt = openstudio::string_conversions::number(Tambt);
+  m_Tambt = to_float(Tambt);
   return true;
 }
 
@@ -123,12 +124,12 @@ bool WeatherDataImpl::setTambt(const std::string &Tambt)
 
 double WeatherDataImpl::barpres() const
 {
-  return openstudio::string_conversions::to<double>(m_barpres);
+  return to<double>(m_barpres);
 }
 
 bool WeatherDataImpl::setBarpres(const double barpres)
 {
-  m_barpres = openstudio::string_conversions::number(barpres);
+  m_barpres = to_float(barpres);
   return true;
 }
 
@@ -139,12 +140,12 @@ bool WeatherDataImpl::setBarpres(const std::string &barpres)
 
 double WeatherDataImpl::windspd() const
 {
-  return openstudio::string_conversions::to<double>(m_windspd);
+  return to<double>(m_windspd);
 }
 
 bool WeatherDataImpl::setWindspd(const double windspd)
 {
-  m_windspd = openstudio::string_conversions::number(windspd);
+  m_windspd = to_float(windspd);
   return true;
 }
 
@@ -155,12 +156,12 @@ bool WeatherDataImpl::setWindspd(const std::string &windspd)
 
 double WeatherDataImpl::winddir() const
 {
-  return openstudio::string_conversions::to<double>(m_winddir);
+  return to<double>(m_winddir);
 }
 
 bool WeatherDataImpl::setWinddir(const double winddir)
 {
-  m_winddir = openstudio::string_conversions::number(winddir);
+  m_winddir = to_float(winddir);
   return true;
 }
 
@@ -171,12 +172,12 @@ bool WeatherDataImpl::setWinddir(const std::string &winddir)
 
 double WeatherDataImpl::relhum() const
 {
-  return openstudio::string_conversions::to<double>(m_relhum);
+  return to<double>(m_relhum);
 }
 
 bool WeatherDataImpl::setRelhum(const double relhum)
 {
-  m_relhum = openstudio::string_conversions::number(relhum);
+  m_relhum = to_float(relhum);
   return true;
 }
 
@@ -318,5 +319,4 @@ bool IconImpl::isWall()
 }
 
 } // detail
-} // contam
-} // openstudio
+} // prjmodel
