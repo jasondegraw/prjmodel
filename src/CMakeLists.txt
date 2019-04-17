@@ -31,8 +31,6 @@ set(${target_name}_src
   ../contam/PrjSubobjectsImpl.cpp
   airflowelements.hpp
   airflowelements.cpp
-  ../contam/PrjAirflowElementsImpl.hpp
-  ../contam/PrjAirflowElementsImpl.cpp
   #SurfaceNetworkBuilder.hpp
   #SurfaceNetworkBuilder.cpp
   utility_functions.hpp
