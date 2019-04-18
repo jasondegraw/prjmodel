@@ -35,17 +35,17 @@
 namespace prjmodel {
 
 WeatherData::WeatherData() :
-  m_impl(std::shared_ptr<detail::WeatherDataImpl>(new detail::WeatherDataImpl))
+  m_impl(std::shared_ptr<WeatherDataImpl>(new WeatherDataImpl))
 {}
 
 WeatherData::WeatherData(std::string Tambt,std::string barpres,std::string windspd,std::string winddir,std::string relhum,int daytyp,
                          int uTa,int ubP,int uws,int uwd) :
-  m_impl(std::shared_ptr<detail::WeatherDataImpl>(new detail::WeatherDataImpl(Tambt,barpres,windspd,winddir,relhum,daytyp,uTa,ubP,uws,uwd)))
+  m_impl(std::shared_ptr<WeatherDataImpl>(new WeatherDataImpl(Tambt,barpres,windspd,winddir,relhum,daytyp,uTa,ubP,uws,uwd)))
 {}
 
 WeatherData::WeatherData(double Tambt,double barpres,double windspd,double winddir,double relhum,int daytyp,
                          int uTa,int ubP,int uws,int uwd) :
-  m_impl(std::shared_ptr<detail::WeatherDataImpl>(new detail::WeatherDataImpl(Tambt,barpres,windspd,winddir,relhum,daytyp,uTa,ubP,uws,uwd)))
+  m_impl(std::shared_ptr<WeatherDataImpl>(new WeatherDataImpl(Tambt,barpres,windspd,winddir,relhum,daytyp,uTa,ubP,uws,uwd)))
 {}
 
 WeatherData::WeatherData(const WeatherData &other) : m_impl(other.m_impl)
@@ -205,12 +205,197 @@ void WeatherData::setUwd(const int uwd)
   m_impl->setUwd(uwd);
 }
 
+WeatherData::WeatherDataImpl::WeatherDataImpl() : m_Tambt(PRJFLOAT("0.0")), m_barpres(PRJFLOAT("0.0")), m_windspd(PRJFLOAT("0.0")),
+m_winddir(PRJFLOAT("0.0")), m_relhum(PRJFLOAT("0.0")), m_daytyp(0), m_uTa(0), m_ubP(0), m_uws(0), m_uwd(0)
+{}
+
+WeatherData::WeatherDataImpl::WeatherDataImpl(std::string Tambt, std::string barpres, std::string windspd, std::string winddir, std::string relhum,
+  int daytyp, int uTa, int ubP, int uws, int uwd) : WeatherData::WeatherDataImpl()
+{
+  setTambt(Tambt);
+  setBarpres(barpres);
+  setWindspd(windspd);
+  setWinddir(winddir);
+  setRelhum(relhum);
+  setDaytyp(daytyp);
+  setUTa(uTa);
+  setUbP(ubP);
+  setUws(uws);
+  setUwd(uwd);
+}
+
+WeatherData::WeatherDataImpl::WeatherDataImpl(double Tambt, double barpres, double windspd, double winddir, double relhum,
+  int daytyp, int uTa, int ubP, int uws, int uwd) : WeatherData::WeatherDataImpl()
+{
+  setTambt(Tambt);
+  setBarpres(barpres);
+  setWindspd(windspd);
+  setWinddir(winddir);
+  setRelhum(relhum);
+  setDaytyp(daytyp);
+  setUTa(uTa);
+  setUbP(ubP);
+  setUws(uws);
+  setUwd(uwd);
+}
+
+void WeatherData::WeatherDataImpl::read(Reader& input)
+{
+  setTambt(input.readNumber<std::string>());
+  setBarpres(input.readNumber<std::string>());
+  setWindspd(input.readNumber<std::string>());
+  setWinddir(input.readNumber<std::string>());
+  setRelhum(input.readNumber<std::string>());
+  setDaytyp(input.read<int>());
+  setUTa(input.read<int>());
+  setUbP(input.read<int>());
+  setUws(input.read<int>());
+  setUwd(input.read<int>());
+}
+
+std::string WeatherData::WeatherDataImpl::write()
+{
+  std::string string;
+  string += PRJFLOAT_TO_STR(m_Tambt) + ' ' + PRJFLOAT_TO_STR(m_barpres) + ' ' + PRJFLOAT_TO_STR(m_windspd) + ' ' + PRJFLOAT_TO_STR(m_winddir) + ' ' + PRJFLOAT_TO_STR(m_relhum) + ' ' + ANY_TO_STR(m_daytyp) + ' ' + ANY_TO_STR(m_uTa) + ' ' + ANY_TO_STR(m_ubP) + ' ' + ANY_TO_STR(m_uws) + ' ' + ANY_TO_STR(m_uwd) + '\n';
+  return string;
+}
+
+double WeatherData::WeatherDataImpl::Tambt() const
+{
+  return to<double>(m_Tambt);
+}
+
+bool WeatherData::WeatherDataImpl::setTambt(const double Tambt)
+{
+  m_Tambt = to_float(Tambt);
+  return true;
+}
+
+bool WeatherData::WeatherDataImpl::setTambt(const std::string& Tambt)
+{
+  return assign_if_valid<double>(Tambt, m_Tambt);
+}
+
+double WeatherData::WeatherDataImpl::barpres() const
+{
+  return to<double>(m_barpres);
+}
+
+bool WeatherData::WeatherDataImpl::setBarpres(const double barpres)
+{
+  m_barpres = to_float(barpres);
+  return true;
+}
+
+bool WeatherData::WeatherDataImpl::setBarpres(const std::string& barpres)
+{
+  return assign_if_valid<double>(barpres, m_barpres);
+}
+
+double WeatherData::WeatherDataImpl::windspd() const
+{
+  return to<double>(m_windspd);
+}
+
+bool WeatherData::WeatherDataImpl::setWindspd(const double windspd)
+{
+  m_windspd = to_float(windspd);
+  return true;
+}
+
+bool WeatherData::WeatherDataImpl::setWindspd(const std::string& windspd)
+{
+  return assign_if_valid<double>(windspd, m_windspd);
+}
+
+double WeatherData::WeatherDataImpl::winddir() const
+{
+  return to<double>(m_winddir);
+}
+
+bool WeatherData::WeatherDataImpl::setWinddir(const double winddir)
+{
+  m_winddir = to_float(winddir);
+  return true;
+}
+
+bool WeatherData::WeatherDataImpl::setWinddir(const std::string& winddir)
+{
+  return assign_if_valid<double>(winddir, m_winddir);
+}
+
+double WeatherData::WeatherDataImpl::relhum() const
+{
+  return to<double>(m_relhum);
+}
+
+bool WeatherData::WeatherDataImpl::setRelhum(const double relhum)
+{
+  m_relhum = to_float(relhum);
+  return true;
+}
+
+bool WeatherData::WeatherDataImpl::setRelhum(const std::string& relhum)
+{
+  return assign_if_valid<double>(relhum, m_relhum);
+}
+
+int WeatherData::WeatherDataImpl::daytyp() const
+{
+  return m_daytyp;
+}
+
+void WeatherData::WeatherDataImpl::setDaytyp(const int daytyp)
+{
+  m_daytyp = daytyp;
+}
+
+int WeatherData::WeatherDataImpl::uTa() const
+{
+  return m_uTa;
+}
+
+void WeatherData::WeatherDataImpl::setUTa(const int uTa)
+{
+  m_uTa = uTa;
+}
+
+int WeatherData::WeatherDataImpl::ubP() const
+{
+  return m_ubP;
+}
+
+void WeatherData::WeatherDataImpl::setUbP(const int ubP)
+{
+  m_ubP = ubP;
+}
+
+int WeatherData::WeatherDataImpl::uws() const
+{
+  return m_uws;
+}
+
+void WeatherData::WeatherDataImpl::setUws(const int uws)
+{
+  m_uws = uws;
+}
+
+int WeatherData::WeatherDataImpl::uwd() const
+{
+  return m_uwd;
+}
+
+void WeatherData::WeatherDataImpl::setUwd(const int uwd)
+{
+  m_uwd = uwd;
+}
+
 Icon::Icon() :
-  m_impl(std::shared_ptr<detail::IconImpl>(new detail::IconImpl()))
+  m_impl(std::shared_ptr<IconImpl>(new IconImpl()))
 {}
 
 Icon::Icon(int icon,int col,int row,int nr) :
-  m_impl(std::shared_ptr<detail::IconImpl>(new detail::IconImpl(icon,col,row,nr)))
+  m_impl(std::shared_ptr<IconImpl>(new IconImpl(icon,col,row,nr)))
 {}
 
 Icon::Icon(const Icon &other) : m_impl(other.m_impl)
@@ -290,24 +475,82 @@ bool Icon::isWall()
   return m_impl->isWall();
 }
 
-void FanDataPoint::setDefaults()
+Icon::IconImpl::IconImpl() : m_icon(0), m_col(0), m_row(0), m_nr(0)
+{}
+
+Icon::IconImpl::IconImpl(int icon, int col, int row, int nr) : Icon::IconImpl()
 {
-  m_mF = PRJFLOAT("0.0");
-  m_u_mF = 0;
-  m_dP = PRJFLOAT("0.0");
-  m_u_dP = 0;
-  m_rP = PRJFLOAT("0.0");
-  m_u_rP = 0;
+  setIcon(icon);
+  setCol(col);
+  setRow(row);
+  setNr(nr);
 }
 
-FanDataPoint::FanDataPoint()
+void Icon::IconImpl::read(Reader& input)
 {
-  setDefaults();
+  setIcon(input.read<int>());
+  setCol(input.read<int>());
+  setRow(input.read<int>());
+  setNr(input.read<int>());
 }
 
-FanDataPoint::FanDataPoint(double mF,int u_mF,double dP,int u_dP,double rP,int u_rP)
+std::string Icon::IconImpl::write()
 {
-  setDefaults();
+  std::string string;
+  string += ANY_TO_STR(m_icon) + ' ' + ANY_TO_STR(m_col) + ' ' + ANY_TO_STR(m_row) + ' ' + ANY_TO_STR(m_nr) + '\n';
+  return string;
+}
+
+int Icon::IconImpl::icon() const
+{
+  return m_icon;
+}
+
+void Icon::IconImpl::setIcon(const int icon)
+{
+  m_icon = icon;
+}
+
+int Icon::IconImpl::col() const
+{
+  return m_col;
+}
+
+void Icon::IconImpl::setCol(const int col)
+{
+  m_col = col;
+}
+
+int Icon::IconImpl::row() const
+{
+  return m_row;
+}
+
+void Icon::IconImpl::setRow(const int row)
+{
+  m_row = row;
+}
+
+int Icon::IconImpl::nr() const
+{
+  return m_nr;
+}
+
+void Icon::IconImpl::setNr(const int nr)
+{
+  m_nr = nr;
+}
+
+bool Icon::IconImpl::isWall()
+{
+  return (m_icon >= WL_EW) && (m_icon <= WL_NESW);
+}
+
+FanDataPoint::FanDataPoint() : m_mF(PRJFLOAT("0.0")), m_u_mF(0), m_dP(PRJFLOAT("0.0")), m_u_dP(0), m_rP(PRJFLOAT("0.0")), m_u_rP(0)
+{}
+
+FanDataPoint::FanDataPoint(double mF,int u_mF,double dP,int u_dP,double rP,int u_rP) : FanDataPoint()
+{
   setMF(mF);
   setU_mF(u_mF);
   setDP(dP);
@@ -316,9 +559,8 @@ FanDataPoint::FanDataPoint(double mF,int u_mF,double dP,int u_dP,double rP,int u
   setU_rP(u_rP);
 }
 
-FanDataPoint::FanDataPoint(std::string mF,int u_mF,std::string dP,int u_dP,std::string rP,int u_rP)
+FanDataPoint::FanDataPoint(std::string mF,int u_mF,std::string dP,int u_dP,std::string rP,int u_rP) : FanDataPoint()
 {
-  setDefaults();
   setMF(mF);
   setU_mF(u_mF);
   setDP(dP);
@@ -492,29 +734,18 @@ bool XyDataPoint::setY(const std::string &y)
   return assign_if_valid<double>(y, m_y);
 }
 
-void AirflowSubelementData::setDefaults()
-{
-  m_nr = 0;
-  m_relHt = PRJFLOAT("0.0");
-  m_filt = 0;
-}
+AirflowSubelementData::AirflowSubelementData() : m_nr(0), m_relHt(PRJFLOAT("0.0")), m_filt(0)
+{}
 
-AirflowSubelementData::AirflowSubelementData()
+AirflowSubelementData::AirflowSubelementData(int nr,double relHt,int filt) : AirflowSubelementData()
 {
-  setDefaults();
-}
-
-AirflowSubelementData::AirflowSubelementData(int nr,double relHt,int filt)
-{
-  setDefaults();
   setNr(nr);
   setRelHt(relHt);
   setFilt(filt);
 }
 
-AirflowSubelementData::AirflowSubelementData(int nr,std::string relHt,int filt)
+AirflowSubelementData::AirflowSubelementData(int nr,std::string relHt,int filt) : AirflowSubelementData()
 {
-  setDefaults();
   setNr(nr);
   setRelHt(relHt);
   setFilt(filt);

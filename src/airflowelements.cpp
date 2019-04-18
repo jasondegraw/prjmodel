@@ -28,7 +28,6 @@
 ***********************************************************************************************************************/
 
 #include "airflowelements.hpp"
-#include "../contam/PrjAirflowElementsImpl.hpp"
 
 #include "logging.hpp"
 #include <algorithm>
