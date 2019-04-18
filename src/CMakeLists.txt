@@ -14,13 +14,9 @@ set(${target_name}_src
   reader.cpp
   #SimFile.hpp
   #SimFile.cpp
-  #WindPressure.hpp
-  #WindPressure.cpp
   defines.hpp
-  ../contam/PrjModel.hpp
-  ../contam/PrjModel.cpp
-  ../contam/PrjModelImpl.hpp
-  ../contam/PrjModelImpl.cpp
+  model.hpp
+  model.cpp
   objects.hpp
   objects.cpp
   subobjects.hpp
@@ -30,6 +26,8 @@ set(${target_name}_src
   #SurfaceNetworkBuilder.hpp
   #SurfaceNetworkBuilder.cpp
   utility_functions.hpp
+  windpressure.hpp
+  windpressure.cpp
 )
 
 # resource files

@@ -27,11 +27,10 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "PrjModel.hpp"
+#include "model.hpp"
 //#include "SimFile.hpp"
 
-#include "PrjModelImpl.hpp"
-#include "../src/logging.hpp"
+#include "logging.hpp"
 
 #include <algorithm>
 
