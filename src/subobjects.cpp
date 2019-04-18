@@ -27,10 +27,9 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "PrjSubobjects.hpp"
-#include "PrjSubobjectsImpl.hpp"
+#include "subobjects.hpp"
 
-#include "../src/utility_functions.hpp"
+#include "utility_functions.hpp"
 
 namespace prjmodel {
 

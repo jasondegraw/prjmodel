@@ -25,10 +25,8 @@ set(${target_name}_src
   #PrjObjects.cpp
   #PrjObjectsImpl.hpp
   #PrjObjectsImpl.cpp
-  ../contam/PrjSubobjects.hpp
-  ../contam/PrjSubobjects.cpp
-  ../contam/PrjSubobjectsImpl.hpp
-  ../contam/PrjSubobjectsImpl.cpp
+  subobjects.hpp
+  subobjects.cpp
   airflowelements.hpp
   airflowelements.cpp
   #SurfaceNetworkBuilder.hpp

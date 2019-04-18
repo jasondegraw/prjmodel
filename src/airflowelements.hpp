@@ -31,7 +31,7 @@
 #define PRJMODEL_AIRFLOWELEMENTS_HPP
 
 #include "defines.hpp"
-#include "../contam/PrjSubobjects.hpp"
+#include "subobjects.hpp"
 #include <string>
 #include <vector>
 
