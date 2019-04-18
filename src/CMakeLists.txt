@@ -17,10 +17,10 @@ set(${target_name}_src
   #WindPressure.hpp
   #WindPressure.cpp
   defines.hpp
-  #PrjModel.hpp
-  #PrjModel.cpp
-  #PrjModelImpl.hpp
-  #PrjModelImpl.cpp
+  ../contam/PrjModel.hpp
+  ../contam/PrjModel.cpp
+  ../contam/PrjModelImpl.hpp
+  ../contam/PrjModelImpl.cpp
   objects.hpp
   objects.cpp
   subobjects.hpp
