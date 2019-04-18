@@ -30,24 +30,14 @@
 #ifndef PRJMODEL_OBJECTS_HPP
 #define PRJMODEL_OBJECTS_HPP
 
-#include "../src/defines.hpp"
-#include "PrjObjectsImpl.hpp"
-#include "../src/prjmodel_api.hpp"
+#include "defines.hpp"
+#include "subobjects.hpp"
+#include "prjmodel_api.hpp"
+#include <vector>
 
 namespace prjmodel {
 
 class Reader;
-namespace detail {
-  class ZoneImpl;
-  class SpeciesImpl;
-  class AhsImpl;
-  class AirflowPathImpl;
-  class RunControlImpl;
-  class LevelImpl;
-  class DayScheduleImpl;
-  class WeekScheduleImpl;
-  class WindPressureProfileImpl;
-}
 
 /** The Zone object stores the data that describes an airflow zone. */
 class PRJMODEL_API Zone

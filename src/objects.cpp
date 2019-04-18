@@ -27,9 +27,9 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "PrjObjects.hpp"
+#include "objects.hpp"
 
-#include "../src/logging.hpp"
+#include "logging.hpp"
 
 #include <algorithm>
 
