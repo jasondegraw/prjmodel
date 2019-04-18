@@ -21,10 +21,10 @@ set(${target_name}_src
   #PrjModel.cpp
   #PrjModelImpl.hpp
   #PrjModelImpl.cpp
-  #PrjObjects.hpp
-  #PrjObjects.cpp
-  #PrjObjectsImpl.hpp
-  #PrjObjectsImpl.cpp
+  ../contam/PrjObjects.hpp
+  ../contam/PrjObjects.cpp
+  ../contam/PrjObjectsImpl.hpp
+  ../contam/PrjObjectsImpl.cpp
   subobjects.hpp
   subobjects.cpp
   airflowelements.hpp

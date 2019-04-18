@@ -199,8 +199,7 @@ template <typename T> PRJFLOAT to_float(T& v)
 #define EXP_2     253  /* FD 375 exponent 2 */
 #define SUB_2     254  /* FE 376 subscript 2 */
 
-namespace openstudio {
-namespace contam {
+namespace prjmodel {
 
 enum PathFlags {
   WIND = 0x0001, // Path is subject to wind pressure
@@ -235,7 +234,6 @@ enum ZoneFlags {
   FLAG_N = 0x003F
 };   // all zone flag bits, used in PrjRead()
 
-}
 }
 
 #endif // PRJMODEL_DEFINES_HPP
