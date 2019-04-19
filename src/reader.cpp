@@ -31,6 +31,7 @@
 #include "reader.hpp"
 #include "logging.hpp"
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 
 //#include "../../utilities/core/Logger.hpp"
@@ -41,10 +42,14 @@
 
 namespace prjmodel {
 
-//Reader::Reader( openstudio::filesystem::ifstream &file )
-//  : m_stream(openstudio::filesystem::read_as_string(file)), m_lineNumber(0)
-//{
-//}
+Reader::Reader(const std::string &filename) : m_lineNumber(0)
+{
+  std::ifstream fp(filename);
+  if (fp) {
+    m_stream << fp.rdbuf();
+    fp.close();
+  }
+}
 
 Reader::Reader(const std::string& string, int starting) : m_lineNumber(starting)
 {

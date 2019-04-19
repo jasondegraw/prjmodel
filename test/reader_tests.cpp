@@ -5,7 +5,7 @@ TEST_CASE("Test basic reading", "[Reader]")
 {
   std::string txt{ " 1.47921e-007 0.000998165 0.65 75 0.0181269 0 4\n9 23 plr_test1 FloorLeaky\n\n 3.1045e-007" };
 
-  prjmodel::Reader reader(txt);
+  prjmodel::Reader reader(txt, 0);
 
   CHECK(reader.readString() == "1.47921e-007");
   CHECK(reader.readDouble() == 0.000998165);

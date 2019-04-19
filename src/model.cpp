@@ -46,11 +46,11 @@ IndexModel::IndexModel() :
 //  m_impl->read(path);
 //}
 
-//IndexModel::IndexModel(std::string filename) :
-//  m_impl(std::shared_ptr<detail::IndexModelImpl>(new detail::IndexModelImpl))
-//{
-//  m_impl->read(filename);
-//}
+IndexModel::IndexModel(std::string filename) :
+  m_impl(std::shared_ptr<IndexModelImpl>(new IndexModelImpl))
+{
+  m_impl->read(filename);
+}
 
 IndexModel::IndexModel(Reader &input) :
   m_impl(std::shared_ptr<IndexModelImpl>(new IndexModelImpl))
@@ -85,10 +85,10 @@ bool IndexModel::operator!=(const IndexModel &other) const
 //  return m_impl->read(openstudio::toString(path));
 //}
 
-//bool IndexModel::read(std::string filename)
-//{
-//  return m_impl->read(filename);
-//}
+bool IndexModel::read(std::string filename)
+{
+  return m_impl->read(filename);
+}
 
 bool IndexModel::read(Reader &input)
 {
@@ -901,10 +901,13 @@ IndexModel::IndexModelImpl::IndexModelImpl(Reader& input) : IndexModel::IndexMod
 //  return m_valid;
 //}
 
-//bool IndexModel::IndexModelImpl::read(std::string filename)
-//{
-//  return read(openstudio::toPath(filename));
-//}
+bool IndexModel::IndexModelImpl::read(std::string filename)
+{
+  m_valid = false;
+  Reader input(filename);
+  read(input);
+  return m_valid;
+}
 
 bool IndexModel::IndexModelImpl::read(Reader& input)
 {

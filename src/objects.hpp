@@ -165,6 +165,14 @@ public:
   int cdaxis() const;
   /** Sets the convection/diffusion axis flag (0=no cd, 1-4 => cd axis direction). */
   void setCdaxis(const int cdaxis);
+  /** Returns the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+  int vfType() const;
+  /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+  void setVfType(const int vf);
+  /** Returns the value file node name. */
+  std::string vfNodeName() const;
+  /** Sets the value file node name. */
+  void setVfNodeName(const std::string& name);
   /** Returns the CFD zone flag (0=no, 1=yes). */
   int cfd() const;
   /** Sets the cfd zone flag (0=no, 1=yes). */
@@ -341,12 +349,22 @@ private:
     void setU_T(const int u_T);
     /** Returns the units of pressure. */
     int u_P() const;
-    /** sets the units of pressure. */
+    /** Sets the units of pressure. */
     void setU_P(const int u_P);
     /** Returns the convection/diffusion axis flag (0=no cd, 1-4 => cd axis direction). */
     int cdaxis() const;
     /** Sets the convection/diffusion axis flag (0=no cd, 1-4 => cd axis direction). */
     void setCdaxis(const int cdaxis);
+
+    /** Returns the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+    int vfType() const;
+    /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+    void setVfType(const int vf);
+    /** Returns the value file node name. */
+    std::string vfNodeName() const;
+    /** Sets the value file node name. */
+    void setVfNodeName(const std::string& name);
+
     /** Returns the CFD zone flag (0=no, 1=yes). */
     int cfd() const;
     /** Sets the cfd zone flag (0=no, 1=yes). */
@@ -454,6 +472,8 @@ private:
     int m_u_T;  // units of temperature (I2) {W}
     int m_u_P;  // units of pressure (I2) {W}
     int m_cdaxis;  // conv/diff axis (0=no cd, 1-4 => cd axis direction) (I2)
+    int m_vf_type; // 0=no value file, 1=use cvf, 2=use dvf (I2) {CONTAM 3.2}
+    std::string m_vf_node_name; // value file node name (I1) {CONTAM 3.2}
     int m_cfd;  // cfd zone (0=no, 1=yes) (I2)
     std::string m_cfdname;  // cfd zone id (CS)
     PRJFLOAT m_X1;  // X coordinate of one end of cdaxis (RX)
@@ -490,10 +510,10 @@ public:
   Species(double molwt, double Dm, double ccdef, double Cp, std::string name, std::string desc);
   /** Create a new object. */
   Species(int nr,int sflag,int ntflag,std::string molwt,std::string mdiam,std::string edens,std::string decay,std::string Dm,
-    std::string ccdef,std::string Cp,int uc,int umd,int ued,int udm,int ucp,std::string name,std::string desc);
+    std::string ccdef,std::string Cp, std::string K, int uc,int umd,int ued,int udm,int ucp,std::string name,std::string desc);
   /** Create a new object. */
   Species(int nr,int sflag,int ntflag,double molwt,double mdiam,double edens,double decay,
-    double Dm,double ccdef,double Cp,int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc);
+    double Dm,double ccdef,double Cp, double K,int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc);
   /** Create a new object from another object. */
   Species(const Species &other);
   /** Destroy the object. */
@@ -577,6 +597,12 @@ public:
   bool setCp(const double Cp);
   /** Sets the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
   bool setCp(const std::string &Cp);
+  /** Returns the UVGI susceptability constant [m2/J]. */
+  double Kuv() const;
+  /** Sets the UVGI susceptability constant [m2/J]. */
+  bool setKuv(const double K);
+  /** Sets the UVGI susceptability constant [m2/J]. */
+  bool setKuv(const std::string& K);
   /** Returns the concentration display units. */
   int ucc() const;
   /** Sets the concentration display units. */
@@ -615,9 +641,9 @@ private:
     //@{
     SpeciesImpl();
     SpeciesImpl(int nr, int sflag, int ntflag, std::string molwt, std::string mdiam, std::string edens, std::string decay, std::string Dm,
-      std::string ccdef, std::string Cp, int uc, int umd, int ued, int udm, int ucp, std::string name, std::string desc);
+      std::string ccdef, std::string Cp, std::string K, int uc, int umd, int ued, int udm, int ucp, std::string name, std::string desc);
     SpeciesImpl(int nr, int sflag, int ntflag, double molwt, double mdiam, double edens, double decay,
-      double Dm, double ccdef, double Cp, int ucc, int umd, int ued, int udm, int ucp, std::string name,
+      double Dm, double ccdef, double Cp, double K, int ucc, int umd, int ued, int udm, int ucp, std::string name,
       std::string desc);
 
     //@}
@@ -687,6 +713,14 @@ private:
     bool setCp(const double Cp);
     /** Sets the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
     bool setCp(const std::string& Cp);
+
+    /** Returns the UVGI susceptability constant [m2/J]. */
+    double Kuv() const;
+    /** Sets the UVGI susceptability constant [m2/J]. */
+    bool setKuv(const double K);
+    /** Sets the UVGI susceptability constant [m2/J]. */
+    bool setKuv(const std::string& K);
+
     /** Returns the concentration display units. */
     int ucc() const;
     /** Sets the concentration display units. */
@@ -727,6 +761,7 @@ private:
     PRJFLOAT m_Dm;  // molecular diffusion coefficient [m2/s] (R4)
     PRJFLOAT m_ccdef;  // default concentration [kg/kg air] (R4)
     PRJFLOAT m_Cp;  // (unused) specific heat at constant pressure [J/kgK] (R4)
+    PRJFLOAT m_Kuv; // UVGI susceptability constant [m2/J] (R4) {CONTAM 3.2}
     int m_ucc;  // units to display concentration (I2) {W}
     int m_umd;  // units to display mean diameter (I2) {W}
     int m_ued;  // units to display effective density (I2) {W}
@@ -1057,6 +1092,10 @@ public:
   int u_F() const;
   /** Sets the flow display units. */
   void setU_F(const int u_F);
+  /** Returns the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+  int vfType() const;
+  /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+  void setVfType(const int vf);
   /** Returns the CFD path flag (0=no, 1=yes). */
   int cfd() const;
   /** Sets the CFD path flag (0=no, 1=yes). */
@@ -1256,6 +1295,10 @@ private:
     int u_F() const;
     /** Sets the flow display units. */
     void setU_F(const int u_F);
+    /** Returns the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+    int vfType() const;
+    /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
+    void setVfType(const int vf);
     /** Returns the CFD path flag (0=no, 1=yes). */
     int cfd() const;
     /** Sets the CFD path flag (0=no, 1=yes). */
@@ -1305,6 +1348,8 @@ private:
     int m_u_XY;  // units of X and Y (I2) {W}
     int m_u_dP;  // units of pressure difference (I2) {W}
     int m_u_F;  // units of flow (I2) {W}
+    int m_vf_type; // 0=no value file, 1=use cvf, 2=use dvf (I2) {CONTAM 3.2}
+    std::string m_vf_node_name; // value file node name (I1) {CONTAM 3.2}
     int m_cfd;  // cfd path (0=no, 1=yes) (I2) {CONTAM 3.0}
     std::string m_cfd_name;  // cfd path id (CS)
     int m_cfd_ptype;  // boundary condition type (0=mass flow, 1=pressure) (I2)
@@ -1804,6 +1849,28 @@ public:
   int logsave() const;
   /** Sets the text controls log file flag: 0 = don't save, 1 = save. */
   void setLogsave(const int logsave);
+
+  /** Returns the basic cex file flag:  0 = don't save, 1 = save.*/
+  int bcexsave() const;
+  /** Sets the basic cex files flag flag:  0 = don't save, 1 = save.*/
+  void setBcexsave(const int bcexsave);
+  /** Returns the save detailed cex files flag: 0 = don't save, 1 = save.*/
+  int dcexsave() const;
+  /** Sets the save detailed cex files flag: 0 = don't save, 1 = save.*/
+  void setDcexsave(const int dcexsave) const;
+  /** Returns the SQL path flow results flags: 0 = don't save, 1 = save.*/
+  int pfsqlsave() const;
+  /** Sets the SQL path flow results flags: 0 = don't save, 1 = save.*/
+  void setPfsqlsave(const int pfsqlsave);
+  /** Returns the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+  int zfsqlsave() const;
+  /** Sets the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+  void setZfsqlsave(const int zfsqlsave) const;
+  /** Returns the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+  int zcsqlsave() const;
+  /** Sets the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+  void setZcsqlsave(const int zcsqlsave);
+
   /** Returns the save vector - unused by CONTAM and subject to change without notice. */
   std::vector<int> save() const;
   /** Sets the save vector - unused by CONTAM and subject to change without notice. */
@@ -2311,6 +2378,28 @@ private:
     int logsave() const;
     /** Sets the text controls log file flag: 0 = don't save, 1 = save. */
     void setLogsave(const int logsave);
+
+    /** Returns the basic cex file flag:  0 = don't save, 1 = save.*/
+    int bcexsave() const;
+    /** Sets the basic cex files flag flag:  0 = don't save, 1 = save.*/
+    void setBcexsave(const int bcexsave);
+    /** Returns the save detailed cex files flag: 0 = don't save, 1 = save.*/
+    int dcexsave() const;
+    /** Sets the save detailed cex files flag: 0 = don't save, 1 = save.*/
+    void setDcexsave(const int dcexsave);
+    /** Returns the SQL path flow results flags: 0 = don't save, 1 = save.*/
+    int pfsqlsave() const;
+    /** Sets the SQL path flow results flags: 0 = don't save, 1 = save.*/
+    void setPfsqlsave(const int pfsqlsave);
+    /** Returns the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+    int zfsqlsave() const; 
+    /** Sets the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+    void setZfsqlsave(const int zfsqlsave);
+    /** Returns the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+    int zcsqlsave() const; 
+    /** Sets the SQL zone flow results flags: 0 = don't save, 1 = save.*/
+    void setZcsqlsave(const int zcsqlsave);
+
     /** Returns the save vector - unused by CONTAM and subject to change without notice. */
     std::vector<int> save() const;
     /** Sets the save vector - unused by CONTAM and subject to change without notice. */
@@ -2453,6 +2542,14 @@ private:
     int m_csmsave;  // (0/1) save text contaminant summary file (I1)
     int m_srfsave;  // (0/1) save text surface result file (I1)
     int m_logsave;  // (0/1) save text controls log file (I1)
+
+    int m_bcexsave; // (0/1) save basic cex file (I1)(3.2)
+    int m_dcexsave; // (0/1) save detailed cex files (I1)(3.2)
+    int m_pfsqlsave; // (0/1) save path flow results to SQL (I1)(3.2)
+    int m_zfsqlsave; // (0/1) save zone flow results to SQL (I1)(3.2)
+    int m_zcsqlsave; // (0/1) save zone mass (contaminant) results to SQL (I1)(3.2)
+
+
     std::vector<int> m_save;  // (unused by CONTAM; subject to change without notice) (I1)
     std::vector<PRJFLOAT> m_rvals;  // real values (R4)
     int m_BldgFlowZ;  // output building airflow test (zones) (IX)

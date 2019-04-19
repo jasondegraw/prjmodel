@@ -35,7 +35,6 @@
 #include <list>
 
 #include "prjmodel_api.hpp"
-//#include "../../utilities/core/Filesystem.hpp"
 
 #include "defines.hpp"
 
@@ -44,8 +43,8 @@ namespace prjmodel {
 class PRJMODEL_API Reader
 {
 public:
-  //explicit Reader(openstudio::filesystem::ifstream &file);
-  explicit Reader(const std::string& string, int starting=0);
+  explicit Reader(const std::string &filename);
+  explicit Reader(const std::string& string, int starting);
   ~Reader();
 
   double readDouble();
@@ -86,6 +85,7 @@ private:
   std::string readLineString();
 
   std::stringstream m_stream;
+  //std::istream& m_stream;
   int m_lineNumber;
   std::list<std::string> m_entries;
 

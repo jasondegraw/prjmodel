@@ -385,6 +385,10 @@ public:
   /** Replace an airflow element with a PlrTest1 airflow element */
   bool replaceAirflowElement(int nr, PlrTest1 element);
 
+  template <class T> std::vector<T> getAirflowElements();
+  
+  template <class T> bool addAirflowElement(T element);
+
   /** Returns a vector of all CvfDat control nodes in the model. */
   std::vector<CvfDat> getCvfDat() const;
   /** Add an CvfDat airflow element to the model. */
@@ -450,7 +454,7 @@ private:
     //explicit IndexModelImpl(std::string filename);
     explicit IndexModelImpl(Reader& input);
     //bool read(openstudio::path path);
-    //bool read(std::string filename);
+    bool read(std::string filename);
     bool read(Reader& input);
     std::string toString();
 
@@ -938,6 +942,16 @@ template <class T> void IndexModel::IndexModelImpl::renumberVector(std::vector<T
     nr++;
   }
 }
+
+template <class T> std::vector<T> IndexModel::getAirflowElements()
+{
+  return m_impl->getAirflowElements<T>();
+}
+
+//template <class T> bool IndexModel::addAirflowElement(T element)
+//{
+//  return m_impl->addAirflowElements<T>(element);
+//}
 
 } // prjmodel
 

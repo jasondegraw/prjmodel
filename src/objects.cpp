@@ -283,6 +283,26 @@ void Zone::setCdaxis(const int cdaxis)
   m_impl->setCdaxis(cdaxis);
 }
 
+int Zone::vfType() const
+{
+  return m_impl->vfType();
+}
+
+void Zone::setVfType(const int vf)
+{
+  m_impl->setVfType(vf);
+}
+
+std::string Zone::vfNodeName() const
+{
+  return m_impl->vfNodeName();
+}
+
+void Zone::setVfNodeName(const std::string& name)
+{
+  m_impl->setVfNodeName(name);
+}
+
 int Zone::cfd() const
 {
   return m_impl->cfd();
@@ -610,6 +630,10 @@ void Zone::ZoneImpl::read(Reader& input)
   setU_T(input.readInt());
   setU_P(input.readInt());
   setCdaxis(input.readInt());
+  setVfType(input.readInt());
+  if (vfType() != 0) {
+    setVfNodeName(input.readString());
+  }
   setCfd(input.readInt());
   if (cfd()) {
     setCfdname(input.readString());
@@ -635,7 +659,11 @@ std::string Zone::ZoneImpl::write()
     + ANY_TO_STR(m_pk) + ' ' + ANY_TO_STR(m_pl) + ' ' + PRJFLOAT_TO_STR(m_relHt) + ' '
     + PRJFLOAT_TO_STR(m_Vol) + ' ' + PRJFLOAT_TO_STR(m_T0) + ' ' + PRJFLOAT_TO_STR(m_P0) + ' ' + m_name + ' '
     + ANY_TO_STR(m_color) + ' ' + ANY_TO_STR(m_u_Ht) + ' ' + ANY_TO_STR(m_u_V) + ' ' + ANY_TO_STR(m_u_T) + ' '
-    + ANY_TO_STR(m_u_P) + ' ' + ANY_TO_STR(m_cdaxis) + ' ' + ANY_TO_STR(m_cfd);
+    + ANY_TO_STR(m_u_P) + ' ' + ANY_TO_STR(m_cdaxis) + ' ' + ANY_TO_STR(m_vf_type);
+  if (m_vf_type) {
+    string += ' ' + m_vf_node_name;
+  }
+  string += ' ' + ANY_TO_STR(m_cfd);
   if (m_cfd)
     string += ' ' + m_cfdname;
   else if (m_cdaxis)
@@ -838,6 +866,26 @@ int Zone::ZoneImpl::cdaxis() const
 void Zone::ZoneImpl::setCdaxis(const int cdaxis)
 {
   m_cdaxis = cdaxis;
+}
+
+int Zone::ZoneImpl::vfType() const
+{
+  return m_vf_type;
+}
+
+void Zone::ZoneImpl::setVfType(const int vf)
+{
+  m_vf_type = vf;
+}
+
+std::string Zone::ZoneImpl::vfNodeName() const
+{
+  return m_vf_node_name;
+}
+
+void Zone::ZoneImpl::setVfNodeName(const std::string& name)
+{
+  m_vf_node_name = name;
 }
 
 int Zone::ZoneImpl::cfd() const
@@ -1117,13 +1165,13 @@ Species::Species(double molwt, double Dm, double ccdef, double Cp, std::string n
 }
 
 Species::Species(int nr,int sflag,int ntflag,std::string molwt,std::string mdiam,std::string edens,std::string decay,std::string Dm,
-  std::string ccdef,std::string Cp,int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc) :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl(nr,sflag,ntflag,molwt,mdiam,edens,decay,Dm,ccdef,Cp,ucc,umd,ued,udm,ucp,name,desc)))
+  std::string ccdef,std::string Cp, std::string K,int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc) :
+  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl(nr,sflag,ntflag,molwt,mdiam,edens,decay,Dm,ccdef,Cp,K,ucc,umd,ued,udm,ucp,name,desc)))
 {}
 
 Species::Species(int nr,int sflag,int ntflag,double molwt,double mdiam,double edens,double decay,double Dm,
-  double ccdef,double Cp,int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc) :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl(nr,sflag,ntflag,molwt,mdiam,edens,decay,Dm,ccdef,Cp,ucc,umd,ued,udm,ucp,name,desc)))
+  double ccdef,double Cp, double K, int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc) :
+  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl(nr,sflag,ntflag,molwt,mdiam,edens,decay,Dm,ccdef,Cp,K,ucc,umd,ued,udm,ucp,name,desc)))
 {}
 
 Species::Species(const Species &other) : m_impl(other.m_impl)
@@ -1293,6 +1341,21 @@ bool Species::setCp(const std::string &Cp)
   return m_impl->setCp(Cp);
 }
 
+double Species::Kuv() const
+{
+  return m_impl->Kuv();
+}
+
+bool Species::setKuv(const double K)
+{
+  return m_impl->setKuv(K);
+}
+
+bool Species::setKuv(const std::string& K)
+{
+  return m_impl->setKuv(K);
+}
+
 int Species::ucc() const
 {
   return m_impl->ucc();
@@ -1365,11 +1428,11 @@ void Species::setDesc(const std::string &desc)
 
 Species::SpeciesImpl::SpeciesImpl() : m_nr(0), m_sflag(0), m_ntflag(0), m_molwt(PRJFLOAT("0.0")), m_mdiam(PRJFLOAT("0.0")),
   m_edens(PRJFLOAT("0.0")), m_decay(PRJFLOAT("0.0")), m_Dm(PRJFLOAT("0.0")), m_ccdef(PRJFLOAT("0.0")), m_Cp(PRJFLOAT("0.0")),
-  m_ucc(0), m_umd(0), m_ued(0), m_udm(0), m_ucp(0)
+  m_Kuv(PRJFLOAT("0.0")), m_ucc(0), m_umd(0), m_ued(0), m_udm(0), m_ucp(0)
 {}
 
 Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, std::string molwt, std::string mdiam, std::string edens, std::string decay,
-  std::string Dm, std::string ccdef, std::string Cp, int ucc, int umd, int ued, int udm, int ucp, std::string name,
+  std::string Dm, std::string ccdef, std::string Cp, std::string K, int ucc, int umd, int ued, int udm, int ucp, std::string name,
   std::string desc) : Species::SpeciesImpl()
 {
   setNr(nr);
@@ -1382,6 +1445,7 @@ Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, std::string mol
   setDm(Dm);
   setCcdef(ccdef);
   setCp(Cp);
+  setKuv(K);
   setUcc(ucc);
   setUmd(umd);
   setUed(ued);
@@ -1392,7 +1456,7 @@ Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, std::string mol
 }
 
 Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, double molwt, double mdiam, double edens, double decay,
-  double Dm, double ccdef, double Cp, int ucc, int umd, int ued, int udm, int ucp, std::string name,
+  double Dm, double ccdef, double Cp, double K, int ucc, int umd, int ued, int udm, int ucp, std::string name,
   std::string desc) : Species::SpeciesImpl()
 {
   setNr(nr);
@@ -1405,6 +1469,7 @@ Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, double molwt, d
   setDm(Dm);
   setCcdef(ccdef);
   setCp(Cp);
+  setKuv(K);
   setUcc(ucc);
   setUmd(umd);
   setUed(ued);
@@ -1426,6 +1491,7 @@ void Species::SpeciesImpl::read(Reader& input)
   setDm(input.read<std::string>());
   setCcdef(input.read<std::string>());
   setCp(input.read<std::string>());
+  setKuv(input.read<std::string>());
   setUcc(input.read<int>());
   setUmd(input.read<int>());
   setUed(input.read<int>());
@@ -1438,7 +1504,10 @@ void Species::SpeciesImpl::read(Reader& input)
 std::string Species::SpeciesImpl::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_sflag) + ' ' + ANY_TO_STR(m_ntflag) + ' ' + PRJFLOAT_TO_STR(m_molwt) + ' ' + PRJFLOAT_TO_STR(m_mdiam) + ' ' + PRJFLOAT_TO_STR(m_edens) + ' ' + PRJFLOAT_TO_STR(m_decay) + ' ' + PRJFLOAT_TO_STR(m_Dm) + ' ' + PRJFLOAT_TO_STR(m_ccdef) + ' ' + PRJFLOAT_TO_STR(m_Cp) + ' ' + ANY_TO_STR(m_ucc) + ' ' + ANY_TO_STR(m_umd) + ' ' + ANY_TO_STR(m_ued) + ' ' + ANY_TO_STR(m_udm) + ' ' + ANY_TO_STR(m_ucp) + ' ' + m_name + '\n';
+  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_sflag) + ' ' + ANY_TO_STR(m_ntflag) + ' ' + PRJFLOAT_TO_STR(m_molwt) + ' ' 
+    + PRJFLOAT_TO_STR(m_mdiam) + ' ' + PRJFLOAT_TO_STR(m_edens) + ' ' + PRJFLOAT_TO_STR(m_decay) + ' ' + PRJFLOAT_TO_STR(m_Dm) + ' ' 
+    + PRJFLOAT_TO_STR(m_ccdef) + ' ' + PRJFLOAT_TO_STR(m_Cp) + ' ' + PRJFLOAT_TO_STR(m_Kuv) + ' ' + ANY_TO_STR(m_ucc) + ' ' + ANY_TO_STR(m_umd)
+    + ' ' + ANY_TO_STR(m_ued) + ' ' + ANY_TO_STR(m_udm) + ' ' + ANY_TO_STR(m_ucp) + ' ' + m_name + '\n';
   string += m_desc + '\n';
   return string;
 }
@@ -1583,6 +1652,22 @@ bool Species::SpeciesImpl::setCp(const double Cp)
 bool Species::SpeciesImpl::setCp(const std::string& Cp)
 {
   return assign_if_valid<double>(Cp, m_Cp);
+}
+
+double Species::SpeciesImpl::Kuv() const
+{
+  return to<double>(m_Kuv);
+}
+
+bool Species::SpeciesImpl::setKuv(const double K)
+{
+  m_Kuv = to_float(K);
+  return true;
+}
+
+bool Species::SpeciesImpl::setKuv(const std::string& K)
+{
+  return assign_if_valid<double>(K, m_Kuv);
 }
 
 int Species::SpeciesImpl::ucc() const
@@ -4151,6 +4236,56 @@ void RunControl::setLogsave(const int logsave)
   m_impl->setLogsave(logsave);
 }
 
+int RunControl::bcexsave() const
+{
+  return m_impl->bcexsave();
+}
+
+void RunControl::setBcexsave(const int bcexsave)
+{
+  m_impl->setBcexsave(bcexsave);
+}
+
+int RunControl::dcexsave() const
+{
+  return m_impl->dcexsave();
+}
+
+void RunControl::setDcexsave(const int dcexsave) const
+{
+  m_impl->setDcexsave(dcexsave);
+}
+
+int RunControl::pfsqlsave() const
+{
+  return m_impl->pfsqlsave();
+}
+
+void RunControl::setPfsqlsave(const int pfsqlsave)
+{
+  m_impl->setPfsqlsave(pfsqlsave);
+}
+
+int RunControl::zfsqlsave() const
+{
+  return  m_impl->zfsqlsave();
+}
+
+void RunControl::setZfsqlsave(const int zfsqlsave) const
+{
+  m_impl->setZfsqlsave(zfsqlsave);
+}
+
+int RunControl::zcsqlsave() const
+{
+  return  m_impl->zcsqlsave();
+}
+
+void RunControl::setZcsqlsave(const int zcsqlsave)
+{
+  m_impl->setZcsqlsave(zcsqlsave);
+}
+
 std::vector<int> RunControl::save() const
 {
   return m_impl->save();
@@ -4281,8 +4416,9 @@ m_mfvacnvg(PRJFLOAT("0.0")), m_mfvrelax(PRJFLOAT("0.0")), m_uccv(0), m_mf_solver
 m_sim_vjt(0), m_udx(0), m_cvode_mth(0), m_cvode_rcnvg(PRJFLOAT("0.0")), m_cvode_acnvg(PRJFLOAT("0.0")), m_cvode_dtmax(PRJFLOAT("0.0")),
 m_tsdens(0), m_tsrelax(PRJFLOAT("0.0")), m_tsmaxi(0), m_cnvgSS(0), m_densZP(0), m_stackD(0), m_dodMdt(0), m_restart(0), m_list(0), m_doDlg(0),
 m_pfsave(0), m_zfsave(0), m_zcsave(0), m_achvol(0), m_achsave(0), m_abwsave(0), m_cbwsave(0), m_expsave(0), m_ebwsave(0), m_zaasave(0),
-m_zbwsave(0), m_rzfsave(0), m_rzmsave(0), m_rz1save(0), m_csmsave(0), m_srfsave(0), m_logsave(0), m_BldgFlowZ(0), m_BldgFlowD(0),
-m_BldgFlowC(0), m_cfd_ctype(0), m_cfd_convcpl(PRJFLOAT("0.0")), m_cfd_var(0), m_cfd_zref(0), m_cfd_imax(0), m_cfd_dtcmo(0)
+m_zbwsave(0), m_rzfsave(0), m_rzmsave(0), m_rz1save(0), m_csmsave(0), m_srfsave(0), m_logsave(0), m_bcexsave(0), m_dcexsave(0), m_pfsqlsave(0),
+m_zfsqlsave(0), m_zcsqlsave(0), m_BldgFlowZ(0), m_BldgFlowD(0), m_BldgFlowC(0), m_cfd_ctype(0), m_cfd_convcpl(PRJFLOAT("0.0")), m_cfd_var(0),
+m_cfd_zref(0), m_cfd_imax(0), m_cfd_dtcmo(0)
 {}
 
 RunControl::RunControlImpl::RunControlImpl(int sim_af, int afcalc, int afmaxi, double afrcnvg, double afacnvg, double afrelax,
@@ -4632,6 +4768,13 @@ void RunControl::RunControlImpl::read(Reader& input)
   setCsmsave(input.read<int>());
   setSrfsave(input.read<int>());
   setLogsave(input.read<int>());
+
+  setBcexsave(input.read<int>());
+  setDcexsave(input.read<int>());
+  setPfsqlsave(input.read<int>());
+  setZfsqlsave(input.read<int>());
+  setZcsqlsave(input.read<int>());
+
   std::vector<int> save;
   for (int i = 0; i < 16; i++) {
     save.push_back(input.read<int>());
@@ -4690,6 +4833,8 @@ std::string RunControl::RunControlImpl::write()
     + ANY_TO_STR(m_zaasave) + ' ' + ANY_TO_STR(m_zbwsave) + '\n';
   string += ANY_TO_STR(m_rzfsave) + ' ' + ANY_TO_STR(m_rzmsave) + ' ' + ANY_TO_STR(m_rz1save) + ' '
     + ANY_TO_STR(m_csmsave) + ' ' + ANY_TO_STR(m_srfsave) + ' ' + ANY_TO_STR(m_logsave) + '\n';
+  string += ANY_TO_STR(m_bcexsave) + ' ' + ANY_TO_STR(m_dcexsave) + ' ' + ANY_TO_STR(m_pfsqlsave) + ' ' + ANY_TO_STR(m_zfsqlsave) + ' '
+    + ANY_TO_STR(m_zcsqlsave) + '\n';
   for (int i = 0; i < 16; i++)
     string += ANY_TO_STR(m_save[i]) + ' ';
   string += '\n';
@@ -5765,6 +5910,56 @@ int RunControl::RunControlImpl::logsave() const
 void RunControl::RunControlImpl::setLogsave(const int logsave)
 {
   m_logsave = logsave;
+}
+
+int RunControl::RunControlImpl::bcexsave() const
+{
+  return m_bcexsave;
+}
+
+void RunControl::RunControlImpl::setBcexsave(const int bcexsave)
+{
+  m_bcexsave = bcexsave;
+}
+
+int RunControl::RunControlImpl::dcexsave() const
+{
+  return m_dcexsave;
+}
+
+void RunControl::RunControlImpl::setDcexsave(const int dcexsave)
+{
+  m_dcexsave = dcexsave;
+}
+
+int RunControl::RunControlImpl::pfsqlsave() const
+{
+  return m_pfsqlsave;
+}
+
+void RunControl::RunControlImpl::setPfsqlsave(const int pfsqlsave)
+{
+  m_pfsqlsave = pfsqlsave;
+}
+
+int RunControl::RunControlImpl::zfsqlsave() const
+{
+  return m_zfsqlsave;
+}
+
+void RunControl::RunControlImpl::setZfsqlsave(const int zfsqlsave)
+{
+  m_zfsqlsave = zfsqlsave;
+}
+
+int RunControl::RunControlImpl::zcsqlsave() const
+{
+  return m_zcsqlsave;
+}
+
+void RunControl::RunControlImpl::setZcsqlsave(const int zcsqlsave)
+{
+  m_zcsqlsave = zcsqlsave;
 }
 
 std::vector<int> RunControl::RunControlImpl::save() const
