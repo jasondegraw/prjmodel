@@ -1096,6 +1096,10 @@ public:
   int vfType() const;
   /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
   void setVfType(const int vf);
+  /** Returns the value file node name. */
+  std::string vfNodeName() const;
+  /** Sets the value file node name. */
+  void setVfNodeName(const std::string& name);
   /** Returns the CFD path flag (0=no, 1=yes). */
   int cfd() const;
   /** Sets the CFD path flag (0=no, 1=yes). */
@@ -1299,6 +1303,10 @@ private:
     int vfType() const;
     /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
     void setVfType(const int vf);
+    /** Returns the value file node name. */
+    std::string vfNodeName() const;
+    /** Sets the value file node name. */
+    void setVfNodeName(const std::string& name);
     /** Returns the CFD path flag (0=no, 1=yes). */
     int cfd() const;
     /** Sets the CFD path flag (0=no, 1=yes). */

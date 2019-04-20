@@ -534,7 +534,7 @@ bool Zone::setIc(std::vector<std::string> &ic)
 }
 
 Zone::ZoneImpl::ZoneImpl() : m_nr(0), m_flags(0), m_ps(0), m_pc(0), m_pk(0), m_pl(0), m_relHt(PRJFLOAT("0.0")), m_Vol(PRJFLOAT("0.0")),
-m_T0(PRJFLOAT("0.0")), m_P0(PRJFLOAT("0.0")), m_color(0), m_u_Ht(0), m_u_V(0), m_u_T(0), m_u_P(0), m_cdaxis(0), m_cfd(0),
+m_T0(PRJFLOAT("0.0")), m_P0(PRJFLOAT("0.0")), m_color(0), m_u_Ht(0), m_u_V(0), m_u_T(0), m_u_P(0), m_cdaxis(0), m_vf_type(0), m_cfd(0),
 m_X1(PRJFLOAT("0.0")), m_Y1(PRJFLOAT("0.0")), m_H1(PRJFLOAT("0.0")), m_X2(PRJFLOAT("0.0")), m_Y2(PRJFLOAT("0.0")), m_H2(PRJFLOAT("0.0")),
 m_celldx(PRJFLOAT("0.0")), m_axialD(PRJFLOAT("0.0")), m_u_aD(0), m_u_L(0)
 {}
@@ -2410,6 +2410,26 @@ void AirflowPath::setU_F(const int u_F)
   m_impl->setU_F(u_F);
 }
 
+int AirflowPath::vfType() const
+{
+  return m_impl->vfType();
+}
+
+void AirflowPath::setVfType(const int vf)
+{
+  m_impl->setVfType(vf);
+}
+
+std::string AirflowPath::vfNodeName() const
+{
+  return m_impl->vfNodeName();
+}
+
+void AirflowPath::setVfNodeName(const std::string& name)
+{
+  m_impl->setVfNodeName(name);
+}
+
 int AirflowPath::cfd() const
 {
   return m_impl->cfd();
@@ -2514,7 +2534,7 @@ bool AirflowPath::outsideAir()
 AirflowPath::AirflowPathImpl::AirflowPathImpl() :m_nr(0), m_flags(0), m_pzn(0), m_pzm(0), m_pe(0), m_pf(0), m_pw(0), m_pa(0), m_ps(0), m_pc(0),
 m_pld(0), m_X(PRJFLOAT("0.0")), m_Y(PRJFLOAT("0.0")), m_relHt(PRJFLOAT("0.0")), m_mult(PRJFLOAT("0.0")), m_wPset(PRJFLOAT("0.0")),
 m_wPmod(PRJFLOAT("0.0")), m_wazm(PRJFLOAT("0.0")), m_Fahs(PRJFLOAT("0.0")), m_Xmax(PRJFLOAT("0.0")), m_Xmin(PRJFLOAT("0.0")), m_icon(0),
-m_dir(0), m_u_Ht(0), m_u_XY(0), m_u_dP(0), m_u_F(0), m_cfd(0), m_cfd_ptype(0), m_cfd_btype(0), m_cfd_capp(0)
+m_dir(0), m_u_Ht(0), m_u_XY(0), m_u_dP(0), m_u_F(0), m_vf_type(0), m_cfd(0), m_cfd_ptype(0), m_cfd_btype(0), m_cfd_capp(0)
 {}
 
 AirflowPath::AirflowPathImpl::AirflowPathImpl(int nr, int flags, int pzn, int pzm, int pe, int pf, int pw, int pa, int ps, int pc, int pld,
@@ -2624,6 +2644,10 @@ void AirflowPath::AirflowPathImpl::read(Reader& input)
   setU_XY(input.read<int>());
   setU_dP(input.read<int>());
   setU_F(input.read<int>());
+  setVfType(input.read<int>());
+  if (m_vf_type) {
+    setVfNodeName(input.readString());
+  }
   setCfd(input.read<int>());
   if (m_cfd) {
     setCfd_name(input.readString());
@@ -2978,6 +3002,26 @@ int AirflowPath::AirflowPathImpl::u_F() const
 void AirflowPath::AirflowPathImpl::setU_F(const int u_F)
 {
   m_u_F = u_F;
+}
+
+int AirflowPath::AirflowPathImpl::vfType() const
+{
+  return m_vf_type;
+}
+
+void AirflowPath::AirflowPathImpl::setVfType(const int vf)
+{
+  m_vf_type = vf;
+}
+
+std::string AirflowPath::AirflowPathImpl::vfNodeName() const
+{
+  return m_vf_node_name;
+}
+
+void AirflowPath::AirflowPathImpl::setVfNodeName(const std::string& name)
+{
+  m_vf_node_name = name;
 }
 
 int AirflowPath::AirflowPathImpl::cfd() const

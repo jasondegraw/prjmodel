@@ -791,6 +791,11 @@ bool IndexModel::replaceAirflowElement(int nr, PlrTest1 element)
   return m_impl->replaceAirflowElement(nr,element);
 }
 
+std::vector<std::shared_ptr<AirflowElement>> IndexModel::airflowElements()
+{
+  return m_impl->m_airflowElements;
+}
+
 std::vector<CvfDat> IndexModel::getCvfDat() const
 {
   return m_impl->getControlNodes<CvfDat>();

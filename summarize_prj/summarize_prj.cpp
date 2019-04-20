@@ -1,5 +1,6 @@
 #include "model.hpp"
 #include <iostream>
+#include <unordered_map>
 
 int main(int argc, char* argv[])
 {
@@ -37,6 +38,26 @@ int main(int argc, char* argv[])
   std::cout << "   CS_PSF: " << model.getAirflowElements<prjmodel::AfePsf>().size() << std::endl;
   std::cout << "   CS_PSQ: " << model.getAirflowElements<prjmodel::AfePsq>().size() << std::endl;
   std::cout << "   AF_SUP: " << model.getAirflowElements<prjmodel::AfeSup>().size() << std::endl;
+
+  auto afe = model.airflowElements();
+  // Build a name table to preserve the index-name relationship
+  std::unordered_map<int, std::string> lookup;
+  int count = 1;
+  for (auto& path : model.airflowPaths()) {
+    int id = path.pe();
+    if (id < 1) {
+      std::cout << path.nr() << ": Negative or zero ID" << std::endl;
+      continue;
+    }
+    --id;
+    if (id >= afe.size()) {
+      std::cout << "ID out of range" << std::endl;
+      continue;
+    }
+    lookup[id] = afe[id]->name();
+    std::cout << count << ' ' << id << ' ' << afe[id]->name() << std::endl;
+    ++count;
+  }
 
   return EXIT_SUCCESS;
 }

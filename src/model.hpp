@@ -384,10 +384,12 @@ public:
   int airflowElementNrByName(std::string name) const;
   /** Replace an airflow element with a PlrTest1 airflow element */
   bool replaceAirflowElement(int nr, PlrTest1 element);
-
+  /** Return all airflow elements of a particular type */
   template <class T> std::vector<T> getAirflowElements();
   
-  template <class T> bool addAirflowElement(T element);
+  /** template <class T> bool addAirflowElement(T element); */
+  std::vector<std::shared_ptr<AirflowElement>> airflowElements();
+
 
   /** Returns a vector of all CvfDat control nodes in the model. */
   std::vector<CvfDat> getCvfDat() const;
@@ -446,9 +448,8 @@ public:
 
 private:
 
-  class IndexModelImpl
+  struct IndexModelImpl
   {
-  public:
     IndexModelImpl();
     //explicit IndexModelImpl(openstudio::path path);
     //explicit IndexModelImpl(std::string filename);
@@ -806,8 +807,6 @@ private:
     //std::vector<TimeSeries> zoneInfiltration(SimFile *sim);
     //std::vector<TimeSeries> pathInfiltration(std::vector<int> pathNrs, SimFile *sim);
 
-
-  private:
     void readZoneIc(Reader & input);
     std::string writeZoneIc(int start = 0);
     template <class T> std::string writeSectionVector(std::vector<T> vector, std::string label = std::string(), int start = 0);
@@ -952,6 +951,8 @@ template <class T> std::vector<T> IndexModel::getAirflowElements()
 //{
 //  return m_impl->addAirflowElements<T>(element);
 //}
+
+
 
 } // prjmodel
 
