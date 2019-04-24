@@ -1798,7 +1798,7 @@ void IndexModel::IndexModelImpl::addLevel(Level & level)
   double refHt = 0;
   if (m_levels.size() > 0) {
     // Note that CONTAM stores heights in meters, so this next statement requires no conversion
-    refHt = m_levels[m_levels.size() - 1].refht() + m_levels[m_levels.size() - 1].delht();
+    refHt = m_levels[m_levels.size() - 1].refht<double>() + m_levels[m_levels.size() - 1].delht<double>();
   }
   level.setNr(m_levels.size() + 1);
   level.setRefht(refHt);

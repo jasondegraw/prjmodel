@@ -36,40 +36,98 @@
 namespace prjmodel {
 
 Zone::Zone() :
-  m_impl(std::shared_ptr<ZoneImpl>(new ZoneImpl()))
+  m_impl(std::shared_ptr<Impl>(new Impl()))
 {}
 
 Zone::Zone(unsigned flags, std::string Vol, std::string T0, std::string name) :
-  m_impl(std::shared_ptr<ZoneImpl>(new ZoneImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setFlags(flags);
-  m_impl->setVol(Vol);
-  m_impl->setT0(T0);
-  m_impl->setName(name);
+  setFlags(flags);
+  setVol(Vol);
+  setT0(T0);
+  setName(name);
 }
 
 Zone::Zone(unsigned flags, double Vol, double T0, std::string name) :
-  m_impl(std::shared_ptr<ZoneImpl>(new ZoneImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setFlags(flags);
-  m_impl->setVol(Vol);
-  m_impl->setT0(T0);
-  m_impl->setName(name);
+  setFlags(flags);
+  setVol(Vol);
+  setT0(T0);
+  setName(name);
 }
 
 Zone::Zone(int nr,unsigned int flags,int ps,int pc,int pk,int pl,std::string relHt,std::string Vol,std::string T0,std::string P0,
   std::string name,int color,int u_Ht,int u_V,int u_T,int u_P,int cdaxis,int cfd,std::string cfdname,std::string X1,
   std::string Y1,std::string H1,std::string X2,std::string Y2,std::string H2,std::string celldx,std::string axialD,int u_aD,int u_L) :
-  m_impl(std::shared_ptr<ZoneImpl>(new ZoneImpl(nr,flags,ps,pc,pk,pl,relHt,Vol,T0,P0,name,color,u_Ht,u_V,u_T,u_P,cdaxis,cfd,cfdname,X1,
-    Y1,H1,X2,Y2,H2,celldx,axialD,u_aD,u_L)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setFlags(flags);
+  setPs(ps);
+  setPc(pc);
+  setPk(pk);
+  setPl(pl);
+  setRelHt(relHt);
+  setVol(Vol);
+  setT0(T0);
+  setP0(P0);
+  setName(name);
+  setColor(color);
+  setU_Ht(u_Ht);
+  setU_V(u_V);
+  setU_T(u_T);
+  setU_P(u_P);
+  setCdaxis(cdaxis);
+  setCfd(cfd);
+  setCfdname(cfdname);
+  setX1(X1);
+  setY1(Y1);
+  setH1(H1);
+  setX2(X2);
+  setY2(Y2);
+  setH2(H2);
+  setCelldx(celldx);
+  setAxialD(axialD);
+  setU_aD(u_aD);
+  setU_L(u_L);
+}
 
 Zone::Zone(int nr,unsigned int flags,int ps,int pc,int pk,int pl,double relHt,double Vol,double T0,double P0,
   std::string name,int color,int u_Ht,int u_V,int u_T,int u_P,int cdaxis,int cfd,std::string cfdname,double X1,
   double Y1,double H1,double X2,double Y2,double H2,double celldx,double axialD,int u_aD,int u_L) :
-  m_impl(std::shared_ptr<ZoneImpl>(new ZoneImpl(nr,flags,ps,pc,pk,pl,relHt,Vol,T0,P0,name,color,u_Ht,u_V,u_T,u_P,cdaxis,cfd,cfdname,X1,
-    Y1,H1,X2,Y2,H2,celldx,axialD,u_aD,u_L)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setFlags(flags);
+  setPs(ps);
+  setPc(pc);
+  setPk(pk);
+  setPl(pl);
+  setRelHt(relHt);
+  setVol(Vol);
+  setT0(T0);
+  setP0(P0);
+  setName(name);
+  setColor(color);
+  setU_Ht(u_Ht);
+  setU_V(u_V);
+  setU_T(u_T);
+  setU_P(u_P);
+  setCdaxis(cdaxis);
+  setCfd(cfd);
+  setCfdname(cfdname);
+  setX1(X1);
+  setY1(Y1);
+  setH1(H1);
+  setX2(X2);
+  setY2(Y2);
+  setH2(H2);
+  setCelldx(celldx);
+  setAxialD(axialD);
+  setU_aD(u_aD);
+  setU_L(u_L);
+}
 
 Zone::Zone(const Zone &other) : m_impl(other.m_impl)
 {}
@@ -93,525 +151,14 @@ bool Zone::operator!=(const Zone &other) const
   return m_impl!=other.m_impl;
 }
 
-int Zone::nr() const
-{
-  return m_impl->nr();
-}
 
-void Zone::setNr(const int nr)
-{
-  m_impl->setNr(nr);
-}
-
-unsigned int Zone::flags() const
-{
-  return m_impl->flags();
-}
-
-void Zone::setFlags(const unsigned int flags)
-{
-  m_impl->setFlags(flags);
-}
-
-int Zone::ps() const
-{
-  return m_impl->ps();
-}
-
-void Zone::setPs(const int ps)
-{
-  m_impl->setPs(ps);
-}
-
-int Zone::pc() const
-{
-  return m_impl->pc();
-}
-
-void Zone::setPc(const int pc)
-{
-  m_impl->setPc(pc);
-}
-
-int Zone::pk() const
-{
-  return m_impl->pk();
-}
-
-void Zone::setPk(const int pk)
-{
-  m_impl->setPk(pk);
-}
-
-int Zone::pl() const
-{
-  return m_impl->pl();
-}
-
-void Zone::setPl(const int pl)
-{
-  m_impl->setPl(pl);
-}
-
-double Zone::relHt() const
-{
-  return m_impl->relHt();
-}
-
-bool Zone::setRelHt(const double relHt)
-{
-  return m_impl->setRelHt(relHt);
-}
-
-bool Zone::setRelHt(const std::string &relHt)
-{
-  return m_impl->setRelHt(relHt);
-}
-
-double Zone::Vol() const
-{
-  return m_impl->Vol();
-}
-
-bool Zone::setVol(const double Vol)
-{
-  return m_impl->setVol(Vol);
-}
-
-bool Zone::setVol(const std::string &Vol)
-{
-  return m_impl->setVol(Vol);
-}
-
-double Zone::T0() const
-{
-  return m_impl->T0();
-}
-
-bool Zone::setT0(const double T0)
-{
-  return m_impl->setT0(T0);
-}
-
-bool Zone::setT0(const std::string &T0)
-{
-  return m_impl->setT0(T0);
-}
-
-double Zone::P0() const
-{
-  return m_impl->P0();
-}
-
-bool Zone::setP0(const double P0)
-{
-  return m_impl->setP0(P0);
-}
-
-bool Zone::setP0(const std::string &P0)
-{
-  return m_impl->setP0(P0);
-}
-
-std::string Zone::name() const
-{
-  return m_impl->name();
-}
-
-void Zone::setName(const std::string &name)
-{
-  m_impl->setName(name);
-}
-
-int Zone::color() const
-{
-  return m_impl->color();
-}
-
-void Zone::setColor(const int color)
-{
-  m_impl->setColor(color);
-}
-
-int Zone::u_Ht() const
-{
-  return m_impl->u_Ht();
-}
-
-void Zone::setU_Ht(const int u_Ht)
-{
-  m_impl->setU_Ht(u_Ht);
-}
-
-int Zone::u_V() const
-{
-  return m_impl->u_V();
-}
-
-void Zone::setU_V(const int u_V)
-{
-  m_impl->setU_V(u_V);
-}
-
-int Zone::u_T() const
-{
-  return m_impl->u_T();
-}
-
-void Zone::setU_T(const int u_T)
-{
-  m_impl->setU_T(u_T);
-}
-
-int Zone::u_P() const
-{
-  return m_impl->u_P();
-}
-
-void Zone::setU_P(const int u_P)
-{
-  m_impl->setU_P(u_P);
-}
-
-int Zone::cdaxis() const
-{
-  return m_impl->cdaxis();
-}
-
-void Zone::setCdaxis(const int cdaxis)
-{
-  m_impl->setCdaxis(cdaxis);
-}
-
-int Zone::vfType() const
-{
-  return m_impl->vfType();
-}
-
-void Zone::setVfType(const int vf)
-{
-  m_impl->setVfType(vf);
-}
-
-std::string Zone::vfNodeName() const
-{
-  return m_impl->vfNodeName();
-}
-
-void Zone::setVfNodeName(const std::string& name)
-{
-  m_impl->setVfNodeName(name);
-}
-
-int Zone::cfd() const
-{
-  return m_impl->cfd();
-}
-
-void Zone::setCfd(const int cfd)
-{
-  m_impl->setCfd(cfd);
-}
-
-std::string Zone::cfdname() const
-{
-  return m_impl->cfdname();
-}
-
-void Zone::setCfdname(const std::string &cfdname)
-{
-  m_impl->setCfdname(cfdname);
-}
-
-double Zone::X1() const
-{
-  return m_impl->X1();
-}
-
-bool Zone::setX1(const double X1)
-{
-  return m_impl->setX1(X1);
-}
-
-bool Zone::setX1(const std::string &X1)
-{
-  return m_impl->setX1(X1);
-}
-
-double Zone::Y1() const
-{
-  return m_impl->Y1();
-}
-
-bool Zone::setY1(const double Y1)
-{
-  return m_impl->setY1(Y1);
-}
-
-bool Zone::setY1(const std::string &Y1)
-{
-  return m_impl->setY1(Y1);
-}
-
-double Zone::H1() const
-{
-  return m_impl->H1();
-}
-
-bool Zone::setH1(const double H1)
-{
-  return m_impl->setH1(H1);
-}
-
-bool Zone::setH1(const std::string &H1)
-{
-  return m_impl->setH1(H1);
-}
-
-double Zone::X2() const
-{
-  return m_impl->X2();
-}
-
-bool Zone::setX2(const double X2)
-{
-  return m_impl->setX2(X2);
-}
-
-bool Zone::setX2(const std::string &X2)
-{
-  return m_impl->setX2(X2);
-}
-
-double Zone::Y2() const
-{
-  return m_impl->Y2();
-}
-
-bool Zone::setY2(const double Y2)
-{
-  return m_impl->setY2(Y2);
-}
-
-bool Zone::setY2(const std::string &Y2)
-{
-  return m_impl->setY2(Y2);
-}
-
-double Zone::H2() const
-{
-  return m_impl->H2();
-}
-
-bool Zone::setH2(const double H2)
-{
-  return m_impl->setH2(H2);
-}
-
-bool Zone::setH2(const std::string &H2)
-{
-  return m_impl->setH2(H2);
-}
-
-double Zone::celldx() const
-{
-  return m_impl->celldx();
-}
-
-bool Zone::setCelldx(const double celldx)
-{
-  return m_impl->setCelldx(celldx);
-}
-
-bool Zone::setCelldx(const std::string &celldx)
-{
-  return m_impl->setCelldx(celldx);
-}
-
-double Zone::axialD() const
-{
-  return m_impl->axialD();
-}
-
-bool Zone::setAxialD(const double axialD)
-{
-  return m_impl->setAxialD(axialD);
-}
-
-bool Zone::setAxialD(const std::string &axialD)
-{
-  return m_impl->setAxialD(axialD);
-}
-
-int Zone::u_aD() const
-{
-  return m_impl->u_aD();
-}
-
-void Zone::setU_aD(const int u_aD)
-{
-  return m_impl->setU_aD(u_aD);
-}
-
-int Zone::u_L() const
-{
-  return m_impl->u_L();
-}
-
-void Zone::setU_L(const int u_L)
-{
-  return m_impl->setU_L(u_L);
-}
-
-std::string Zone::write()
-{
-  return m_impl->write();
-}
-
-void Zone::read(Reader &input)
-{
-  m_impl->read(input);
-}
-
-void Zone::setVariablePressure(bool b)
-{
-  m_impl->setVariablePressure(b);
-}
-
-bool Zone::variablePressure() const
-{
-  return m_impl->variablePressure();
-}
-
-void Zone::setVariableContaminants(bool b)
-{
-  m_impl->setVariableContaminants(b);
-}
-
-bool Zone::variableContaminants() const
-{
-  return m_impl->variableContaminants();
-}
-
-void Zone::setSystem(bool b)
-{
-  m_impl->setSystem(b);
-}
-
-bool Zone::system() const
-{
-  return m_impl->system();
-}
-
-double Zone::ic(const int i) const
-{
-  return m_impl->ic(i);
-}
-
-std::vector<double> Zone::ic() const
-{
-  return m_impl->ic();
-}
-
-bool Zone::setIc(const int i, const double value)
-{
-  return m_impl->setIc(i,value);
-}
-
-bool Zone::setIc(const int i, const std::string &value)
-{
-  return m_impl->setIc(i,value);
-}
-
-bool Zone::setIc(std::vector<double> &ic)
-{
-  return m_impl->setIc(ic);
-}
-
-bool Zone::setIc(std::vector<std::string> &ic)
-{
-  return m_impl->setIc(ic);
-}
-
-Zone::ZoneImpl::ZoneImpl() : m_nr(0), m_flags(0), m_ps(0), m_pc(0), m_pk(0), m_pl(0), m_relHt(PRJFLOAT("0.0")), m_Vol(PRJFLOAT("0.0")),
+Zone::Impl::Impl() : m_nr(0), m_flags(0), m_ps(0), m_pc(0), m_pk(0), m_pl(0), m_relHt(PRJFLOAT("0.0")), m_Vol(PRJFLOAT("0.0")),
 m_T0(PRJFLOAT("0.0")), m_P0(PRJFLOAT("0.0")), m_color(0), m_u_Ht(0), m_u_V(0), m_u_T(0), m_u_P(0), m_cdaxis(0), m_vf_type(0), m_cfd(0),
 m_X1(PRJFLOAT("0.0")), m_Y1(PRJFLOAT("0.0")), m_H1(PRJFLOAT("0.0")), m_X2(PRJFLOAT("0.0")), m_Y2(PRJFLOAT("0.0")), m_H2(PRJFLOAT("0.0")),
 m_celldx(PRJFLOAT("0.0")), m_axialD(PRJFLOAT("0.0")), m_u_aD(0), m_u_L(0)
 {}
 
-Zone::ZoneImpl::ZoneImpl(int nr, unsigned int flags, int ps, int pc, int pk, int pl, std::string relHt, std::string Vol, std::string T0,
-  std::string P0, std::string name, int color, int u_Ht, int u_V, int u_T, int u_P, int cdaxis, int cfd,
-  std::string cfdname, std::string X1, std::string Y1, std::string H1, std::string X2, std::string Y2, std::string H2, std::string celldx,
-  std::string axialD, int u_aD, int u_L) : Zone::ZoneImpl()
-{
-  setNr(nr);
-  setFlags(flags);
-  setPs(ps);
-  setPc(pc);
-  setPk(pk);
-  setPl(pl);
-  setRelHt(relHt);
-  setVol(Vol);
-  setT0(T0);
-  setP0(P0);
-  setName(name);
-  setColor(color);
-  setU_Ht(u_Ht);
-  setU_V(u_V);
-  setU_T(u_T);
-  setU_P(u_P);
-  setCdaxis(cdaxis);
-  setCfd(cfd);
-  setCfdname(cfdname);
-  setX1(X1);
-  setY1(Y1);
-  setH1(H1);
-  setX2(X2);
-  setY2(Y2);
-  setH2(H2);
-  setCelldx(celldx);
-  setAxialD(axialD);
-  setU_aD(u_aD);
-  setU_L(u_L);
-}
-
-Zone::ZoneImpl::ZoneImpl(int nr, unsigned int flags, int ps, int pc, int pk, int pl, double relHt, double Vol, double T0,
-  double P0, std::string name, int color, int u_Ht, int u_V, int u_T, int u_P, int cdaxis, int cfd,
-  std::string cfdname, double X1, double Y1, double H1, double X2, double Y2, double H2, double celldx,
-  double axialD, int u_aD, int u_L) : Zone::ZoneImpl()
-{
-  setNr(nr);
-  setFlags(flags);
-  setPs(ps);
-  setPc(pc);
-  setPk(pk);
-  setPl(pl);
-  setRelHt(relHt);
-  setVol(Vol);
-  setT0(T0);
-  setP0(P0);
-  setName(name);
-  setColor(color);
-  setU_Ht(u_Ht);
-  setU_V(u_V);
-  setU_T(u_T);
-  setU_P(u_P);
-  setCdaxis(cdaxis);
-  setCfd(cfd);
-  setCfdname(cfdname);
-  setX1(X1);
-  setY1(Y1);
-  setH1(H1);
-  setX2(X2);
-  setY2(Y2);
-  setH2(H2);
-  setCelldx(celldx);
-  setAxialD(axialD);
-  setU_aD(u_aD);
-  setU_L(u_L);
-}
-
-void Zone::ZoneImpl::read(Reader& input)
+void Zone::read(Reader& input)
 {
   setNr(input.readInt());
   setFlags(input.readInt());
@@ -652,491 +199,512 @@ void Zone::ZoneImpl::read(Reader& input)
   }
 }
 
-std::string Zone::ZoneImpl::write()
+std::string Zone::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_flags) + ' ' + ANY_TO_STR(m_ps) + ' ' + ANY_TO_STR(m_pc) + ' '
-    + ANY_TO_STR(m_pk) + ' ' + ANY_TO_STR(m_pl) + ' ' + PRJFLOAT_TO_STR(m_relHt) + ' '
-    + PRJFLOAT_TO_STR(m_Vol) + ' ' + PRJFLOAT_TO_STR(m_T0) + ' ' + PRJFLOAT_TO_STR(m_P0) + ' ' + m_name + ' '
-    + ANY_TO_STR(m_color) + ' ' + ANY_TO_STR(m_u_Ht) + ' ' + ANY_TO_STR(m_u_V) + ' ' + ANY_TO_STR(m_u_T) + ' '
-    + ANY_TO_STR(m_u_P) + ' ' + ANY_TO_STR(m_cdaxis) + ' ' + ANY_TO_STR(m_vf_type);
-  if (m_vf_type) {
-    string += ' ' + m_vf_node_name;
+  string += ANY_TO_STR(m_impl->m_nr) + ' ' + ANY_TO_STR(m_impl->m_flags) + ' ' + ANY_TO_STR(m_impl->m_ps) + ' ' + ANY_TO_STR(m_impl->m_pc) + ' '
+    + ANY_TO_STR(m_impl->m_pk) + ' ' + ANY_TO_STR(m_impl->m_pl) + ' ' + PRJFLOAT_TO_STR(m_impl->m_relHt) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_Vol) + ' ' + PRJFLOAT_TO_STR(m_impl->m_T0) + ' ' + PRJFLOAT_TO_STR(m_impl->m_P0) + ' ' + m_impl->m_name + ' '
+    + ANY_TO_STR(m_impl->m_color) + ' ' + ANY_TO_STR(m_impl->m_u_Ht) + ' ' + ANY_TO_STR(m_impl->m_u_V) + ' ' + ANY_TO_STR(m_impl->m_u_T) + ' '
+    + ANY_TO_STR(m_impl->m_u_P) + ' ' + ANY_TO_STR(m_impl->m_cdaxis) + ' ' + ANY_TO_STR(m_impl->m_vf_type);
+  if (m_impl->m_vf_type) {
+    string += ' ' + m_impl->m_vf_node_name;
   }
-  string += ' ' + ANY_TO_STR(m_cfd);
-  if (m_cfd)
-    string += ' ' + m_cfdname;
-  else if (m_cdaxis)
-    string += PRJFLOAT_TO_STR(m_X1) + ' ' + PRJFLOAT_TO_STR(m_Y1) + ' ' + PRJFLOAT_TO_STR(m_H1) + ' '
-    + PRJFLOAT_TO_STR(m_X2) + ' ' + PRJFLOAT_TO_STR(m_Y2) + ' ' + PRJFLOAT_TO_STR(m_H2) + ' '
-    + PRJFLOAT_TO_STR(m_celldx) + ' ' + PRJFLOAT_TO_STR(m_axialD) + ' ' + ANY_TO_STR(m_u_aD) + ' '
-    + ANY_TO_STR(m_u_L);
+  string += ' ' + ANY_TO_STR(m_impl->m_cfd);
+  if (m_impl->m_cfd)
+    string += ' ' + m_impl->m_cfdname;
+  else if (m_impl->m_cdaxis)
+    string += PRJFLOAT_TO_STR(m_impl->m_X1) + ' ' + PRJFLOAT_TO_STR(m_impl->m_Y1) + ' ' + PRJFLOAT_TO_STR(m_impl->m_H1) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_X2) + ' ' + PRJFLOAT_TO_STR(m_impl->m_Y2) + ' ' + PRJFLOAT_TO_STR(m_impl->m_H2) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_celldx) + ' ' + PRJFLOAT_TO_STR(m_impl->m_axialD) + ' ' + ANY_TO_STR(m_impl->m_u_aD) + ' '
+    + ANY_TO_STR(m_impl->m_u_L);
   return string + '\n';
 }
 
-int Zone::ZoneImpl::nr() const
+int Zone::nr() const
 {
-  return m_nr;
+  return m_impl->m_nr;
 }
 
-void Zone::ZoneImpl::setNr(const int nr)
+void Zone::setNr(const int nr)
 {
-  m_nr = nr;
+  m_impl->m_nr = nr;
 }
 
-unsigned int Zone::ZoneImpl::flags() const
+unsigned int Zone::flags() const
 {
-  return m_flags;
+  return m_impl->m_flags;
 }
 
-void Zone::ZoneImpl::setFlags(const unsigned int flags)
+void Zone::setFlags(const unsigned int flags)
 {
-  m_flags = flags;
+  m_impl->m_flags = flags;
 }
 
-int Zone::ZoneImpl::ps() const
+int Zone::ps() const
 {
-  return m_ps;
+  return m_impl->m_ps;
 }
 
-void Zone::ZoneImpl::setPs(const int ps)
+void Zone::setPs(const int ps)
 {
-  m_ps = ps;
+  m_impl->m_ps = ps;
 }
 
-int Zone::ZoneImpl::pc() const
+int Zone::pc() const
 {
-  return m_pc;
+  return m_impl->m_pc;
 }
 
-void Zone::ZoneImpl::setPc(const int pc)
+void Zone::setPc(const int pc)
 {
-  m_pc = pc;
+  m_impl->m_pc = pc;
 }
 
-int Zone::ZoneImpl::pk() const
+int Zone::pk() const
 {
-  return m_pk;
+  return m_impl->m_pk;
 }
 
-void Zone::ZoneImpl::setPk(const int pk)
+void Zone::setPk(const int pk)
 {
-  m_pk = pk;
+  m_impl->m_pk = pk;
 }
 
-int Zone::ZoneImpl::pl() const
+int Zone::pl() const
 {
-  return m_pl;
+  return m_impl->m_pl;
 }
 
-void Zone::ZoneImpl::setPl(const int pl)
+void Zone::setPl(const int pl)
 {
-  m_pl = pl;
+  m_impl->m_pl = pl;
 }
 
-double Zone::ZoneImpl::relHt() const
+template <> double PRJMODEL_API Zone::relHt() const
 {
-  return to<double>(m_relHt);
+  return to<double>(m_impl->m_relHt);
 }
 
-bool Zone::ZoneImpl::setRelHt(const double relHt)
+template <> std::string PRJMODEL_API Zone::relHt() const
 {
-  m_relHt = to_float(relHt);
+  return PRJFLOAT_TO_STR(m_impl->m_relHt);
+}
+
+bool Zone::setRelHt(const double relHt)
+{
+  m_impl->m_relHt = to_float(relHt);
   return true;
 }
 
-bool Zone::ZoneImpl::setRelHt(const std::string& relHt)
+bool Zone::setRelHt(const std::string& relHt)
 {
-  return assign_if_valid<double>(relHt, m_relHt);
+  return assign_if_valid<double>(relHt, m_impl->m_relHt);
 }
 
-double Zone::ZoneImpl::Vol() const
+template <> double PRJMODEL_API Zone::Vol() const
 {
-  return to<double>(m_Vol);
+  return to<double>(m_impl->m_Vol);
 }
 
-bool Zone::ZoneImpl::setVol(const double Vol)
+template <> std::string PRJMODEL_API Zone::Vol() const
 {
-  m_Vol = to_float(Vol);
+  return PRJFLOAT_TO_STR(m_impl->m_Vol);
+}
+
+bool Zone::setVol(const double Vol)
+{
+  m_impl->m_Vol = to_float(Vol);
   return true;
 }
 
-bool Zone::ZoneImpl::setVol(const std::string& Vol)
+bool Zone::setVol(const std::string& Vol)
 {
-  return assign_if_valid<double>(Vol, m_Vol);
+  return assign_if_valid<double>(Vol, m_impl->m_Vol);
 }
 
-double Zone::ZoneImpl::T0() const
+template <> double PRJMODEL_API Zone::T0() const
 {
-  return to<double>(m_T0);
+  return to<double>(m_impl->m_T0);
 }
 
-bool Zone::ZoneImpl::setT0(const double T0)
+template <> std::string PRJMODEL_API Zone::T0() const
 {
-  m_T0 = to_float(T0);
+  return PRJFLOAT_TO_STR(m_impl->m_T0);
+}
+
+bool Zone::setT0(const double T0)
+{
+  m_impl->m_T0 = to_float(T0);
   return true;
 }
 
-bool Zone::ZoneImpl::setT0(const std::string& T0)
+bool Zone::setT0(const std::string& T0)
 {
-  return assign_if_valid<double>(T0, m_T0);
+  return assign_if_valid<double>(T0, m_impl->m_T0);
 }
 
-double Zone::ZoneImpl::P0() const
+template <> double PRJMODEL_API Zone::P0() const
 {
-  return to<double>(m_P0);
+  return to<double>(m_impl->m_P0);
 }
 
-bool Zone::ZoneImpl::setP0(const double P0)
+template <> std::string PRJMODEL_API Zone::P0() const
 {
-  m_P0 = to_float(P0);
+  return PRJFLOAT_TO_STR(m_impl->m_P0);
+}
+
+bool Zone::setP0(const double P0)
+{
+  m_impl->m_P0 = to_float(P0);
   return true;
 }
 
-bool Zone::ZoneImpl::setP0(const std::string& P0)
+bool Zone::setP0(const std::string& P0)
 {
-  return assign_if_valid<double>(P0, m_P0);
+  return assign_if_valid<double>(P0, m_impl->m_P0);
 }
 
-std::string Zone::ZoneImpl::name() const
+std::string Zone::name() const
 {
-  return m_name;
+  return m_impl->m_name;
 }
 
-void Zone::ZoneImpl::setName(const std::string& name)
+void Zone::setName(const std::string& name)
 {
-  m_name = name;
+  m_impl->m_name = name;
 }
 
-int Zone::ZoneImpl::color() const
+int Zone::color() const
 {
-  return m_color;
+  return m_impl->m_color;
 }
 
-void Zone::ZoneImpl::setColor(const int color)
+void Zone::setColor(const int color)
 {
-  m_color = color;
+  m_impl->m_color = color;
 }
 
-int Zone::ZoneImpl::u_Ht() const
+int Zone::u_Ht() const
 {
-  return m_u_Ht;
+  return m_impl->m_u_Ht;
 }
 
-void Zone::ZoneImpl::setU_Ht(const int u_Ht)
+void Zone::setU_Ht(const int u_Ht)
 {
-  m_u_Ht = u_Ht;
+  m_impl->m_u_Ht = u_Ht;
 }
 
-int Zone::ZoneImpl::u_V() const
+int Zone::u_V() const
 {
-  return m_u_V;
+  return m_impl->m_u_V;
 }
 
-void Zone::ZoneImpl::setU_V(const int u_V)
+void Zone::setU_V(const int u_V)
 {
-  m_u_V = u_V;
+  m_impl->m_u_V = u_V;
 }
 
-int Zone::ZoneImpl::u_T() const
+int Zone::u_T() const
 {
-  return m_u_T;
+  return m_impl->m_u_T;
 }
 
-void Zone::ZoneImpl::setU_T(const int u_T)
+void Zone::setU_T(const int u_T)
 {
-  m_u_T = u_T;
+  m_impl->m_u_T = u_T;
 }
 
-int Zone::ZoneImpl::u_P() const
+int Zone::u_P() const
 {
-  return m_u_P;
+  return m_impl->m_u_P;
 }
 
-void Zone::ZoneImpl::setU_P(const int u_P)
+void Zone::setU_P(const int u_P)
 {
-  m_u_P = u_P;
+  m_impl->m_u_P = u_P;
 }
 
-int Zone::ZoneImpl::cdaxis() const
+int Zone::cdaxis() const
 {
-  return m_cdaxis;
+  return m_impl->m_cdaxis;
 }
 
-void Zone::ZoneImpl::setCdaxis(const int cdaxis)
+void Zone::setCdaxis(const int cdaxis)
 {
-  m_cdaxis = cdaxis;
+  m_impl->m_cdaxis = cdaxis;
 }
 
-int Zone::ZoneImpl::vfType() const
+int Zone::vfType() const
 {
-  return m_vf_type;
+  return m_impl->m_vf_type;
 }
 
-void Zone::ZoneImpl::setVfType(const int vf)
+void Zone::setVfType(const int vf)
 {
-  m_vf_type = vf;
+  m_impl->m_vf_type = vf;
 }
 
-std::string Zone::ZoneImpl::vfNodeName() const
+std::string Zone::vfNodeName() const
 {
-  return m_vf_node_name;
+  return m_impl->m_vf_node_name;
 }
 
-void Zone::ZoneImpl::setVfNodeName(const std::string& name)
+void Zone::setVfNodeName(const std::string& name)
 {
-  m_vf_node_name = name;
+  m_impl->m_vf_node_name = name;
 }
 
-int Zone::ZoneImpl::cfd() const
+int Zone::cfd() const
 {
-  return m_cfd;
+  return m_impl->m_cfd;
 }
 
-void Zone::ZoneImpl::setCfd(const int cfd)
+void Zone::setCfd(const int cfd)
 {
-  m_cfd = cfd;
+  m_impl->m_cfd = cfd;
 }
 
-std::string Zone::ZoneImpl::cfdname() const
+std::string Zone::cfdname() const
 {
-  return m_cfdname;
+  return m_impl->m_cfdname;
 }
 
-void Zone::ZoneImpl::setCfdname(const std::string& cfdname)
+void Zone::setCfdname(const std::string& cfdname)
 {
-  m_cfdname = cfdname;
+  m_impl->m_cfdname = cfdname;
 }
 
-double Zone::ZoneImpl::X1() const
+double Zone::X1() const
 {
-  return to<double>(m_X1);
+  return to<double>(m_impl->m_X1);
 }
 
-bool Zone::ZoneImpl::setX1(const double X1)
+bool Zone::setX1(const double X1)
 {
-  m_X1 = to_float(X1);
+  m_impl->m_X1 = to_float(X1);
   return true;
 }
 
-bool Zone::ZoneImpl::setX1(const std::string& X1)
+bool Zone::setX1(const std::string& X1)
 {
-  return assign_if_valid<double>(X1, m_X1);
+  return assign_if_valid<double>(X1, m_impl->m_X1);
 }
 
-double Zone::ZoneImpl::Y1() const
+double Zone::Y1() const
 {
-  return to<double>(m_Y1);
+  return to<double>(m_impl->m_Y1);
 }
 
-bool Zone::ZoneImpl::setY1(const double Y1)
+bool Zone::setY1(const double Y1)
 {
-  m_Y1 = to_float(Y1);
+  m_impl->m_Y1 = to_float(Y1);
   return true;
 }
 
-bool Zone::ZoneImpl::setY1(const std::string& Y1)
+bool Zone::setY1(const std::string& Y1)
 {
-  return assign_if_valid<double>(Y1, m_Y1);
+  return assign_if_valid<double>(Y1, m_impl->m_Y1);
 }
 
-double Zone::ZoneImpl::H1() const
+double Zone::H1() const
 {
-  return to<double>(m_H1);
+  return to<double>(m_impl->m_H1);
 }
 
-bool Zone::ZoneImpl::setH1(const double H1)
+bool Zone::setH1(const double H1)
 {
-  m_H1 = to_float(H1);
+  m_impl->m_H1 = to_float(H1);
   return true;
 }
 
-bool Zone::ZoneImpl::setH1(const std::string& H1)
+bool Zone::setH1(const std::string& H1)
 {
-  return assign_if_valid<double>(H1, m_H1);
+  return assign_if_valid<double>(H1, m_impl->m_H1);
 }
 
-double Zone::ZoneImpl::X2() const
+double Zone::X2() const
 {
-  return to<double>(m_X2);
+  return to<double>(m_impl->m_X2);
 }
 
-bool Zone::ZoneImpl::setX2(const double X2)
+bool Zone::setX2(const double X2)
 {
-  m_X2 = to_float(X2);
+  m_impl->m_X2 = to_float(X2);
   return true;
 }
 
-bool Zone::ZoneImpl::setX2(const std::string& X2)
+bool Zone::setX2(const std::string& X2)
 {
-  return assign_if_valid<double>(X2, m_X2);
+  return assign_if_valid<double>(X2, m_impl->m_X2);
 }
 
-double Zone::ZoneImpl::Y2() const
+double Zone::Y2() const
 {
-  return to<double>(m_Y2);
+  return to<double>(m_impl->m_Y2);
 }
 
-bool Zone::ZoneImpl::setY2(const double Y2)
+bool Zone::setY2(const double Y2)
 {
-  m_Y2 = to_float(Y2);
+  m_impl->m_Y2 = to_float(Y2);
   return true;
 }
 
-bool Zone::ZoneImpl::setY2(const std::string& Y2)
+bool Zone::setY2(const std::string& Y2)
 {
-  return assign_if_valid<double>(Y2, m_Y2);
+  return assign_if_valid<double>(Y2, m_impl->m_Y2);
 }
 
-double Zone::ZoneImpl::H2() const
+double Zone::H2() const
 {
-  return to<double>(m_H2);
+  return to<double>(m_impl->m_H2);
 }
 
-bool Zone::ZoneImpl::setH2(const double H2)
+bool Zone::setH2(const double H2)
 {
-  m_H2 = to_float(H2);
+  m_impl->m_H2 = to_float(H2);
   return true;
 }
 
-bool Zone::ZoneImpl::setH2(const std::string& H2)
+bool Zone::setH2(const std::string& H2)
 {
-  return assign_if_valid<double>(H2, m_H2);
+  return assign_if_valid<double>(H2, m_impl->m_H2);
 }
 
-double Zone::ZoneImpl::celldx() const
+double Zone::celldx() const
 {
-  return to<double>(m_celldx);
+  return to<double>(m_impl->m_celldx);
 }
 
-bool Zone::ZoneImpl::setCelldx(const double celldx)
+bool Zone::setCelldx(const double celldx)
 {
-  m_celldx = to_float(celldx);
+  m_impl->m_celldx = to_float(celldx);
   return true;
 }
 
-bool Zone::ZoneImpl::setCelldx(const std::string& celldx)
+bool Zone::setCelldx(const std::string& celldx)
 {
-  return assign_if_valid<double>(celldx, m_celldx);
+  return assign_if_valid<double>(celldx, m_impl->m_celldx);
 }
 
-double Zone::ZoneImpl::axialD() const
+double Zone::axialD() const
 {
-  return to<double>(m_axialD);
+  return to<double>(m_impl->m_axialD);
 }
 
-bool Zone::ZoneImpl::setAxialD(const double axialD)
+bool Zone::setAxialD(const double axialD)
 {
-  m_axialD = to_float(axialD);
+  m_impl->m_axialD = to_float(axialD);
   return true;
 }
 
-bool Zone::ZoneImpl::setAxialD(const std::string& axialD)
+bool Zone::setAxialD(const std::string& axialD)
 {
-  return assign_if_valid<double>(axialD, m_axialD);
+  return assign_if_valid<double>(axialD, m_impl->m_axialD);
 }
 
-int Zone::ZoneImpl::u_aD() const
+int Zone::u_aD() const
 {
-  return m_u_aD;
+  return m_impl->m_u_aD;
 }
 
-void Zone::ZoneImpl::setU_aD(const int u_aD)
+void Zone::setU_aD(const int u_aD)
 {
-  m_u_aD = u_aD;
+  m_impl->m_u_aD = u_aD;
 }
 
-int Zone::ZoneImpl::u_L() const
+int Zone::u_L() const
 {
-  return m_u_L;
+  return m_impl->m_u_L;
 }
 
-void Zone::ZoneImpl::setU_L(const int u_L)
+void Zone::setU_L(const int u_L)
 {
-  m_u_L = u_L;
+  m_impl->m_u_L = u_L;
 }
 
-void Zone::ZoneImpl::setVariablePressure(bool b)
+void Zone::setVariablePressure(bool b)
 {
   if (b)
-    m_flags |= ZoneFlags::VAR_P;
+    m_impl->m_flags |= ZoneFlags::VAR_P;
   else
-    m_flags &= ZoneFlags::NVAR_P;
+    m_impl->m_flags &= ZoneFlags::NVAR_P;
 }
 
-bool Zone::ZoneImpl::variablePressure() const
+bool Zone::variablePressure() const
 {
-  return m_flags & ZoneFlags::VAR_P;
+  return m_impl->m_flags & ZoneFlags::VAR_P;
 }
 
-void Zone::ZoneImpl::setVariableContaminants(bool b)
+void Zone::setVariableContaminants(bool b)
 {
   if (b)
-    m_flags |= ZoneFlags::VAR_C;
+    m_impl->m_flags |= ZoneFlags::VAR_C;
   else
-    m_flags &= ZoneFlags::NVAR_C;
+    m_impl->m_flags &= ZoneFlags::NVAR_C;
 }
 
-bool Zone::ZoneImpl::variableContaminants() const
+bool Zone::variableContaminants() const
 {
-  return m_flags & ZoneFlags::VAR_C;
+  return m_impl->m_flags & ZoneFlags::VAR_C;
 }
 
-void Zone::ZoneImpl::setSystem(bool b)
+void Zone::setSystem(bool b)
 {
   if (b)
-    m_flags |= ZoneFlags::SYS_N;
+    m_impl->m_flags |= ZoneFlags::SYS_N;
   else
-    m_flags &= ZoneFlags::NSYS_N;
+    m_impl->m_flags &= ZoneFlags::NSYS_N;
 }
 
-bool Zone::ZoneImpl::system() const
+bool Zone::system() const
 {
-  return m_flags & ZoneFlags::SYS_N;
+  return m_impl->m_flags & ZoneFlags::SYS_N;
 }
 
-double Zone::ZoneImpl::ic(const int i) const
+double Zone::ic(const int i) const
 {
-  return to<double>(m_ic[i]);
+  return to<double>(m_impl->m_ic[i]);
 }
 
-std::vector<double> Zone::ZoneImpl::ic() const
+std::vector<double> Zone::ic() const
 {
   std::vector<double> out;
-  for (std::size_t i = 0; i < m_ic.size(); i++) {
-    out.push_back(to<double>(m_ic[i]));
+  for (std::size_t i = 0; i < m_impl->m_ic.size(); i++) {
+    out.push_back(to<double>(m_impl->m_ic[i]));
   }
   return out;
 }
 
-bool Zone::ZoneImpl::setIc(const int i, const double value)
+bool Zone::setIc(const int i, const double value)
 {
-  m_ic[i] = to_float(value);
+  m_impl->m_ic[i] = to_float(value);
   return true;
 }
 
-bool Zone::ZoneImpl::setIc(const int i, const std::string& value)
+bool Zone::setIc(const int i, const std::string& value)
 {
-  return assign_if_valid<double>(value, m_ic[i]);
+  return assign_if_valid<double>(value, m_impl->m_ic[i]);
 }
 
-bool Zone::ZoneImpl::setIc(const std::vector<double>& ic)
+bool Zone::setIc(const std::vector<double>& ic)
 {
   std::vector<std::string> in;
   for (const auto& input : ic) {
     in.push_back(to_float(input));
   }
+  m_impl->m_ic = in;
   return true;
 }
 
-bool Zone::ZoneImpl::setIc(const std::vector<std::string>& ic)
+bool Zone::setIc(const std::vector<std::string>& ic)
 {
   for (const auto& input : ic) {
     if (!is_valid<double>(input)) {
       return false;
     }
   }
-  m_ic = ic;
+  m_impl->m_ic = ic;
   return true;
 }
 
@@ -1977,86 +1545,150 @@ void Ahs::AhsImpl::setDesc(const std::string& desc)
 }
 
 AirflowPath::AirflowPath() :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {}
 
 AirflowPath::AirflowPath(int flags, int pzn, int pe, int pw, int pld, std::string relHt, std::string mult, std::string wPset,
   std::string wPmod, std::string wazm, unsigned int icon) :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setFlags(flags);
-  m_impl->setPzn(pzn);
-  m_impl->setPzm(-1);
-  m_impl->setPe(pe);
-  m_impl->setPw(pw);
-  m_impl->setPld(pld);
-  m_impl->setRelHt(relHt);
-  m_impl->setMult(mult);
-  m_impl->setWPset(wPset);
-  m_impl->setWPmod(wPmod);
-  m_impl->setWazm(wazm);
-  m_impl->setIcon(icon);
+  setFlags(flags);
+  setPzn(pzn);
+  setPzm(-1);
+  setPe(pe);
+  setPw(pw);
+  setPld(pld);
+  setRelHt(relHt);
+  setMult(mult);
+  setWPset(wPset);
+  setWPmod(wPmod);
+  setWazm(wazm);
+  setIcon(icon);
 }
 
 AirflowPath::AirflowPath(int flags, int pzn, int pe, int pw, int pld, double relHt, double mult, double wPset,
   double wPmod, double wazm, unsigned int icon) :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setFlags(flags);
-  m_impl->setPzn(pzn);
-  m_impl->setPzm(-1);
-  m_impl->setPe(pe);
-  m_impl->setPw(pw);
-  m_impl->setPld(pld);
-  m_impl->setRelHt(relHt);
-  m_impl->setMult(mult);
-  m_impl->setWPset(wPset);
-  m_impl->setWPmod(wPmod);
-  m_impl->setWazm(wazm);
-  m_impl->setIcon(icon);
+  setFlags(flags);
+  setPzn(pzn);
+  setPzm(-1);
+  setPe(pe);
+  setPw(pw);
+  setPld(pld);
+  setRelHt(relHt);
+  setMult(mult);
+  setWPset(wPset);
+  setWPmod(wPmod);
+  setWazm(wazm);
+  setIcon(icon);
 }
 
 AirflowPath::AirflowPath(int flags, int pzn, int pzm, int pe, int pld, std::string relHt, std::string mult, unsigned int icon) :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setFlags(flags);
-  m_impl->setPzn(pzn);
-  m_impl->setPzm(pzm);
-  m_impl->setPe(pe);
-  m_impl->setPld(pld);
-  m_impl->setRelHt(relHt);
-  m_impl->setMult(mult);
-  m_impl->setIcon(icon);
+  setFlags(flags);
+  setPzn(pzn);
+  setPzm(pzm);
+  setPe(pe);
+  setPld(pld);
+  setRelHt(relHt);
+  setMult(mult);
+  setIcon(icon);
 }
 
 AirflowPath::AirflowPath(int flags, int pzn, int pzm, int pe, int pld, double relHt, double mult, unsigned int icon) :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setFlags(flags);
-  m_impl->setPzn(pzn);
-  m_impl->setPzm(pzm);
-  m_impl->setPe(pe);
-  m_impl->setPld(pld);
-  m_impl->setRelHt(relHt);
-  m_impl->setMult(mult);
-  m_impl->setIcon(icon);
+  setFlags(flags);
+  setPzn(pzn);
+  setPzm(pzm);
+  setPe(pe);
+  setPld(pld);
+  setRelHt(relHt);
+  setMult(mult);
+  setIcon(icon);
 }
 
 AirflowPath::AirflowPath(int nr,int flags,int pzn,int pzm,int pe,int pf,int pw,int pa,int ps,int pc,int pld,std::string X,
   std::string Y,std::string relHt,std::string mult,std::string wPset,std::string wPmod,std::string wazm,std::string Fahs,
   std::string Xmax,std::string Xmin,unsigned int icon,unsigned int dir,int u_Ht,int u_XY,int u_dP,
   int u_F,int cfd,std::string cfd_name,int cfd_ptype,int cfd_btype,int cfd_capp) :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl(nr,flags,pzn,pzm,pe,pf,pw,pa,ps,pc,pld,X,Y,relHt,mult,wPset,wPmod,wazm,Fahs,
-    Xmax,Xmin,icon,dir,u_Ht,u_XY,u_dP,u_F,cfd,cfd_name,cfd_ptype,cfd_btype,cfd_capp)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setFlags(flags);
+  setPzn(pzn);
+  setPzm(pzm);
+  setPe(pe);
+  setPf(pf);
+  setPw(pw);
+  setPa(pa);
+  setPs(ps);
+  setPc(pc);
+  setPld(pld);
+  setX(X);
+  setY(Y);
+  setRelHt(relHt);
+  setMult(mult);
+  setWPset(wPset);
+  setWPmod(wPmod);
+  setWazm(wazm);
+  setFahs(Fahs);
+  setXmax(Xmax);
+  setXmin(Xmin);
+  setIcon(icon);
+  setDir(dir);
+  setU_Ht(u_Ht);
+  setU_XY(u_XY);
+  setU_dP(u_dP);
+  setU_F(u_F);
+  setCfd(cfd);
+  setCfd_name(cfd_name);
+  setCfd_ptype(cfd_ptype);
+  setCfd_btype(cfd_btype);
+  setCfd_capp(cfd_capp);
+}
 
 AirflowPath::AirflowPath(int nr,int flags,int pzn,int pzm,int pe,int pf,int pw,int pa,int ps,int pc,int pld,double X,
   double Y,double relHt,double mult,double wPset,double wPmod,double wazm,double Fahs,
   double Xmax,double Xmin,unsigned int icon,unsigned int dir,int u_Ht,int u_XY,int u_dP,
   int u_F,int cfd,std::string cfd_name,int cfd_ptype,int cfd_btype,int cfd_capp) :
-  m_impl(std::shared_ptr<AirflowPathImpl>(new AirflowPathImpl(nr,flags,pzn,pzm,pe,pf,pw,pa,ps,pc,pld,X,Y,relHt,mult,wPset,wPmod,wazm,Fahs,
-    Xmax,Xmin,icon,dir,u_Ht,u_XY,u_dP,u_F,cfd,cfd_name,cfd_ptype,cfd_btype,cfd_capp)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setFlags(flags);
+  setPzn(pzn);
+  setPzm(pzm);
+  setPe(pe);
+  setPf(pf);
+  setPw(pw);
+  setPa(pa);
+  setPs(ps);
+  setPc(pc);
+  setPld(pld);
+  setX(X);
+  setY(Y);
+  setRelHt(relHt);
+  setMult(mult);
+  setWPset(wPset);
+  setWPmod(wPmod);
+  setWazm(wazm);
+  setFahs(Fahs);
+  setXmax(Xmax);
+  setXmin(Xmin);
+  setIcon(icon);
+  setDir(dir);
+  setU_Ht(u_Ht);
+  setU_XY(u_XY);
+  setU_dP(u_dP);
+  setU_F(u_F);
+  setCfd(cfd);
+  setCfd_name(cfd_name);
+  setCfd_ptype(cfd_ptype);
+  setCfd_btype(cfd_btype);
+  setCfd_capp(cfd_capp);
+}
 
 AirflowPath::AirflowPath(const AirflowPath &other) : m_impl(other.m_impl)
 {}
@@ -2080,542 +1712,13 @@ bool AirflowPath::operator!=(const AirflowPath &other) const
   return m_impl!=other.m_impl;
 }
 
-void AirflowPath::read(Reader &input)
-{
-  m_impl->read(input);
-}
-
-std::string AirflowPath::write()
-{
-  return m_impl->write();
-}
-
-int AirflowPath::nr() const
-{
-  return m_impl->nr();
-}
-
-void AirflowPath::setNr(const int nr)
-{
-  m_impl->setNr(nr);
-}
-
-int AirflowPath::flags() const
-{
-  return m_impl->flags();
-}
-
-void AirflowPath::setFlags(const int flags)
-{
-  m_impl->setFlags(flags);
-}
-
-int AirflowPath::pzn() const
-{
-  return m_impl->pzn();
-}
-
-void AirflowPath::setPzn(const int pzn)
-{
-  m_impl->setPzn(pzn);
-}
-
-int AirflowPath::pzm() const
-{
-  return m_impl->pzm();
-}
-
-void AirflowPath::setPzm(const int pzm)
-{
-  m_impl->setPzm(pzm);
-}
-
-int AirflowPath::pe() const
-{
-  return m_impl->pe();
-}
-
-void AirflowPath::setPe(const int pe)
-{
-  m_impl->setPe(pe);
-}
-
-int AirflowPath::pf() const
-{
-  return m_impl->pf();
-}
-
-void AirflowPath::setPf(const int pf)
-{
-  m_impl->setPf(pf);
-}
-
-int AirflowPath::pw() const
-{
-  return m_impl->pw();
-}
-
-void AirflowPath::setPw(const int pw)
-{
-  m_impl->setPw(pw);
-}
-
-int AirflowPath::pa() const
-{
-  return m_impl->pa();
-}
-
-void AirflowPath::setPa(const int pa)
-{
-  m_impl->setPa(pa);
-}
-
-int AirflowPath::ps() const
-{
-  return m_impl->ps();
-}
-
-void AirflowPath::setPs(const int ps)
-{
-  m_impl->setPs(ps);
-}
-
-int AirflowPath::pc() const
-{
-  return m_impl->pc();
-}
-
-void AirflowPath::setPc(const int pc)
-{
-  m_impl->setPc(pc);
-}
-
-int AirflowPath::pld() const
-{
-  return m_impl->pld();
-}
-
-void AirflowPath::setPld(const int pld)
-{
-  m_impl->setPld(pld);
-}
-
-double AirflowPath::X() const
-{
-  return m_impl->X();
-}
-
-bool AirflowPath::setX(const double X)
-{
-  return m_impl->setX(X);
-}
-
-bool AirflowPath::setX(const std::string &X)
-{
-  return m_impl->setX(X);
-}
-
-double AirflowPath::Y() const
-{
-  return m_impl->Y();
-}
-
-bool AirflowPath::setY(const double Y)
-{
-  return m_impl->setY(Y);
-}
-
-bool AirflowPath::setY(const std::string &Y)
-{
-  return m_impl->setY(Y);
-}
-
-double AirflowPath::relHt() const
-{
-  return m_impl->relHt();
-}
-
-bool AirflowPath::setRelHt(const std::string &relHt)
-{
-  return m_impl->setRelHt(relHt);
-}
-
-bool AirflowPath::setRelHt(const double relHt)
-{
-  return m_impl->setRelHt(relHt);
-}
-
-double AirflowPath::mult() const
-{
-  return m_impl->mult();
-}
-
-bool AirflowPath::setMult(const double mult)
-{
-  return m_impl->setMult(mult);
-}
-
-bool AirflowPath::setMult(const std::string &mult)
-{
-  return m_impl->setMult(mult);
-}
-
-double AirflowPath::wPset() const
-{
-  return m_impl->wPset();
-}
-
-bool AirflowPath::setWPset(const double wPset)
-{
-  return m_impl->setWPset(wPset);
-}
-
-bool AirflowPath::setWPset(const std::string &wPset)
-{
-  return m_impl->setWPset(wPset);
-}
-
-double AirflowPath::wPmod() const
-{
-  return m_impl->wPmod();
-}
-
-bool AirflowPath::setWPmod(const double wPmod)
-{
-  return m_impl->setWPmod(wPmod);
-}
-
-bool AirflowPath::setWPmod(const std::string &wPmod)
-{
-  return m_impl->setWPmod(wPmod);
-}
-
-double AirflowPath::wazm() const
-{
-  return m_impl->wazm();
-}
-
-bool AirflowPath::setWazm(const double wazm)
-{
-  return m_impl->setWazm(wazm);
-}
-
-bool AirflowPath::setWazm(const std::string &wazm)
-{
-  return m_impl->setWazm(wazm);
-}
-
-double AirflowPath::Fahs() const
-{
-  return m_impl->Fahs();
-}
-
-bool AirflowPath::setFahs(const double Fahs)
-{
-  return m_impl->setFahs(Fahs);
-}
-
-bool AirflowPath::setFahs(const std::string &Fahs)
-{
-  return m_impl->setFahs(Fahs);
-}
-
-double AirflowPath::Xmax() const
-{
-  return m_impl->Xmax();
-}
-
-bool AirflowPath::setXmax(const double Xmax)
-{
-  return m_impl->setXmax(Xmax);
-}
-
-bool AirflowPath::setXmax(const std::string &Xmax)
-{
-  return m_impl->setXmax(Xmax);
-}
-
-double AirflowPath::Xmin() const
-{
-  return m_impl->Xmin();
-}
-
-bool AirflowPath::setXmin(const double Xmin)
-{
-  return m_impl->setXmin(Xmin);
-}
-
-bool AirflowPath::setXmin(const std::string &Xmin)
-{
-  return m_impl->setXmin(Xmin);
-}
-
-unsigned int AirflowPath::icon() const
-{
-  return m_impl->icon();
-}
-
-void AirflowPath::setIcon(const unsigned int icon)
-{
-  m_impl->setIcon(icon);
-}
-
-unsigned int AirflowPath::dir() const
-{
-  return m_impl->dir();
-}
-
-void AirflowPath::setDir(const unsigned int dir)
-{
-  m_impl->setDir(dir);
-}
-
-int AirflowPath::u_Ht() const
-{
-  return m_impl->u_Ht();
-}
-
-void AirflowPath::setU_Ht(const int u_Ht)
-{
-  m_impl->setU_Ht(u_Ht);
-}
-
-int AirflowPath::u_XY() const
-{
-  return m_impl->u_XY();
-}
-
-void AirflowPath::setU_XY(const int u_XY)
-{
-  m_impl->setU_XY(u_XY);
-}
-
-int AirflowPath::u_dP() const
-{
-  return m_impl->u_dP();
-}
-
-void AirflowPath::setU_dP(const int u_dP)
-{
-  m_impl->setU_dP(u_dP);
-}
-
-int AirflowPath::u_F() const
-{
-  return m_impl->u_F();
-}
-
-void AirflowPath::setU_F(const int u_F)
-{
-  m_impl->setU_F(u_F);
-}
-
-int AirflowPath::vfType() const
-{
-  return m_impl->vfType();
-}
-
-void AirflowPath::setVfType(const int vf)
-{
-  m_impl->setVfType(vf);
-}
-
-std::string AirflowPath::vfNodeName() const
-{
-  return m_impl->vfNodeName();
-}
-
-void AirflowPath::setVfNodeName(const std::string& name)
-{
-  m_impl->setVfNodeName(name);
-}
-
-int AirflowPath::cfd() const
-{
-  return m_impl->cfd();
-}
-
-void AirflowPath::setCfd(const int cfd)
-{
-  m_impl->setCfd(cfd);
-}
-
-std::string AirflowPath::cfd_name() const
-{
-  return m_impl->cfd_name();
-}
-
-void AirflowPath::setCfd_name(const std::string &cfd_name)
-{
-  m_impl->setCfd_name(cfd_name);
-}
-
-int AirflowPath::cfd_ptype() const
-{
-  return m_impl->cfd_ptype();
-}
-
-void AirflowPath::setCfd_ptype(const int cfd_ptype)
-{
-  m_impl->setCfd_ptype(cfd_ptype);
-}
-
-int AirflowPath::cfd_btype() const
-{
-  return m_impl->cfd_btype();
-}
-
-void AirflowPath::setCfd_btype(const int cfd_btype)
-{
-  m_impl->setCfd_btype(cfd_btype);
-}
-
-int AirflowPath::cfd_capp() const
-{
-  return m_impl->cfd_capp();
-}
-
-void AirflowPath::setCfd_capp(const int cfd_capp)
-{
-  m_impl->setCfd_capp(cfd_capp);
-}
-
-void AirflowPath::setWindPressure(bool b)
-{
-  m_impl->setWindPressure(b);
-}
-
-bool AirflowPath::windPressure()
-{
-  return m_impl->windPressure();
-}
-
-void AirflowPath::setSystem(bool b)
-{
-  m_impl->setSystem(b);
-}
-
-bool AirflowPath::system()
-{
-  return m_impl->system();
-}
-
-void AirflowPath::setExhaust(bool b)
-{
-  m_impl->setExhaust(b);
-}
-
-bool AirflowPath::exhaust()
-{
-  return m_impl->exhaust();
-}
-
-void AirflowPath::setRecirculation(bool b)
-{
-  m_impl->setRecirculation(b);
-}
-
-bool AirflowPath::recirculation()
-{
-  return m_impl->recirculation();
-}
-
-void AirflowPath::setOutsideAir(bool b)
-{
-  m_impl->setOutsideAir(b);
-}
-
-bool AirflowPath::outsideAir()
-{
-  return m_impl->outsideAir();
-}
-
-
-AirflowPath::AirflowPathImpl::AirflowPathImpl() :m_nr(0), m_flags(0), m_pzn(0), m_pzm(0), m_pe(0), m_pf(0), m_pw(0), m_pa(0), m_ps(0), m_pc(0),
+AirflowPath::Impl::Impl() :m_nr(0), m_flags(0), m_pzn(0), m_pzm(0), m_pe(0), m_pf(0), m_pw(0), m_pa(0), m_ps(0), m_pc(0),
 m_pld(0), m_X(PRJFLOAT("0.0")), m_Y(PRJFLOAT("0.0")), m_relHt(PRJFLOAT("0.0")), m_mult(PRJFLOAT("0.0")), m_wPset(PRJFLOAT("0.0")),
 m_wPmod(PRJFLOAT("0.0")), m_wazm(PRJFLOAT("0.0")), m_Fahs(PRJFLOAT("0.0")), m_Xmax(PRJFLOAT("0.0")), m_Xmin(PRJFLOAT("0.0")), m_icon(0),
 m_dir(0), m_u_Ht(0), m_u_XY(0), m_u_dP(0), m_u_F(0), m_vf_type(0), m_cfd(0), m_cfd_ptype(0), m_cfd_btype(0), m_cfd_capp(0)
 {}
 
-AirflowPath::AirflowPathImpl::AirflowPathImpl(int nr, int flags, int pzn, int pzm, int pe, int pf, int pw, int pa, int ps, int pc, int pld,
-  std::string X, std::string Y, std::string relHt, std::string mult, std::string wPset, std::string wPmod, std::string wazm,
-  std::string Fahs, std::string Xmax, std::string Xmin, unsigned int icon, unsigned int dir, int u_Ht, int u_XY,
-  int u_dP, int u_F, int cfd, std::string cfd_name, int cfd_ptype, int cfd_btype, int cfd_capp) : AirflowPath::AirflowPathImpl()
-{
-  setNr(nr);
-  setFlags(flags);
-  setPzn(pzn);
-  setPzm(pzm);
-  setPe(pe);
-  setPf(pf);
-  setPw(pw);
-  setPa(pa);
-  setPs(ps);
-  setPc(pc);
-  setPld(pld);
-  setX(X);
-  setY(Y);
-  setRelHt(relHt);
-  setMult(mult);
-  setWPset(wPset);
-  setWPmod(wPmod);
-  setWazm(wazm);
-  setFahs(Fahs);
-  setXmax(Xmax);
-  setXmin(Xmin);
-  setIcon(icon);
-  setDir(dir);
-  setU_Ht(u_Ht);
-  setU_XY(u_XY);
-  setU_dP(u_dP);
-  setU_F(u_F);
-  setCfd(cfd);
-  setCfd_name(cfd_name);
-  setCfd_ptype(cfd_ptype);
-  setCfd_btype(cfd_btype);
-  setCfd_capp(cfd_capp);
-}
-
-AirflowPath::AirflowPathImpl::AirflowPathImpl(int nr, int flags, int pzn, int pzm, int pe, int pf, int pw, int pa, int ps, int pc, int pld,
-  double X, double Y, double relHt, double mult, double wPset, double wPmod, double wazm,
-  double Fahs, double Xmax, double Xmin, unsigned int icon, unsigned int dir, int u_Ht, int u_XY,
-  int u_dP, int u_F, int cfd, std::string cfd_name, int cfd_ptype, int cfd_btype, int cfd_capp) : AirflowPath::AirflowPathImpl()
-{
-  setNr(nr);
-  setFlags(flags);
-  setPzn(pzn);
-  setPzm(pzm);
-  setPe(pe);
-  setPf(pf);
-  setPw(pw);
-  setPa(pa);
-  setPs(ps);
-  setPc(pc);
-  setPld(pld);
-  setX(X);
-  setY(Y);
-  setRelHt(relHt);
-  setMult(mult);
-  setWPset(wPset);
-  setWPmod(wPmod);
-  setWazm(wazm);
-  setFahs(Fahs);
-  setXmax(Xmax);
-  setXmin(Xmin);
-  setIcon(icon);
-  setDir(dir);
-  setU_Ht(u_Ht);
-  setU_XY(u_XY);
-  setU_dP(u_dP);
-  setU_F(u_F);
-  setCfd(cfd);
-  setCfd_name(cfd_name);
-  setCfd_ptype(cfd_ptype);
-  setCfd_btype(cfd_btype);
-  setCfd_capp(cfd_capp);
-}
-
-void AirflowPath::AirflowPathImpl::read(Reader& input)
+void AirflowPath::read(Reader& input)
 {
   setNr(input.read<int>());
   setFlags(input.read<int>());
@@ -2645,11 +1748,11 @@ void AirflowPath::AirflowPathImpl::read(Reader& input)
   setU_dP(input.read<int>());
   setU_F(input.read<int>());
   setVfType(input.read<int>());
-  if (m_vf_type) {
+  if (m_impl->m_vf_type) {
     setVfNodeName(input.readString());
   }
   setCfd(input.read<int>());
-  if (m_cfd) {
+  if (m_impl->m_cfd) {
     setCfd_name(input.readString());
     setCfd_ptype(input.read<int>());
     setCfd_btype(input.read<int>());
@@ -2657,487 +1760,502 @@ void AirflowPath::AirflowPathImpl::read(Reader& input)
   }
 }
 
-std::string AirflowPath::AirflowPathImpl::write()
+std::string AirflowPath::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_flags) + ' ' + ANY_TO_STR(m_pzn) + ' ' + ANY_TO_STR(m_pzm) + ' '
-    + ANY_TO_STR(m_pe) + ' ' + ANY_TO_STR(m_pf) + ' ' + ANY_TO_STR(m_pw) + ' ' + ANY_TO_STR(m_pa) + ' '
-    + ANY_TO_STR(m_ps) + ' ' + ANY_TO_STR(m_pc) + ' ' + ANY_TO_STR(m_pld) + ' ' + PRJFLOAT_TO_STR(m_X) + ' '
-    + PRJFLOAT_TO_STR(m_Y) + ' ' + PRJFLOAT_TO_STR(m_relHt) + ' ' + PRJFLOAT_TO_STR(m_mult) + ' ' + PRJFLOAT_TO_STR(m_wPset) + ' '
-    + PRJFLOAT_TO_STR(m_wPmod) + ' ' + PRJFLOAT_TO_STR(m_wazm) + ' ' + PRJFLOAT_TO_STR(m_Fahs) + ' ' + PRJFLOAT_TO_STR(m_Xmax) + ' '
-    + PRJFLOAT_TO_STR(m_Xmin) + ' ' + ANY_TO_STR(m_icon) + ' ' + ANY_TO_STR(m_dir) + ' ' + ANY_TO_STR(m_u_Ht) + ' '
-    + ANY_TO_STR(m_u_XY) + ' ' + ANY_TO_STR(m_u_dP) + ' ' + ANY_TO_STR(m_u_F) + ' ' + ANY_TO_STR(m_cfd);
-  if (m_cfd) {
-    string += ' ' + m_cfd_name + ' ' + ANY_TO_STR(m_cfd_ptype) + ' ' + ANY_TO_STR(m_cfd_btype) + ' '
-      + ANY_TO_STR(m_cfd_capp);
+  string += ANY_TO_STR(m_impl->m_nr) + ' ' + ANY_TO_STR(m_impl->m_flags) + ' ' + ANY_TO_STR(m_impl->m_pzn) + ' ' + ANY_TO_STR(m_impl->m_pzm) + ' '
+    + ANY_TO_STR(m_impl->m_pe) + ' ' + ANY_TO_STR(m_impl->m_pf) + ' ' + ANY_TO_STR(m_impl->m_pw) + ' ' + ANY_TO_STR(m_impl->m_pa) + ' '
+    + ANY_TO_STR(m_impl->m_ps) + ' ' + ANY_TO_STR(m_impl->m_pc) + ' ' + ANY_TO_STR(m_impl->m_pld) + ' ' + PRJFLOAT_TO_STR(m_impl->m_X) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_Y) + ' ' + PRJFLOAT_TO_STR(m_impl->m_relHt) + ' ' + PRJFLOAT_TO_STR(m_impl->m_mult) + ' ' + PRJFLOAT_TO_STR(m_impl->m_wPset) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_wPmod) + ' ' + PRJFLOAT_TO_STR(m_impl->m_wazm) + ' ' + PRJFLOAT_TO_STR(m_impl->m_Fahs) + ' ' + PRJFLOAT_TO_STR(m_impl->m_Xmax) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_Xmin) + ' ' + ANY_TO_STR(m_impl->m_icon) + ' ' + ANY_TO_STR(m_impl->m_dir) + ' ' + ANY_TO_STR(m_impl->m_u_Ht) + ' '
+    + ANY_TO_STR(m_impl->m_u_XY) + ' ' + ANY_TO_STR(m_impl->m_u_dP) + ' ' + ANY_TO_STR(m_impl->m_u_F) + ' ' + ANY_TO_STR(m_impl->m_cfd);
+  if (m_impl->m_cfd) {
+    string += ' ' + m_impl->m_cfd_name + ' ' + ANY_TO_STR(m_impl->m_cfd_ptype) + ' ' + ANY_TO_STR(m_impl->m_cfd_btype) + ' '
+      + ANY_TO_STR(m_impl->m_cfd_capp);
   }
   return string + '\n';
 }
 
-int AirflowPath::AirflowPathImpl::nr() const
+int AirflowPath::nr() const
 {
-  return m_nr;
+  return m_impl->m_nr;
 }
 
-void AirflowPath::AirflowPathImpl::setNr(const int nr)
+void AirflowPath::setNr(const int nr)
 {
-  m_nr = nr;
+  m_impl->m_nr = nr;
 }
 
-int AirflowPath::AirflowPathImpl::flags() const
+int AirflowPath::flags() const
 {
-  return m_flags;
+  return m_impl->m_flags;
 }
 
-void AirflowPath::AirflowPathImpl::setFlags(const int flags)
+void AirflowPath::setFlags(const int flags)
 {
-  m_flags = flags;
+  m_impl->m_flags = flags;
 }
 
-int AirflowPath::AirflowPathImpl::pzn() const
+int AirflowPath::pzn() const
 {
-  return m_pzn;
+  return m_impl->m_pzn;
 }
 
-void AirflowPath::AirflowPathImpl::setPzn(const int pzn)
+void AirflowPath::setPzn(const int pzn)
 {
-  m_pzn = pzn;
+  m_impl->m_pzn = pzn;
 }
 
-int AirflowPath::AirflowPathImpl::pzm() const
+int AirflowPath::pzm() const
 {
-  return m_pzm;
+  return m_impl->m_pzm;
 }
 
-void AirflowPath::AirflowPathImpl::setPzm(const int pzm)
+void AirflowPath::setPzm(const int pzm)
 {
-  m_pzm = pzm;
+  m_impl->m_pzm = pzm;
 }
 
-int AirflowPath::AirflowPathImpl::pe() const
+int AirflowPath::pe() const
 {
-  return m_pe;
+  return m_impl->m_pe;
 }
 
-void AirflowPath::AirflowPathImpl::setPe(const int pe)
+void AirflowPath::setPe(const int pe)
 {
-  m_pe = pe;
+  m_impl->m_pe = pe;
 }
 
-int AirflowPath::AirflowPathImpl::pf() const
+int AirflowPath::pf() const
 {
-  return m_pf;
+  return m_impl->m_pf;
 }
 
-void AirflowPath::AirflowPathImpl::setPf(const int pf)
+void AirflowPath::setPf(const int pf)
 {
-  m_pf = pf;
+  m_impl->m_pf = pf;
 }
 
-int AirflowPath::AirflowPathImpl::pw() const
+int AirflowPath::pw() const
 {
-  return m_pw;
+  return m_impl->m_pw;
 }
 
-void AirflowPath::AirflowPathImpl::setPw(const int pw)
+void AirflowPath::setPw(const int pw)
 {
-  m_pw = pw;
+  m_impl->m_pw = pw;
 }
 
-int AirflowPath::AirflowPathImpl::pa() const
+int AirflowPath::pa() const
 {
-  return m_pa;
+  return m_impl->m_pa;
 }
 
-void AirflowPath::AirflowPathImpl::setPa(const int pa)
+void AirflowPath::setPa(const int pa)
 {
-  m_pa = pa;
+  m_impl->m_pa = pa;
 }
 
-int AirflowPath::AirflowPathImpl::ps() const
+int AirflowPath::ps() const
 {
-  return m_ps;
+  return m_impl->m_ps;
 }
 
-void AirflowPath::AirflowPathImpl::setPs(const int ps)
+void AirflowPath::setPs(const int ps)
 {
-  m_ps = ps;
+  m_impl->m_ps = ps;
 }
 
-int AirflowPath::AirflowPathImpl::pc() const
+int AirflowPath::pc() const
 {
-  return m_pc;
+  return m_impl->m_pc;
 }
 
-void AirflowPath::AirflowPathImpl::setPc(const int pc)
+void AirflowPath::setPc(const int pc)
 {
-  m_pc = pc;
+  m_impl->m_pc = pc;
 }
 
-int AirflowPath::AirflowPathImpl::pld() const
+int AirflowPath::pld() const
 {
-  return m_pld;
+  return m_impl->m_pld;
 }
 
-void AirflowPath::AirflowPathImpl::setPld(const int pld)
+void AirflowPath::setPld(const int pld)
 {
-  m_pld = pld;
+  m_impl->m_pld = pld;
 }
 
-double AirflowPath::AirflowPathImpl::X() const
+double AirflowPath::X() const
 {
-  return to<double>(m_X);
+  return to<double>(m_impl->m_X);
 }
 
-bool AirflowPath::AirflowPathImpl::setX(const double X)
+bool AirflowPath::setX(const double X)
 {
-  m_X = to_float(X);
+  m_impl->m_X = to_float(X);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setX(const std::string& X)
+bool AirflowPath::setX(const std::string& X)
 {
-  return assign_if_valid<double>(X, m_X);
+  return assign_if_valid<double>(X, m_impl->m_X);
 }
 
-double AirflowPath::AirflowPathImpl::Y() const
+double AirflowPath::Y() const
 {
-  return to<double>(m_Y);
+  return to<double>(m_impl->m_Y);
 }
 
-bool AirflowPath::AirflowPathImpl::setY(const double Y)
+bool AirflowPath::setY(const double Y)
 {
-  m_Y = to_float(Y);
+  m_impl->m_Y = to_float(Y);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setY(const std::string& Y)
+bool AirflowPath::setY(const std::string& Y)
 {
-  return assign_if_valid<double>(Y, m_Y);
+  return assign_if_valid<double>(Y, m_impl->m_Y);
 }
 
-double AirflowPath::AirflowPathImpl::relHt() const
+double AirflowPath::relHt() const
 {
-  return to<double>(m_relHt);
+  return to<double>(m_impl->m_relHt);
 }
 
-bool AirflowPath::AirflowPathImpl::setRelHt(const double relHt)
+bool AirflowPath::setRelHt(const double relHt)
 {
-  m_relHt = to_float(relHt);
+  m_impl->m_relHt = to_float(relHt);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setRelHt(const std::string& relHt)
+bool AirflowPath::setRelHt(const std::string& relHt)
 {
-  return assign_if_valid<double>(relHt, m_relHt);
+  return assign_if_valid<double>(relHt, m_impl->m_relHt);
 }
 
-double AirflowPath::AirflowPathImpl::mult() const
+template <> double PRJMODEL_API AirflowPath::mult() const
 {
-  return to<double>(m_mult);
+  return to<double>(m_impl->m_mult);
 }
 
-bool AirflowPath::AirflowPathImpl::setMult(const double mult)
+template <> std::string PRJMODEL_API AirflowPath::mult() const
 {
-  m_mult = to_float(mult);
+  return PRJFLOAT_TO_STR(m_impl->m_mult);
+}
+
+bool AirflowPath::setMult(const double mult)
+{
+  m_impl->m_mult = to_float(mult);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setMult(const std::string& mult)
+bool AirflowPath::setMult(const std::string& mult)
 {
-  return assign_if_valid<double>(mult, m_mult);
+  return assign_if_valid<double>(mult, m_impl->m_mult);
 }
 
-double AirflowPath::AirflowPathImpl::wPset() const
+template <> double PRJMODEL_API AirflowPath::wPset() const
 {
-  return to<double>(m_wPset);
+  return to<double>(m_impl->m_wPset);
 }
 
-bool AirflowPath::AirflowPathImpl::setWPset(const double wPset)
+template <> std::string PRJMODEL_API AirflowPath::wPset() const
 {
-  m_wPset = to_float(wPset);
+  return PRJFLOAT_TO_STR(m_impl->m_wPset);
+}
+
+bool AirflowPath::setWPset(const double wPset)
+{
+  m_impl->m_wPset = to_float(wPset);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setWPset(const std::string& wPset)
+bool AirflowPath::setWPset(const std::string& wPset)
 {
-  return assign_if_valid<double>(wPset, m_wPset);
+  return assign_if_valid<double>(wPset, m_impl->m_wPset);
 }
 
-double AirflowPath::AirflowPathImpl::wPmod() const
+double AirflowPath::wPmod() const
 {
-  return to<double>(m_wPmod);
+  return to<double>(m_impl->m_wPmod);
 }
 
-bool AirflowPath::AirflowPathImpl::setWPmod(const double wPmod)
+bool AirflowPath::setWPmod(const double wPmod)
 {
-  m_wPmod = to_float(wPmod);
+  m_impl->m_wPmod = to_float(wPmod);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setWPmod(const std::string& wPmod)
+bool AirflowPath::setWPmod(const std::string& wPmod)
 {
-  return assign_if_valid<double>(wPmod, m_wPmod);
+  return assign_if_valid<double>(wPmod, m_impl->m_wPmod);
 }
 
-double AirflowPath::AirflowPathImpl::wazm() const
+template <> double PRJMODEL_API AirflowPath::wazm() const
 {
-  return to<double>(m_wazm);
+  return to<double>(m_impl->m_wazm);
 }
 
-bool AirflowPath::AirflowPathImpl::setWazm(const double wazm)
+template <> std::string PRJMODEL_API AirflowPath::wazm() const
 {
-  m_wazm = to_float(wazm);
+  return PRJFLOAT_TO_STR(m_impl->m_wazm);
+}
+
+bool AirflowPath::setWazm(const double wazm)
+{
+  m_impl->m_wazm = to_float(wazm);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setWazm(const std::string& wazm)
+bool AirflowPath::setWazm(const std::string& wazm)
 {
-  return assign_if_valid<double>(wazm, m_wazm);
+  return assign_if_valid<double>(wazm, m_impl->m_wazm);
 }
 
-double AirflowPath::AirflowPathImpl::Fahs() const
+double AirflowPath::Fahs() const
 {
-  return to<double>(m_Fahs);
+  return to<double>(m_impl->m_Fahs);
 }
 
-bool AirflowPath::AirflowPathImpl::setFahs(const double Fahs)
+bool AirflowPath::setFahs(const double Fahs)
 {
-  m_Fahs = to_float(Fahs);
+  m_impl->m_Fahs = to_float(Fahs);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setFahs(const std::string& Fahs)
+bool AirflowPath::setFahs(const std::string& Fahs)
 {
-  return assign_if_valid<double>(Fahs, m_Fahs);
+  return assign_if_valid<double>(Fahs, m_impl->m_Fahs);
 }
 
-double AirflowPath::AirflowPathImpl::Xmax() const
+double AirflowPath::Xmax() const
 {
-  return to<double>(m_Xmax);
+  return to<double>(m_impl->m_Xmax);
 }
 
-bool AirflowPath::AirflowPathImpl::setXmax(const double Xmax)
+bool AirflowPath::setXmax(const double Xmax)
 {
-  m_Xmax = to_float(Xmax);
+  m_impl->m_Xmax = to_float(Xmax);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setXmax(const std::string& Xmax)
+bool AirflowPath::setXmax(const std::string& Xmax)
 {
-  return assign_if_valid<double>(Xmax, m_Xmax);
+  return assign_if_valid<double>(Xmax, m_impl->m_Xmax);
 }
 
-double AirflowPath::AirflowPathImpl::Xmin() const
+double AirflowPath::Xmin() const
 {
-  return to<double>(m_Xmin);
+  return to<double>(m_impl->m_Xmin);
 }
 
-bool AirflowPath::AirflowPathImpl::setXmin(const double Xmin)
+bool AirflowPath::setXmin(const double Xmin)
 {
-  m_Xmin = to_float(Xmin);
+  m_impl->m_Xmin = to_float(Xmin);
   return true;
 }
 
-bool AirflowPath::AirflowPathImpl::setXmin(const std::string& Xmin)
+bool AirflowPath::setXmin(const std::string& Xmin)
 {
-  return assign_if_valid<double>(Xmin, m_Xmin);
+  return assign_if_valid<double>(Xmin, m_impl->m_Xmin);
 }
 
-unsigned int AirflowPath::AirflowPathImpl::icon() const
+unsigned int AirflowPath::icon() const
 {
-  return m_icon;
+  return m_impl->m_icon;
 }
 
-void AirflowPath::AirflowPathImpl::setIcon(const unsigned int icon)
+void AirflowPath::setIcon(const unsigned int icon)
 {
-  m_icon = icon;
+  m_impl->m_icon = icon;
 }
 
-unsigned int AirflowPath::AirflowPathImpl::dir() const
+unsigned int AirflowPath::dir() const
 {
-  return m_dir;
+  return m_impl->m_dir;
 }
 
-void AirflowPath::AirflowPathImpl::setDir(const unsigned int dir)
+void AirflowPath::setDir(const unsigned int dir)
 {
-  m_dir = dir;
+  m_impl->m_dir = dir;
 }
 
-int AirflowPath::AirflowPathImpl::u_Ht() const
+int AirflowPath::u_Ht() const
 {
-  return m_u_Ht;
+  return m_impl->m_u_Ht;
 }
 
-void AirflowPath::AirflowPathImpl::setU_Ht(const int u_Ht)
+void AirflowPath::setU_Ht(const int u_Ht)
 {
-  m_u_Ht = u_Ht;
+  m_impl->m_u_Ht = u_Ht;
 }
 
-int AirflowPath::AirflowPathImpl::u_XY() const
+int AirflowPath::u_XY() const
 {
-  return m_u_XY;
+  return m_impl->m_u_XY;
 }
 
-void AirflowPath::AirflowPathImpl::setU_XY(const int u_XY)
+void AirflowPath::setU_XY(const int u_XY)
 {
-  m_u_XY = u_XY;
+  m_impl->m_u_XY = u_XY;
 }
 
-int AirflowPath::AirflowPathImpl::u_dP() const
+int AirflowPath::u_dP() const
 {
-  return m_u_dP;
+  return m_impl->m_u_dP;
 }
 
-void AirflowPath::AirflowPathImpl::setU_dP(const int u_dP)
+void AirflowPath::setU_dP(const int u_dP)
 {
-  m_u_dP = u_dP;
+  m_impl->m_u_dP = u_dP;
 }
 
-int AirflowPath::AirflowPathImpl::u_F() const
+int AirflowPath::u_F() const
 {
-  return m_u_F;
+  return m_impl->m_u_F;
 }
 
-void AirflowPath::AirflowPathImpl::setU_F(const int u_F)
+void AirflowPath::setU_F(const int u_F)
 {
-  m_u_F = u_F;
+  m_impl->m_u_F = u_F;
 }
 
-int AirflowPath::AirflowPathImpl::vfType() const
+int AirflowPath::vfType() const
 {
-  return m_vf_type;
+  return m_impl->m_vf_type;
 }
 
-void AirflowPath::AirflowPathImpl::setVfType(const int vf)
+void AirflowPath::setVfType(const int vf)
 {
-  m_vf_type = vf;
+  m_impl->m_vf_type = vf;
 }
 
-std::string AirflowPath::AirflowPathImpl::vfNodeName() const
+std::string AirflowPath::vfNodeName() const
 {
-  return m_vf_node_name;
+  return m_impl->m_vf_node_name;
 }
 
-void AirflowPath::AirflowPathImpl::setVfNodeName(const std::string& name)
+void AirflowPath::setVfNodeName(const std::string& name)
 {
-  m_vf_node_name = name;
+  m_impl->m_vf_node_name = name;
 }
 
-int AirflowPath::AirflowPathImpl::cfd() const
+int AirflowPath::cfd() const
 {
-  return m_cfd;
+  return m_impl->m_cfd;
 }
 
-void AirflowPath::AirflowPathImpl::setCfd(const int cfd)
+void AirflowPath::setCfd(const int cfd)
 {
-  m_cfd = cfd;
+  m_impl->m_cfd = cfd;
 }
 
-std::string AirflowPath::AirflowPathImpl::cfd_name() const
+std::string AirflowPath::cfd_name() const
 {
-  return m_cfd_name;
+  return m_impl->m_cfd_name;
 }
 
-void AirflowPath::AirflowPathImpl::setCfd_name(const std::string& cfd_name)
+void AirflowPath::setCfd_name(const std::string& cfd_name)
 {
-  m_cfd_name = cfd_name;
+  m_impl->m_cfd_name = cfd_name;
 }
 
-int AirflowPath::AirflowPathImpl::cfd_ptype() const
+int AirflowPath::cfd_ptype() const
 {
-  return m_cfd_ptype;
+  return m_impl->m_cfd_ptype;
 }
 
-void AirflowPath::AirflowPathImpl::setCfd_ptype(const int cfd_ptype)
+void AirflowPath::setCfd_ptype(const int cfd_ptype)
 {
-  m_cfd_ptype = cfd_ptype;
+  m_impl->m_cfd_ptype = cfd_ptype;
 }
 
-int AirflowPath::AirflowPathImpl::cfd_btype() const
+int AirflowPath::cfd_btype() const
 {
-  return m_cfd_btype;
+  return m_impl->m_cfd_btype;
 }
 
-void AirflowPath::AirflowPathImpl::setCfd_btype(const int cfd_btype)
+void AirflowPath::setCfd_btype(const int cfd_btype)
 {
-  m_cfd_btype = cfd_btype;
+  m_impl->m_cfd_btype = cfd_btype;
 }
 
-int AirflowPath::AirflowPathImpl::cfd_capp() const
+int AirflowPath::cfd_capp() const
 {
-  return m_cfd_capp;
+  return m_impl->m_cfd_capp;
 }
 
-void AirflowPath::AirflowPathImpl::setCfd_capp(const int cfd_capp)
+void AirflowPath::setCfd_capp(const int cfd_capp)
 {
-  m_cfd_capp = cfd_capp;
+  m_impl->m_cfd_capp = cfd_capp;
 }
 
-void AirflowPath::AirflowPathImpl::setWindPressure(bool b)
+void AirflowPath::setWindPressure(bool b)
 {
   if (b)
-    m_flags |= PathFlags::WIND;
+    m_impl->m_flags |= PathFlags::WIND;
   else
-    m_flags &= 0xFFFE;
+    m_impl->m_flags &= 0xFFFE;
 }
 
-bool AirflowPath::AirflowPathImpl::windPressure()
+bool AirflowPath::windPressure()
 {
-  return m_flags & PathFlags::WIND;
+  return m_impl->m_flags & PathFlags::WIND;
 }
 
-void AirflowPath::AirflowPathImpl::setSystem(bool b)
+void AirflowPath::setSystem(bool b)
 {
   if (b)
-    m_flags |= PathFlags::AHS_S;
+    m_impl->m_flags |= PathFlags::AHS_S;
   else
-    m_flags &= 0xFFF7;
+    m_impl->m_flags &= 0xFFF7;
 }
 
-bool AirflowPath::AirflowPathImpl::system()
+bool AirflowPath::system()
 {
-  return m_flags & PathFlags::AHS_S;
+  return m_impl->m_flags & PathFlags::AHS_S;
 }
 
-void AirflowPath::AirflowPathImpl::setExhaust(bool b)
+void AirflowPath::setExhaust(bool b)
 {
   if (b)
-    m_flags |= PathFlags::AHS_X;
+    m_impl->m_flags |= PathFlags::AHS_X;
   else
-    m_flags &= 0xFFBF;
+    m_impl->m_flags &= 0xFFBF;
 }
 
-bool AirflowPath::AirflowPathImpl::exhaust()
+bool AirflowPath::exhaust()
 {
-  return m_flags & PathFlags::AHS_X;
+  return m_impl->m_flags & PathFlags::AHS_X;
 }
 
 
-void AirflowPath::AirflowPathImpl::setRecirculation(bool b)
+void AirflowPath::setRecirculation(bool b)
 {
   if (b)
-    m_flags |= PathFlags::AHS_R;
+    m_impl->m_flags |= PathFlags::AHS_R;
   else
-    m_flags &= 0xFFEF;
+    m_impl->m_flags &= 0xFFEF;
 }
 
-bool AirflowPath::AirflowPathImpl::recirculation()
+bool AirflowPath::recirculation()
 {
-  return m_flags & PathFlags::AHS_R;
+  return m_impl->m_flags & PathFlags::AHS_R;
 }
 
-void AirflowPath::AirflowPathImpl::setOutsideAir(bool b)
+void AirflowPath::setOutsideAir(bool b)
 {
   if (b)
-    m_flags |= PathFlags::AHS_O;
+    m_impl->m_flags |= PathFlags::AHS_O;
   else
-    m_flags &= 0xFFDF;
+    m_impl->m_flags &= 0xFFDF;
 }
 
-bool AirflowPath::AirflowPathImpl::outsideAir()
+bool AirflowPath::outsideAir()
 {
-  return m_flags & PathFlags::AHS_O;
+  return m_impl->m_flags & PathFlags::AHS_O;
 }
 
 RunControl::RunControl() :
@@ -6142,30 +5260,46 @@ void RunControl::RunControlImpl::setCfd_dtcmo(const int cfd_dtcmo)
 }
 
 Level::Level() :
-  m_impl(std::shared_ptr<LevelImpl>(new LevelImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {}
 
 Level::Level(double delht, std::string name) :
-  m_impl(std::shared_ptr<LevelImpl>(new LevelImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setDelht(delht);
-  m_impl->setName(name);
+  setDelht(delht);
+  setName(name);
 }
 
 Level::Level(std::string delht, std::string name) :
-  m_impl(std::shared_ptr<LevelImpl>(new LevelImpl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-  m_impl->setDelht(delht);
-  m_impl->setName(name);
+  setDelht(delht);
+  setName(name);
 }
 
 Level::Level(int nr,double refht,double delht,int u_rfht,int u_dlht,std::string name,std::vector<Icon> icons) :
-  m_impl(std::shared_ptr<LevelImpl>(new LevelImpl(nr,refht,delht,u_rfht,u_dlht,name,icons)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setRefht(refht);
+  setDelht(delht);
+  setU_rfht(u_rfht);
+  setU_dlht(u_dlht);
+  setName(name);
+  setIcons(icons);
+}
 
 Level::Level(int nr,std::string refht,std::string delht,int u_rfht,int u_dlht,std::string name,std::vector<Icon> icons) :
-  m_impl(std::shared_ptr<LevelImpl>(new LevelImpl(nr,refht,delht,u_rfht,u_dlht,name,icons)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setRefht(refht);
+  setDelht(delht);
+  setU_rfht(u_rfht);
+  setU_dlht(u_dlht);
+  setName(name);
+  setIcons(icons);
+}
 
 Level::Level(const Level &other) : m_impl(other.m_impl)
 {}
@@ -6189,124 +5323,10 @@ bool Level::operator!=(const Level &other) const
   return m_impl!=other.m_impl;
 }
 
-std::string Level::write()
-{
-  return m_impl->write();
-}
-
-void Level::read(Reader &input)
-{
-  m_impl->read(input);
-}
-
-int Level::nr() const
-{
-  return m_impl->nr();
-}
-
-void Level::setNr(const int nr)
-{
-  m_impl->setNr(nr);
-}
-
-double Level::refht() const
-{
-  return m_impl->refht();
-}
-
-bool Level::setRefht(const double refht)
-{
-  return m_impl->setRefht(refht);
-}
-
-bool Level::setRefht(const std::string &refht)
-{
-  return m_impl->setRefht(refht);
-}
-
-double Level::delht() const
-{
-  return m_impl->delht();
-}
-
-bool Level::setDelht(const double delht)
-{
-  return m_impl->setDelht(delht);
-}
-
-bool Level::setDelht(const std::string &delht)
-{
-  return m_impl->setDelht(delht);
-}
-
-int Level::u_rfht() const
-{
-  return m_impl->u_rfht();
-}
-
-void Level::setU_rfht(const int u_rfht)
-{
-  m_impl->setU_rfht(u_rfht);
-}
-
-int Level::u_dlht() const
-{
-  return m_impl->u_dlht();
-}
-
-void Level::setU_dlht(const int u_dlht)
-{
-  m_impl->setU_dlht(u_dlht);
-}
-
-std::string Level::name() const
-{
-  return m_impl->name();
-}
-
-void Level::setName(const std::string &name)
-{
-  m_impl->setName(name);
-}
-
-std::vector<Icon> Level::icons() const
-{
-  return m_impl->icons();
-}
-
-void Level::setIcons(const std::vector<Icon> &icons)
-{
-  m_impl->setIcons(icons);
-}
-
-Level::LevelImpl::LevelImpl() : m_nr(0), m_refht(PRJFLOAT("0.0")), m_delht(PRJFLOAT("0.0")), m_u_rfht(0), m_u_dlht(0)
+Level::Impl::Impl() : m_nr(0), m_refht(PRJFLOAT("0.0")), m_delht(PRJFLOAT("0.0")), m_u_rfht(0), m_u_dlht(0)
 {}
 
-Level::LevelImpl::LevelImpl(int nr, double refht, double delht, int u_rfht, int u_dlht, std::string name, std::vector<Icon> icons)
-  : Level::LevelImpl()
-{
-  setNr(nr);
-  setRefht(refht);
-  setDelht(delht);
-  setU_rfht(u_rfht);
-  setU_dlht(u_dlht);
-  setName(name);
-  setIcons(icons);
-}
-
-Level::LevelImpl::LevelImpl(int nr, std::string refht, std::string delht, int u_rfht, int u_dlht, std::string name, std::vector<Icon> icons)
-  : Level::LevelImpl()
-{
-  setNr(nr);
-  setRefht(refht);
-  setDelht(delht);
-  setU_rfht(u_rfht);
-  setU_dlht(u_dlht);
-  setName(name);
-  setIcons(icons);
-}
-
-void Level::LevelImpl::read(Reader& input)
+void Level::read(Reader& input)
 {
   setNr(input.read<int>());
   setRefht(input.readNumber<std::string>());
@@ -6324,97 +5344,112 @@ void Level::LevelImpl::read(Reader& input)
   setIcons(icons);
 }
 
-std::string Level::LevelImpl::write()
+std::string Level::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + PRJFLOAT_TO_STR(m_refht) + ' ' + PRJFLOAT_TO_STR(m_delht) + ' ' + ANY_TO_STR((int)m_icons.size())
-    + ' ' + ANY_TO_STR(m_u_rfht) + ' ' + ANY_TO_STR(m_u_dlht) + ' ' + PRJFLOAT_TO_STR(m_name) + '\n';
-  for (unsigned i = 0; i < m_icons.size(); i++) {
-    string += m_icons[i].write();
+  string += ANY_TO_STR(m_impl->m_nr) + ' ' + PRJFLOAT_TO_STR(m_impl->m_refht) + ' ' + PRJFLOAT_TO_STR(m_impl->m_delht) + ' '
+    + ANY_TO_STR((int)m_impl->m_icons.size()) + ' ' + ANY_TO_STR(m_impl->m_u_rfht) + ' ' + ANY_TO_STR(m_impl->m_u_dlht) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_name) + '\n';
+  for (unsigned i = 0; i < m_impl->m_icons.size(); i++) {
+    string += m_impl->m_icons[i].write();
   }
   return string;
 }
 
-int Level::LevelImpl::nr() const
+int Level::nr() const
 {
-  return m_nr;
+  return m_impl->m_nr;
 }
 
-void Level::LevelImpl::setNr(const int nr)
+void Level::setNr(const int nr)
 {
-  m_nr = nr;
+  m_impl->m_nr = nr;
 }
 
-double Level::LevelImpl::refht() const
+//double Level::refht() const
+//{
+//  return to<double>(m_impl->m_refht);
+//}
+template <> double PRJMODEL_API Level::refht<double>() const
 {
-  return to<double>(m_refht);
+  return to<double>(m_impl->m_refht);
 }
 
-bool Level::LevelImpl::setRefht(const double refht)
+template <> std::string PRJMODEL_API Level::refht<std::string>() const
 {
-  m_refht = to_float(refht);
+  return PRJFLOAT_TO_STR(m_impl->m_refht);
+}
+
+bool Level::setRefht(const double refht)
+{
+  m_impl->m_refht = to_float(refht);
   return true;
 }
 
-bool Level::LevelImpl::setRefht(const std::string& refht)
+bool Level::setRefht(const std::string& refht)
 {
-  return assign_if_valid<double>(refht, m_refht);
+  return assign_if_valid<double>(refht, m_impl->m_refht);
 }
 
-double Level::LevelImpl::delht() const
+template <> double PRJMODEL_API Level::delht() const
 {
-  return to<double>(m_delht);
+  return to<double>(m_impl->m_delht);
 }
 
-bool Level::LevelImpl::setDelht(const double delht)
+template <> std::string PRJMODEL_API Level::delht() const
 {
-  m_delht = to_float(delht);
+  return PRJFLOAT_TO_STR(m_impl->m_delht);
+}
+
+bool Level::setDelht(const double delht)
+{
+  m_impl->m_delht = to_float(delht);
   return true;
 }
 
-bool Level::LevelImpl::setDelht(const std::string& delht)
+bool Level::setDelht(const std::string& delht)
 {
-  return assign_if_valid<double>(delht, m_delht);
+  return assign_if_valid<double>(delht, m_impl->m_delht);
 }
 
-int Level::LevelImpl::u_rfht() const
+int Level::u_rfht() const
 {
-  return m_u_rfht;
+  return m_impl->m_u_rfht;
 }
 
-void Level::LevelImpl::setU_rfht(const int u_rfht)
+void Level::setU_rfht(const int u_rfht)
 {
-  m_u_rfht = u_rfht;
+  m_impl->m_u_rfht = u_rfht;
 }
 
-int Level::LevelImpl::u_dlht() const
+int Level::u_dlht() const
 {
-  return m_u_dlht;
+  return m_impl->m_u_dlht;
 }
 
-void Level::LevelImpl::setU_dlht(const int u_dlht)
+void Level::setU_dlht(const int u_dlht)
 {
-  m_u_dlht = u_dlht;
+  m_impl->m_u_dlht = u_dlht;
 }
 
-std::string Level::LevelImpl::name() const
+std::string Level::name() const
 {
-  return m_name;
+  return m_impl->m_name;
 }
 
-void Level::LevelImpl::setName(const std::string& name)
+void Level::setName(const std::string& name)
 {
-  m_name = name;
+  m_impl->m_name = name;
 }
 
-std::vector<Icon> Level::LevelImpl::icons() const
+std::vector<Icon> Level::icons() const
 {
-  return m_icons;
+  return m_impl->m_icons;
 }
 
-void Level::LevelImpl::setIcons(const std::vector<Icon>& icons)
+void Level::setIcons(const std::vector<Icon>& icons)
 {
-  m_icons = icons;
+  m_impl->m_icons = icons;
 }
 
 DaySchedule::DaySchedule() :

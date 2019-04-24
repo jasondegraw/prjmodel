@@ -1108,31 +1108,31 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the pressure drop [Pa]. */
-  double dP() const;
+  template <typename T> T dP() const;
   /** Sets the pressure drop [Pa]. */
   bool setDP(const double dP);
   /** Sets the pressure drop [Pa]. */
   bool setDP(const std::string &dP);
   /** Returns the flow rate [kg/s].*/
-  double Flow() const;
+  template <typename T> T Flow() const;
   /** Sets the flow rate [kg/s].*/
   bool setFlow(const double Flow);
   /** Sets the flow rate [kg/s].*/
@@ -1149,75 +1149,14 @@ public:
 
 private:
 
-  class PlrTest1Impl
+  struct Impl
   {
-  public:
-    PlrTest1Impl();
-    PlrTest1Impl(int nr, int icon, std::string name, std::string desc);
-    PlrTest1Impl(int nr, int icon, std::string name, std::string desc, double lam, double turb, double expt, double dP,
-      double Flow, int u_P, int u_F);
-    PlrTest1Impl(int nr, int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt, std::string dP,
-      std::string Flow, int u_P, int u_F);
+    Impl();
+    
     void read(Reader& reader);
     std::string write();
     void readDetails(Reader& input);
 
-    /** Returns the element number, in order from 1 to the number of airflow elements. */
-    int nr() const;
-    /** Sets the elemt number. This should only be done with care. */
-    void setNr(const int nr);
-    /** Returns the icon used to represent flow path. */
-    int icon() const;
-    /** Sets the icon used to represent flow path. */
-    void setIcon(const int icon);
-    /** Returns the element name. */
-    std::string name() const;
-    /** Sets the element name. */
-    void setName(const std::string& name);
-    /** Returns the element description. */
-    std::string desc() const;
-    /** Sets the element description. */
-    void setDesc(const std::string& desc);
-    /** Returns the laminar flow coefficient. */
-    double lam() const;
-    /** Sets the laminar flow coefficient. */
-    bool setLam(const double lam);
-    /** Sets the laminar flow coefficient. */
-    bool setLam(const std::string& lam);
-    /** Returns the turbulent flow coefficient. */
-    double turb() const;
-    /** Sets the turbulent flow coefficient. */
-    bool setTurb(const double turb);
-    /** Sets the turbulent flow coefficient. */
-    bool setTurb(const std::string& turb);
-    /** Returns the pressure exponent. */
-    double expt() const;
-    /** Sets the pressure exponent. */
-    bool setExpt(const double expt);
-    /** Sets the pressure exponent. */
-    bool setExpt(const std::string& expt);
-    /** Returns the pressure drop [Pa]. */
-    double dP() const;
-    /** Sets the pressure drop [Pa]. */
-    bool setDP(const double dP);
-    /** Sets the pressure drop [Pa]. */
-    bool setDP(const std::string& dP);
-    /** Returns the flow rate [kg/s].*/
-    double Flow() const;
-    /** Sets the flow rate [kg/s].*/
-    bool setFlow(const double Flow);
-    /** Sets the flow rate [kg/s].*/
-    bool setFlow(const std::string& Flow);
-    /** Returns the display units of pressure drop. */
-    int u_P() const;
-    /** Sets the display units of pressure drop. */
-    void setU_P(const int u_P);
-    /** Returns the display units of flow. */
-    int u_F() const;
-    /** Sets the display units of flow. */
-    void setU_F(const int u_F);
-
-  private:
     int m_nr;  // element number (IX); in order from 1 to _nafe
     int m_icon;  // icon used to represent flow path (I2) {W}
     std::string m_name;  // element name (CS) {W}
@@ -1232,7 +1171,7 @@ private:
   };
 
 
-  std::shared_ptr<PlrTest1Impl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 /** The PlrTest2 object is an airflow element representing 2-point test data power law leakage. */

@@ -114,25 +114,25 @@ public:
   /** Sets the building level index. It is converted to pointer by CONTAM. */
   void setPl(const int pl);
   /** Returns the zone height [m]. */
-  double relHt() const;
+  template <typename T> T relHt() const;
   /** Sets the zone height [m]. */
   bool setRelHt(const double relHt);
   /** Sets the zone height [m]. */
   bool setRelHt(const std::string &relHt);
   /** Returns the zone volume [m^3]. */
-  double Vol() const;
+  template <typename T> T Vol() const;
   /** Sets the zone volume [m^3]. */
   bool setVol(const double Vol);
   /** Sets the zone volume [m^3]. */
   bool setVol(const std::string &Vol);
   /** Returns the initial zone temperature [K]. */
-  double T0() const;
+  template <typename T> T T0() const;
   /** Sets the initial zone temperature [K]. */
   bool setT0(const double T0);
   /** Sets the initial zone temperature [K]. */
   bool setT0(const std::string &T0);
   /** Returns the initial zone pressure [Pa]. */
-  double P0() const;
+  template <typename T> T P0() const;
   /** Sets the initial zone pressure [Pa]. */
   bool setP0(const double P0);
   /** Sets the initial zone pressure [Pa]. */
@@ -258,203 +258,17 @@ public:
   /** Sets the initial condition of contaminant i. */
   bool setIc(const int i, const std::string &value);
   /** Sets the contaminant initial condition vector. */
-  bool setIc(std::vector<double> &ic);
+  bool setIc(const std::vector<double> &ic);
   /** Sets the contaminant initial condition vector. */
-  bool setIc(std::vector<std::string> &ic);
+  bool setIc(const std::vector<std::string> &ic);
   //@}
 
 private:
 
-  class ZoneImpl
+  struct Impl
   {
-  public:
-    ZoneImpl();
-    ZoneImpl(int nr, unsigned int flags, int ps, int pc, int pk, int pl, std::string relHt, std::string Vol, std::string T0, std::string P0,
-      std::string name, int color, int u_Ht, int u_V, int u_T, int u_P, int cdaxis, int cfd, std::string cfdname, std::string X1,
-      std::string Y1, std::string H1, std::string X2, std::string Y2, std::string H2, std::string celldx, std::string axialD, int u_aD, int u_L);
-    ZoneImpl(int nr, unsigned int flags, int ps, int pc, int pk, int pl, double relHt, double Vol, double T0, double P0,
-      std::string name, int color, int u_Ht, int u_V, int u_T, int u_P, int cdaxis, int cfd, std::string cfdname, double X1,
-      double Y1, double H1, double X2, double Y2, double H2, double celldx, double axialD, int u_aD, int u_L);
-
-    void read(Reader& input);
-    std::string write();
-
-    /** Returns the zone number, in order from 1 to the number of zones. */
-    int nr() const;
-    /** Sets the zone number. This should only be done with care. */
-    void setNr(const int nr);
-    /** Returns the zones flags. See the ZoneFlags enum for more information. */
-    unsigned int flags() const;
-    /** Set the zones flags. See the ZoneFlags enum for more information. */
-    void setFlags(const unsigned int flags);
-    /** Returns the week schedule index. It is converted to pointer by CONTAM. */
-    int ps() const;
-    /** Sets the week schedule index. It is converted to pointer by CONTAM. */
-    void setPs(const int ps);
-    /** Returns the control node index. It is converted to pointer by CONTAM. */
-    int pc() const;
-    /** Sets the control node index. It is converted to pointer by CONTAM. */
-    void setPc(const int pc);
-    /** Returns the kinetic reaction index. It is converted to pointer by CONTAM. */
-    int pk() const;
-    /** Sets the kinetic reaction index. It is converted to pointer by CONTAM. */
-    void setPk(const int pk);
-    /** Returns the building level index. It is converted to pointer by CONTAM. */
-    int pl() const;
-    /** Sets the building level index. It is converted to pointer by CONTAM. */
-    void setPl(const int pl);
-    /** Returns the zone height [m]. */
-    double relHt() const;
-    /** Sets the zone height [m]. */
-    bool setRelHt(const double relHt);
-    /** Sets the zone height [m]. */
-    bool setRelHt(const std::string& relHt);
-    /** Returns the zone volume [m^3]. */
-    double Vol() const;
-    /** Sets the zone volume [m^3]. */
-    bool setVol(const double Vol);
-    /** Sets the zone volume [m^3]. */
-    bool setVol(const std::string& Vol);
-    /** Returns the initial zone temperature [K]. */
-    double T0() const;
-    /** Sets the initial zone temperature [K]. */
-    bool setT0(const double T0);
-    /** Sets the initial zone temperature [K]. */
-    bool setT0(const std::string& T0);
-    /** Returns the initial zone pressure [Pa]. */
-    double P0() const;
-    /** Sets the initial zone pressure [Pa]. */
-    bool setP0(const double P0);
-    /** Sets the initial zone pressure [Pa]. */
-    bool setP0(const std::string& P0);
-    /** Returns the zone name. */
-    std::string name() const;
-    /** Sets the zone name. */
-    void setName(const std::string& name);
-    /** Returns the zone fill color. */
-    int color() const;
-    /** Sets the zone fill color. */
-    void setColor(const int color);
-    /** Returns the units of height. */
-    int u_Ht() const;
-    /** Sets the units of height. */
-    void setU_Ht(const int u_Ht);
-    /** Returns the units of volume. */
-    int u_V() const;
-    /** Sets the units of volume. */
-    void setU_V(const int u_V);
-    /** Returns the units of temperature. */
-    int u_T() const;
-    /** Sets the units of temperature. */
-    void setU_T(const int u_T);
-    /** Returns the units of pressure. */
-    int u_P() const;
-    /** Sets the units of pressure. */
-    void setU_P(const int u_P);
-    /** Returns the convection/diffusion axis flag (0=no cd, 1-4 => cd axis direction). */
-    int cdaxis() const;
-    /** Sets the convection/diffusion axis flag (0=no cd, 1-4 => cd axis direction). */
-    void setCdaxis(const int cdaxis);
-
-    /** Returns the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
-    int vfType() const;
-    /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
-    void setVfType(const int vf);
-    /** Returns the value file node name. */
-    std::string vfNodeName() const;
-    /** Sets the value file node name. */
-    void setVfNodeName(const std::string& name);
-
-    /** Returns the CFD zone flag (0=no, 1=yes). */
-    int cfd() const;
-    /** Sets the cfd zone flag (0=no, 1=yes). */
-    void setCfd(const int cfd);
-    /** Returns the CFD zone name. */
-    std::string cfdname() const;
-    /** Sets the CFD zone name. */
-    void setCfdname(const std::string& cfdname);
-    /** Returns the X coordinate of one end of the cdaxis. */
-    double X1() const;
-    /** Sets the X coordinate of one end of the cdaxis. */
-    bool setX1(const double X1);
-    /** Sets the X coordinate of one end of the cdaxis. */
-    bool setX1(const std::string& X1);
-    /** Returns the Y coordinate of one end of the cdaxis. */
-    double Y1() const;
-    /** Sets the Y coordinate of one end of the cdaxis. */
-    bool setY1(const double Y1);
-    /** Sets the Y coordinate of one end of the cdaxis. */
-    bool setY1(const std::string& Y1);
-    /** Returns the relative height of one end of the cdaxis. */
-    double H1() const;
-    /** Sets the relative height of one end of the cdaxis. */
-    bool setH1(const double H1);
-    /** Sets the relative height of one end of the cdaxis. */
-    bool setH1(const std::string& H1);
-    /** Returns the X coordinate of the other end of the cdaxis. */
-    double X2() const;
-    /** Sets the X coordinate of the other end of the cdaxis. */
-    bool setX2(const double X2);
-    /** Sets the X coordinate of the other end of the cdaxis. */
-    bool setX2(const std::string& X2);
-    /** Returns the Y coordinate of the other end of the cdaxis. */
-    double Y2() const;
-    /** Sets the Y coordinate of the other end of the cdaxis. */
-    bool setY2(const double Y2);
-    /** Sets the Y coordinate of the other end of the cdaxis. */
-    bool setY2(const std::string& Y2);
-    /** Returns the relative height of the other end of the cdaxis. */
-    double H2() const;
-    /** Sets the relative height of the other end of the cdaxis. */
-    bool setH2(const double H2);
-    /** Sets the relative height of the other end of the cdaxis. */
-    bool setH2(const std::string& H2);
-    /** Returns the convection/diffusion cell length [m]. */
-    double celldx() const;
-    /** Returns the convection/diffusion cell length [m]. */
-    bool setCelldx(const double celldx);
-    /** Returns the convection/diffusion cell length [m]. */
-    bool setCelldx(const std::string& celldx);
-    /** Returns the axial diffusion coeff [m^2/s]. */
-    double axialD() const;
-    /** Sets the axial diffusion coeff [m^2/s]. */
-    bool setAxialD(const double axialD);
-    /** Sets the axial diffusion coeff [m^2/s]. */
-    bool setAxialD(const std::string& axialD);
-    /** Returns the display units of axial diffusion. */
-    int u_aD() const;
-    /** Sets the display units of axial diffusion. */
-    void setU_aD(const int u_aD);
-    /** Returns the c/d axis limit display units. */
-    int u_L() const;
-    /** Sets the c/d axis limit display units. */
-    void setU_L(const int u_L);
-    /** Returns true if the zone is a variable pressure zone. */
-    bool variablePressure() const;
-    /** Set the zone pressure behavior. */
-    void setVariablePressure(bool b);
-    /** Returns true if the zone is a variable contaminant zone. */
-    bool variableContaminants() const;
-    /** Set the zone contaminant behavior. */
-    void setVariableContaminants(bool b);
-    /** Returns true if the zone is a system zone. */
-    bool system() const;
-    /** Set the zone system flag. */
-    void setSystem(bool b);
-    /** Returns the initial condition of contaminant i. */
-    double ic(const int i) const;
-    /** Returns the contaminant initial conditions as a vector. */
-    std::vector<double> ic() const;
-    /** Sets the initial condition of contaminant i. */
-    bool setIc(const int i, const double value);
-    /** Sets the initial condition of contaminant i. */
-    bool setIc(const int i, const std::string& value);
-    /** Sets the contaminant initial condition vector. */
-    bool setIc(const std::vector<double>& ic);
-    /** Sets the contaminant initial condition vector. */
-    bool setIc(const std::vector<std::string>& ic);
-
-  private:
+    Impl();
+    
     int m_nr;  // zone number (IX); in order from 1 to _nzone
     unsigned int m_flags;  // zone flags - bits defined in contam.h (U2)
     int m_ps;  // week schedule index (IX); converted to pointer
@@ -491,7 +305,7 @@ private:
 
   };
 
-  std::shared_ptr<ZoneImpl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 /** The Species object contains descriptive information about contaminants in
@@ -1027,13 +841,13 @@ public:
   /** Sets the height relative to current level [m]. */
   bool setRelHt(const std::string &relHt);
   /** Return the element multiplier. */
-  double mult() const;
+  template <typename T> T mult() const;
   /** Sets the element multiplier. */
   bool setMult(const double mult);
   /** Sets the element multiplier. */
   bool setMult(const std::string &mult);
   /** Returns the constant wind pressure [Pa] (pw==NULL). */
-  double wPset() const;
+  template <typename T> T wPset() const;
   /** Sets the constant wind pressure [Pa] (pw==NULL). */
   bool setWPset(const double wPset);
   /** Sets the constant wind pressure [Pa] (pw==NULL). */
@@ -1045,7 +859,7 @@ public:
   /** Sets the wind speed modifier (pw!=NULL). */
   bool setWPmod(const std::string &wPmod);
   /** Returns the wall azimuth angle in degrees (pw!=NULL). */
-  double wazm() const;
+  template <typename T> T wazm() const;
   /** Sets the wall azimuth angle in degrees (pw!=NULL). */
   bool setWazm(const double wazm);
   /** Sets the wall azimuth angle in degrees (pw!=NULL). */
@@ -1145,190 +959,21 @@ public:
 
 private:
 
-  class AirflowPathImpl
+  struct Impl
   {
-  public:
-    AirflowPathImpl();
-    AirflowPathImpl(int nr, int flags, int pzn, int pzm, int pe, int pf, int pw, int pa, int ps, int pc, int pld, std::string X,
-      std::string Y, std::string relHt, std::string mult, std::string wPset, std::string wPmod, std::string wazm, std::string Fahs, std::string Xmax,
-      std::string Xmin, unsigned int icon, unsigned int dir, int u_Ht, int u_XY, int u_dP, int u_F, int cfd,
-      std::string cfd_name, int cfd_ptype, int cfd_btype, int cfd_capp);
-    AirflowPathImpl(int nr, int flags, int pzn, int pzm, int pe, int pf, int pw, int pa, int ps, int pc, int pld, double X,
-      double Y, double relHt, double mult, double wPset, double wPmod, double wazm, double Fahs, double Xmax,
-      double Xmin, unsigned int icon, unsigned int dir, int u_Ht, int u_XY, int u_dP, int u_F, int cfd,
-      std::string cfd_name, int cfd_ptype, int cfd_btype, int cfd_capp);
-    void read(Reader& reader);
-    std::string write();
+    Impl();
 
-    void setWindPressure(bool b);
-    bool windPressure();
-    void setSystem(bool b);
-    bool system();
-    void setExhaust(bool b);
-    bool exhaust();
-    void setRecirculation(bool b);
-    bool recirculation();
-    void setOutsideAir(bool b);
-    bool outsideAir();
+    //void setWindPressure(bool b);
+    //bool windPressure();
+    //void setSystem(bool b);
+    //bool system();
+    //void setExhaust(bool b);
+    //bool exhaust();
+    //void setRecirculation(bool b);
+    //bool recirculation();
+    //void setOutsideAir(bool b);
+    //bool outsideAir();
 
-    /** Returns the path number, in order from 1 to the number of paths. */
-    int nr() const;
-    /** Sets the path number. This should only be done with care. */
-    void setNr(const int nr);
-    /** Returns the airflow path flag value. */
-    int flags() const;
-    /** Sets the airflow path flag value. */
-    void setFlags(const int flags);
-    /** Returns the zone N index, with positive flow from N to M. It is converted to pointer by CONTAM. */
-    int pzn() const;
-    /** Sets the zone N index, with positive flow from N to M. It is converted to pointer by CONTAM. */
-    void setPzn(const int pzn);
-    /** Returns the zone M index, with positive flow from N to M. It is converted to pointer by CONTAM. */
-    int pzm() const;
-    /** Sets the zone M index, with positive flow from N to M. It is converted to pointer by CONTAM. */
-    void setPzm(const int pzm);
-    /** Returns the flow element index. It is converted to pointer by CONTAM. */
-    int pe() const;
-    /** Sets the flow element index. It is converted to pointer by CONTAM. */
-    void setPe(const int pe);
-    /** Returns the filter index. It is converted to pointer by CONTAM. */
-    int pf() const;
-    /** Sets the filter index. It is converted to pointer by CONTAM. */
-    void setPf(const int pf);
-    /** Returns the wind coefficients index. It is converted to pointer by CONTAM. */
-    int pw() const;
-    /** Sets the wind coefficients index. It is converted to pointer by CONTAM. */
-    void setPw(const int pw);
-    /** Returns the AHS index. It is converted to pointer by CONTAM. */
-    int pa() const;
-    /** Sets the AHS index. It is converted to pointer by CONTAM. */
-    void setPa(const int pa);
-    /** Returns the schedule index. It is converted to pointer by CONTAM. */
-    int ps() const;
-    /** Sets the schedule index. It is converted to pointer by CONTAM. */
-    void setPs(const int ps);
-    /** Returns the control node index. It is converted to pointer by CONTAM. */
-    int pc() const;
-    /** Sets the control node index. It is converted to pointer by CONTAM. */
-    void setPc(const int pc);
-    /** Returns the level index. It is converted to pointer by CONTAM. */
-    int pld() const;
-    /** Sets the level index. It is converted to pointer by CONTAM. */
-    void setPld(const int pld);
-    /** Returns the X-coordinate of an envelope path [m] if set. */
-    double X() const;
-    /** Sets the X-coordinate of an envelope path [m]. */
-    bool setX(const double X);
-    /** Sets the X-coordinate of an envelope path [m]. */
-    bool setX(const std::string& X);
-    /** Returns the Y-coordinate of an envelope path [m] if set. */
-    double Y() const;
-    /** Sets the Y-coordinate of an envelope path [m]. */
-    bool setY(const double Y);
-    /** Sets the Y-coordinate of an envelope path [m]. */
-    bool setY(const std::string& Y);
-    /** Returns the height relative to current level [m]. */
-    double relHt() const;
-    /** Sets the height relative to current level [m]. */
-    bool setRelHt(const double relHt);
-    /** Sets the height relative to current level [m]. */
-    bool setRelHt(const std::string& relHt);
-    /** Return the element multiplier. */
-    double mult() const;
-    /** Sets the element multiplier. */
-    bool setMult(const double mult);
-    /** Sets the element multiplier. */
-    bool setMult(const std::string& mult);
-    /** Returns the constant wind pressure [Pa] (pw==NULL). */
-    double wPset() const;
-    /** Sets the constant wind pressure [Pa] (pw==NULL). */
-    bool setWPset(const double wPset);
-    /** Sets the constant wind pressure [Pa] (pw==NULL). */
-    bool setWPset(const std::string& wPset);
-    /** Returns the wind speed modifier (pw!=NULL). */
-    double wPmod() const;
-    /** Sets the wind speed modifier (pw!=NULL). */
-    bool setWPmod(const double wPmod);
-    /** Sets the wind speed modifier (pw!=NULL). */
-    bool setWPmod(const std::string& wPmod);
-    /** Returns the wall azimuth angle in degrees (pw!=NULL). */
-    double wazm() const;
-    /** Sets the wall azimuth angle in degrees (pw!=NULL). */
-    bool setWazm(const double wazm);
-    /** Sets the wall azimuth angle in degrees (pw!=NULL). */
-    bool setWazm(const std::string& wazm);
-    /** Returns the AHS path flow rate [kg/s] (pw==NULL). */
-    double Fahs() const;
-    /** Sets the AHS path flow rate [kg/s] (pw==NULL). */
-    bool setFahs(const double Fahs);
-    /** Sets the AHS path flow rate [kg/s] (pw==NULL). */
-    bool setFahs(const std::string& Fahs);
-    /** Returns the flow or pressure maximum. */
-    double Xmax() const;
-    /** Sets the flow or pressure maximum. */
-    bool setXmax(const double Xmax);
-    /** Sets the flow or pressure maximum. */
-    bool setXmax(const std::string& Xmax);
-    /** Returns the flow or pressure minimum. */
-    double Xmin() const;
-    /** Sets the flow or pressure minimum. */
-    bool setXmin(const double Xmin);
-    /** Sets the flow or pressure minimum. */
-    bool setXmin(const std::string& Xmin);
-    /** Returns the icon used to represent flow path. */
-    unsigned int icon() const;
-    /** Sets the icon used to represent flow path. */
-    void setIcon(const unsigned int icon);
-    /** Returns the positive flow direction on the sketchpad. */
-    unsigned int dir() const;
-    /** Sets the positive flow direction on the sketchpad. */
-    void setDir(const unsigned int dir);
-    /** Returns the height display units. */
-    int u_Ht() const;
-    /** Sets the height display units. */
-    void setU_Ht(const int u_Ht);
-    /** Returns the X and Y display units. */
-    int u_XY() const;
-    /** Sets the X and Y display units. */
-    void setU_XY(const int u_XY);
-    /** Returns the pressure difference display units. */
-    int u_dP() const;
-    /** Sets the pressure difference display units. */
-    void setU_dP(const int u_dP);
-    /** Returns the flow display units. */
-    int u_F() const;
-    /** Sets the flow display units. */
-    void setU_F(const int u_F);
-    /** Returns the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
-    int vfType() const;
-    /** Sets the value file type: 0=no value file, 1=use cvf, 2=use dvf. */
-    void setVfType(const int vf);
-    /** Returns the value file node name. */
-    std::string vfNodeName() const;
-    /** Sets the value file node name. */
-    void setVfNodeName(const std::string& name);
-    /** Returns the CFD path flag (0=no, 1=yes). */
-    int cfd() const;
-    /** Sets the CFD path flag (0=no, 1=yes). */
-    void setCfd(const int cfd);
-    /** Returns the CFD path id. */
-    std::string cfd_name() const;
-    /** Sets the CFD path id. */
-    void setCfd_name(const std::string& cfd_name);
-    /** Returns the CFD boundary condition type (0=mass flow, 1=pressure). */
-    int cfd_ptype() const;
-    /** Sets the CFD boundary condition type (0=mass flow, 1=pressure). */
-    void setCfd_ptype(const int cfd_ptype);
-    /** Returns the pressure bc type (if ptype = 1, 0=linear, 1=stagnation pressure). */
-    int cfd_btype() const;
-    /** Sets the pressure bc type (if ptype = 1, 0=linear, 1=stagnation pressure). */
-    void setCfd_btype(const int cfd_btype);
-    /** Returns the coupling approach (1=pressure-pressure). */
-    int cfd_capp() const;
-    /** Sets the coupling approach (1=pressure-pressure). */
-    void setCfd_capp(const int cfd_capp);
-
-  private:
     int m_nr;  // path number (IX); in order from 1 to _npath
     int m_flags;  // airflow path flag values (I2)
     int m_pzn;  // zone N index (IX); converted to pointer
@@ -1365,7 +1010,7 @@ private:
     int m_cfd_capp;  // coupling approach (1=pressure-pressure) (I2)
   };
 
-  std::shared_ptr<AirflowPathImpl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 /** The RunControl object stores most of the information related to how CONTAM solves the airflow network
@@ -2626,13 +2271,13 @@ public:
   /** Sets the level number. This should only be done with care. */
   void setNr(const int nr);
   /** Returns the reference elevation of level [m]. */
-  double refht() const;
+  template <typename T> T refht() const;
   /** Sets the reference elevation of level [m]. */
   bool setRefht(const double refht);
   /** Sets the reference elevation of level [m]. */
   bool setRefht(const std::string &refht);
   /** Returns the delta elevation to next level [m]. */
-  double delht() const;
+  template <typename T> T delht() const;
   /** Sets the delta elevation to next level [m]. */
   bool setDelht(const double delht);
   /** Sets the delta elevation to next level [m]. */
@@ -2656,49 +2301,10 @@ public:
   //@}
 private:
 
-  class LevelImpl
+  struct Impl
   {
-  public:
-    LevelImpl();
-    LevelImpl(int nr, double refht, double delht, int u_rfht, int u_dlht, std::string name, std::vector<Icon> icons);
-    LevelImpl(int nr, std::string refht, std::string delht, int u_rfht, int u_dlht, std::string name, std::vector<Icon> icons);
-    void read(Reader& reader);
-    std::string write();
+    Impl();
 
-    /** Returns the level number, in order from 1 to the number of levels. */
-    int nr() const;
-    /** Sets the level number. This should only be done with care. */
-    void setNr(const int nr);
-    /** Returns the reference elevation of level [m]. */
-    double refht() const;
-    /** Sets the reference elevation of level [m]. */
-    bool setRefht(const double refht);
-    /** Sets the reference elevation of level [m]. */
-    bool setRefht(const std::string& refht);
-    /** Returns the delta elevation to next level [m]. */
-    double delht() const;
-    /** Sets the delta elevation to next level [m]. */
-    bool setDelht(const double delht);
-    /** Sets the delta elevation to next level [m]. */
-    bool setDelht(const std::string& delht);
-    /** Returns the units of reference elevation. */
-    int u_rfht() const;
-    /** Returns the units of reference elevation. */
-    void setU_rfht(const int u_rfht);
-    /** Returns the units of delta elevation. */
-    int u_dlht() const;
-    /** Sets the units of delta elevation. */
-    void setU_dlht(const int u_dlht);
-    /** Returns the level name. */
-    std::string name() const;
-    /** Sets the level name. */
-    void setName(const std::string& name);
-    /** Returns the level's icons in a vector. */
-    std::vector<Icon> icons() const;
-    /** Sets the level's icon vector. */
-    void setIcons(const std::vector<Icon>& icons);
-
-  private:
     int m_nr;  // level number (IX), in order from 1 to nlev
     PRJFLOAT m_refht;  // reference elevation of level [m] (R4)
     PRJFLOAT m_delht;  // delta elevation to next level [m] (R4) {W}
@@ -2709,8 +2315,14 @@ private:
     std::vector<Icon> m_icons;  // level icons (Icon)
   };
 
-  std::shared_ptr<LevelImpl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
+
+//template <typename T> T Level::refht() const
+//{
+//  static_assert(true, "No available conversion for refht");
+//  return T();
+//}
 
 /** The DaySchedule object contains schedule data for a single day. */
 class PRJMODEL_API DaySchedule

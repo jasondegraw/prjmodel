@@ -2096,31 +2096,50 @@ PlrFcn::~PlrFcn()
 {}
 
 PlrTest1::PlrTest1() :
-  m_impl(std::shared_ptr<PlrTest1Impl>(new PlrTest1Impl))
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {}
 
 PlrTest1::PlrTest1(int nr,int icon,std::string name,std::string desc) :
-  m_impl(std::shared_ptr<PlrTest1Impl>(new PlrTest1Impl(nr,icon,name,desc)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setIcon(icon);
+  setName(name);
+  setDesc(desc);
+}
 
 PlrTest1::PlrTest1(int nr,int icon,std::string name,std::string desc,double lam,double turb,double expt,double dP,
                    double Flow,int u_P,int u_F) :
-  m_impl(std::shared_ptr<PlrTest1Impl>(new PlrTest1Impl(nr,icon,name,desc,lam,turb,expt,dP,Flow,u_P,u_F)))
-{}
+  m_impl(std::shared_ptr<Impl>(new Impl))
+{
+  setNr(nr);
+  setIcon(icon);
+  setName(name);
+  setDesc(desc);
+  setLam(lam);
+  setTurb(turb);
+  setExpt(expt);
+  setDP(dP);
+  setFlow(Flow);
+  setU_P(u_P);
+  setU_F(u_F);
+}
 
 PlrTest1::PlrTest1(int nr,int icon,std::string name,std::string desc,std::string lam,std::string turb,std::string expt,std::string dP,
                    std::string Flow,int u_P,int u_F) :
-  m_impl(std::shared_ptr<PlrTest1Impl>(new PlrTest1Impl(nr,icon,name,desc,lam,turb,expt,dP,Flow,u_P,u_F)))
-{}
-
-PlrTest1::PlrTest1(int icon, std::string name, std::string desc, double lam, double turb, double expt, double dP,
-  double Flow) : PlrTest1(0, icon, name, desc, lam, turb, expt, dP, Flow, 0, 0)
+  m_impl(std::shared_ptr<Impl>(new Impl))
 {
-}
-
-PlrTest1::PlrTest1(int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt, std::string dP,
-  std::string Flow) : PlrTest1(0, icon, name, desc, lam, turb, expt, dP, Flow, 0, 0)
-{
+  setNr(nr);
+  setIcon(icon);
+  setName(name);
+  setDesc(desc);
+  setLam(lam);
+  setTurb(turb);
+  setExpt(expt);
+  setDP(dP);
+  setFlow(Flow);
+  setU_P(u_P);
+  setU_F(u_F);
 }
 
 PlrTest1::PlrTest1(const PlrTest1 &other) : m_impl(other.m_impl)
@@ -2145,201 +2164,11 @@ bool PlrTest1::operator!=(const PlrTest1 &other) const
   return m_impl != other.m_impl;
 }
 
-std::string PlrTest1::write()
-{
-  return m_impl->write();
-}
-
-void PlrTest1::read(Reader &input)
-{
-  m_impl->read(input);
-}
-
-void PlrTest1::readDetails(Reader &input)
-{
-  m_impl->readDetails(input);
-}
-
-int PlrTest1::nr() const
-{
-  return m_impl->nr();
-}
-
-void PlrTest1::setNr(const int nr)
-{
-  m_impl->setNr(nr);
-}
-
-int PlrTest1::icon() const
-{
-  return m_impl->icon();
-}
-
-void PlrTest1::setIcon(const int icon)
-{
-  m_impl->setIcon(icon);
-}
-
-std::string PlrTest1::name() const
-{
-  return m_impl->name();
-}
-
-void PlrTest1::setName(const std::string &name)
-{
-  m_impl->setName(name);
-}
-
-std::string PlrTest1::desc() const
-{
-  return m_impl->desc();
-}
-
-void PlrTest1::setDesc(const std::string &desc)
-{
-  m_impl->setDesc(desc);
-}
-
-double PlrTest1::lam() const
-{
-  return m_impl->lam();
-}
-
-bool PlrTest1::setLam(const double lam)
-{
-  return m_impl->setLam(lam);
-}
-
-bool PlrTest1::setLam(const std::string &lam)
-{
-  return m_impl->setLam(lam);
-}
-
-double PlrTest1::turb() const
-{
-  return m_impl->turb();
-}
-
-bool PlrTest1::setTurb(const double turb)
-{
-  return m_impl->setTurb(turb);
-}
-
-bool PlrTest1::setTurb(const std::string &turb)
-{
-  return m_impl->setTurb(turb);
-}
-
-double PlrTest1::expt() const
-{
-  return m_impl->expt();
-}
-
-bool PlrTest1::setExpt(const double expt)
-{
-  return m_impl->setExpt(expt);
-}
-
-bool PlrTest1::setExpt(const std::string &expt)
-{
-  return m_impl->setExpt(expt);
-}
-
-double PlrTest1::dP() const
-{
-  return m_impl->dP();
-}
-
-bool PlrTest1::setDP(const double dP)
-{
-  return m_impl->setDP(dP);
-}
-
-bool PlrTest1::setDP(const std::string &dP)
-{
-  return m_impl->setDP(dP);
-}
-
-double PlrTest1::Flow() const
-{
-  return m_impl->Flow();
-}
-
-bool PlrTest1::setFlow(const double Flow)
-{
-  return m_impl->setFlow(Flow);
-}
-
-bool PlrTest1::setFlow(const std::string &Flow)
-{
-  return m_impl->setFlow(Flow);
-}
-
-int PlrTest1::u_P() const
-{
-  return m_impl->u_P();
-}
-
-void PlrTest1::setU_P(const int u_P)
-{
-  m_impl->setU_P(u_P);
-}
-
-int PlrTest1::u_F() const
-{
-  return m_impl->u_F();
-}
-
-void PlrTest1::setU_F(const int u_F)
-{
-  m_impl->setU_F(u_F);
-}
-
-PlrTest1::PlrTest1Impl::PlrTest1Impl() : m_nr(0), m_icon(0), m_lam(PRJFLOAT("0.0")), m_turb(PRJFLOAT("0.0")), m_expt(PRJFLOAT("0.0")), m_dP(PRJFLOAT("0.0")),
+PlrTest1::Impl::Impl() : m_nr(0), m_icon(0), m_lam(PRJFLOAT("0.0")), m_turb(PRJFLOAT("0.0")), m_expt(PRJFLOAT("0.0")), m_dP(PRJFLOAT("0.0")),
 m_Flow(PRJFLOAT("0.0")), m_u_P(0), m_u_F(0)
 {}
 
-PlrTest1::PlrTest1Impl::PlrTest1Impl(int nr, int icon, std::string name, std::string desc) : PlrTest1::PlrTest1Impl()
-{
-  setNr(nr);
-  setIcon(icon);
-  setName(name);
-  setDesc(desc);
-}
-
-PlrTest1::PlrTest1Impl::PlrTest1Impl(int nr, int icon, std::string name, std::string desc, double lam, double turb, double expt,
-  double dP, double Flow, int u_P, int u_F) : PlrTest1::PlrTest1Impl()
-{
-  setNr(nr);
-  setIcon(icon);
-  setName(name);
-  setDesc(desc);
-  setLam(lam);
-  setTurb(turb);
-  setExpt(expt);
-  setDP(dP);
-  setFlow(Flow);
-  setU_P(u_P);
-  setU_F(u_F);
-}
-
-PlrTest1::PlrTest1Impl::PlrTest1Impl(int nr, int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt,
-  std::string dP, std::string Flow, int u_P, int u_F) : PlrTest1::PlrTest1Impl()
-{
-  setNr(nr);
-  setIcon(icon);
-  setName(name);
-  setDesc(desc);
-  setLam(lam);
-  setTurb(turb);
-  setExpt(expt);
-  setDP(dP);
-  setFlow(Flow);
-  setU_P(u_P);
-  setU_F(u_F);
-}
-
-void PlrTest1::PlrTest1Impl::read(Reader& input)
+void PlrTest1::read(Reader& input)
 {
   setNr(input.read<int>());
   setIcon(input.read<int>());
@@ -2355,18 +2184,18 @@ void PlrTest1::PlrTest1Impl::read(Reader& input)
   setU_F(input.read<int>());
 }
 
-std::string PlrTest1::PlrTest1Impl::write()
+std::string PlrTest1::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + " plr_test1 " + m_name + '\n';
-  string += m_desc + '\n';
-  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
-    + PRJFLOAT_TO_STR(m_dP) + ' ' + PRJFLOAT_TO_STR(m_Flow) + ' ' + ANY_TO_STR(m_u_P) + ' '
-    + ANY_TO_STR(m_u_F) + '\n';
+  string += ANY_TO_STR(m_impl->m_nr) + ' ' + ANY_TO_STR(m_impl->m_icon) + " plr_test1 " + m_impl->m_name + '\n';
+  string += m_impl->m_desc + '\n';
+  string += PRJFLOAT_TO_STR(m_impl->m_lam) + ' ' + PRJFLOAT_TO_STR(m_impl->m_turb) + ' ' + PRJFLOAT_TO_STR(m_impl->m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_dP) + ' ' + PRJFLOAT_TO_STR(m_impl->m_Flow) + ' ' + ANY_TO_STR(m_impl->m_u_P) + ' '
+    + ANY_TO_STR(m_impl->m_u_F) + '\n';
   return string;
 }
 
-void PlrTest1::PlrTest1Impl::readDetails(Reader& input)
+void PlrTest1::readDetails(Reader& input)
 {
   setLam(input.readNumber<std::string>());
   setTurb(input.readNumber<std::string>());
@@ -2377,144 +2206,169 @@ void PlrTest1::PlrTest1Impl::readDetails(Reader& input)
   setU_F(input.read<int>());
 }
 
-int PlrTest1::PlrTest1Impl::nr() const
+int PlrTest1::nr() const
 {
-  return m_nr;
+  return m_impl->m_nr;
 }
 
-void PlrTest1::PlrTest1Impl::setNr(const int nr)
+void PlrTest1::setNr(const int nr)
 {
-  m_nr = nr;
+  m_impl->m_nr = nr;
 }
 
-int PlrTest1::PlrTest1Impl::icon() const
+int PlrTest1::icon() const
 {
-  return m_icon;
+  return m_impl->m_icon;
 }
 
-void PlrTest1::PlrTest1Impl::setIcon(const int icon)
+void PlrTest1::setIcon(const int icon)
 {
-  m_icon = icon;
+  m_impl->m_icon = icon;
 }
 
-std::string PlrTest1::PlrTest1Impl::name() const
+std::string PlrTest1::name() const
 {
-  return m_name;
+  return m_impl->m_name;
 }
 
-void PlrTest1::PlrTest1Impl::setName(const std::string& name)
+void PlrTest1::setName(const std::string& name)
 {
-  m_name = name;
+  m_impl->m_name = name;
 }
 
-std::string PlrTest1::PlrTest1Impl::desc() const
+std::string PlrTest1::desc() const
 {
-  return m_desc;
+  return m_impl->m_desc;
 }
 
-void PlrTest1::PlrTest1Impl::setDesc(const std::string& desc)
+void PlrTest1::setDesc(const std::string& desc)
 {
-  m_desc = desc;
+  m_impl->m_desc = desc;
 }
 
-double PlrTest1::PlrTest1Impl::lam() const
+template <> double PRJMODEL_API PlrTest1::lam() const
 {
-  return to<double>(m_lam);
+  return to<double>(m_impl->m_lam);
 }
 
-bool PlrTest1::PlrTest1Impl::setLam(const double lam)
+template <> std::string PRJMODEL_API PlrTest1::lam() const
 {
-  m_lam = to_float(lam);
+  return PRJFLOAT_TO_STR(m_impl->m_lam);
+}
+
+bool PlrTest1::setLam(const double lam)
+{
+  m_impl->m_lam = to_float(lam);
   return true;
 }
 
-bool PlrTest1::PlrTest1Impl::setLam(const std::string& lam)
+bool PlrTest1::setLam(const std::string& lam)
 {
-  return assign_if_valid<double>(lam, m_lam);
+  return assign_if_valid<double>(lam, m_impl->m_lam);
 }
 
-double PlrTest1::PlrTest1Impl::turb() const
+template <> double PRJMODEL_API PlrTest1::turb() const
 {
-  return to<double>(m_turb);
+  return to<double>(m_impl->m_turb);
 }
 
-bool PlrTest1::PlrTest1Impl::setTurb(const double turb)
+template <> std::string PRJMODEL_API PlrTest1::turb() const
 {
-  m_turb = to_float(turb);
+  return PRJFLOAT_TO_STR(m_impl->m_turb);
+}
+
+bool PlrTest1::setTurb(const double turb)
+{
+  m_impl->m_turb = to_float(turb);
   return true;
 }
 
-bool PlrTest1::PlrTest1Impl::setTurb(const std::string& turb)
+bool PlrTest1::setTurb(const std::string& turb)
 {
-  return assign_if_valid<double>(turb, m_turb);
+  return assign_if_valid<double>(turb, m_impl->m_turb);
 }
 
-double PlrTest1::PlrTest1Impl::expt() const
+template <> double PRJMODEL_API PlrTest1::expt() const
 {
-  return to<double>(m_expt);
+  return to<double>(m_impl->m_expt);
 }
 
-bool PlrTest1::PlrTest1Impl::setExpt(const double expt)
+template <> std::string PRJMODEL_API PlrTest1::expt() const
 {
-  m_expt = to_float(expt);
+  return PRJFLOAT_TO_STR(m_impl->m_expt);
+}
+
+bool PlrTest1::setExpt(const double expt)
+{
+  m_impl->m_expt = to_float(expt);
   return true;
 }
 
-bool PlrTest1::PlrTest1Impl::setExpt(const std::string& expt)
+bool PlrTest1::setExpt(const std::string& expt)
 {
-  return assign_if_valid<double>(expt, m_expt);
+  return assign_if_valid<double>(expt, m_impl->m_expt);
 }
 
-double PlrTest1::PlrTest1Impl::dP() const
+template <> double PRJMODEL_API PlrTest1::dP() const
 {
-  return to<double>(m_dP);
+  return to<double>(m_impl->m_dP);
 }
 
-bool PlrTest1::PlrTest1Impl::setDP(const double dP)
+template <> std::string PRJMODEL_API PlrTest1::dP() const
 {
-  m_dP = to_float(dP);
+  return PRJFLOAT_TO_STR(m_impl->m_dP);
+}
+
+bool PlrTest1::setDP(const double dP)
+{
+  m_impl->m_dP = to_float(dP);
   return true;
 }
 
-bool PlrTest1::PlrTest1Impl::setDP(const std::string& dP)
+bool PlrTest1::setDP(const std::string& dP)
 {
-  return assign_if_valid<double>(dP, m_dP);
+  return assign_if_valid<double>(dP, m_impl->m_dP);
 }
 
-double PlrTest1::PlrTest1Impl::Flow() const
+template <> double PRJMODEL_API PlrTest1::Flow() const
 {
-  return to<double>(m_Flow);
+  return to<double>(m_impl->m_Flow);
 }
 
-bool PlrTest1::PlrTest1Impl::setFlow(const double Flow)
+template <> std::string PRJMODEL_API PlrTest1::Flow() const
 {
-  m_Flow = to_float(Flow);
+  return PRJFLOAT_TO_STR(m_impl->m_Flow);
+}
+
+bool PlrTest1::setFlow(const double Flow)
+{
+  m_impl->m_Flow = to_float(Flow);
   return true;
 }
 
-bool PlrTest1::PlrTest1Impl::setFlow(const std::string& Flow)
+bool PlrTest1::setFlow(const std::string& Flow)
 {
-  return assign_if_valid<double>(Flow, m_Flow);
+  return assign_if_valid<double>(Flow, m_impl->m_Flow);
 }
 
-int PlrTest1::PlrTest1Impl::u_P() const
+int PlrTest1::u_P() const
 {
-  return m_u_P;
+  return m_impl->m_u_P;
 }
 
-void PlrTest1::PlrTest1Impl::setU_P(const int u_P)
+void PlrTest1::setU_P(const int u_P)
 {
-  m_u_P = u_P;
+  m_impl->m_u_P = u_P;
 }
 
-int PlrTest1::PlrTest1Impl::u_F() const
+int PlrTest1::u_F() const
 {
-  return m_u_F;
+  return m_impl->m_u_F;
 }
 
-void PlrTest1::PlrTest1Impl::setU_F(const int u_F)
+void PlrTest1::setU_F(const int u_F)
 {
-  m_u_F = u_F;
+  m_impl->m_u_F = u_F;
 }
 
 PlrTest2::PlrTest2() :
