@@ -1,27 +1,26 @@
 language: cpp
 
-os:
-  - linux
-  - osx
+matrix:
+  include:
 
-dist: xenial
+    - os: linux
+      dist: xenial
+      compiler: gcc
 
-#env:
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+          packages: ['clang-6.0', 'libstdc++-8-dev']
 
-compiler:
-  - clang
-  - gcc
+    - os: osx
+      compiler: gcc
 
-#addons:
-#  apt:
-#    packages:
-#      - libglu1-mesa-dev
-
-#before_install:
-# - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-# - sudo apt-get update -qq
-# - sudo apt-get install qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev qttools5-dev-tools qt5-default libqt5gui5
-#  - sudo apt-get install libglu1-mesa-dev
+    - os: osx
+      compiler: clang
 
 install:
   - mkdir build
@@ -34,3 +33,4 @@ install:
 script:
   - cd build/bin
   - ./prjmodel_tests
+  
