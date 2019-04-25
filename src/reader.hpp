@@ -33,6 +33,7 @@
 #include <sstream>
 #include <vector>
 #include <list>
+#include <memory>
 
 #include "prjmodel_api.hpp"
 

@@ -32,6 +32,7 @@
 
 #include <string>
 #include <sstream>
+#include <typeinfo>
 
 using PRJFLOAT = std::string;
 
