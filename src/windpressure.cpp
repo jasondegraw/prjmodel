@@ -27,7 +27,7 @@
 *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************************************************/
 
-#include "WindPressure.hpp"
+#include "windpressure.hpp"
 
 #include <math.h>
 
