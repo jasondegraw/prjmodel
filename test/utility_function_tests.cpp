@@ -1,3 +1,6 @@
+#if defined(__clang__) && defined(__linux__)
+#define CATCH_CONFIG_NO_CPP17_UNCAUGHT_EXCEPTIONS
+#endif
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "utility_functions.hpp"
