@@ -1,4 +1,4 @@
-language: cpp
+g`"anguage: cpp
 
 matrix:
   include:
@@ -21,6 +21,8 @@ matrix:
 
     - os: osx
       compiler: clang
+
+    - os: windows
 
 install:
   - mkdir build
