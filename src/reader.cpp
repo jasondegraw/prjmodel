@@ -224,24 +224,24 @@ std::vector<int> Reader::readIntVector(bool terminated)
   return vector;
 }
 
-void Reader::debug(std::string& mesg)
+void Reader::debug(const std::string& mesg)
 {
   std::cout << mesg << std::endl;
 }
 
-void Reader::warning(std::string& mesg)
+void Reader::warning(const std::string& mesg)
 {
   m_warnings.push_back(mesg);
   std::cout << mesg << std::endl;
 }
 
-void Reader::error(std::string& mesg)
+void Reader::error(const std::string& mesg)
 {
   m_errors.push_back(mesg);
   std::cout << mesg << std::endl;
 }
 
-void Reader::fatal(std::string& mesg)
+void Reader::fatal(const std::string& mesg)
 {
   m_errors.push_back(mesg);
   std::cout << mesg << std::endl;

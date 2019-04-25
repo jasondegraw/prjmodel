@@ -76,10 +76,10 @@ public:
   template <typename T> T readNumber();
 
 protected:
-  void debug(std::string& mesg);
-  void warning(std::string& mesg);
-  void error(std::string& mesg);
-  void fatal(std::string& mesg);
+  void debug(const std::string& mesg);
+  void warning(const std::string& mesg);
+  void error(const std::string& mesg);
+  void fatal(const std::string& mesg);
 
 private:
   std::string readStdString();
