@@ -33,4 +33,4 @@ install:
 
 script:
   - cd build/bin
-  - prjmodel_tests
+  - ./prjmodel_tests
