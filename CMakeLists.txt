@@ -1,7 +1,7 @@
 project(prjmodel)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-  # Nothing to see here yet
+  add_compile_options("-std=c++17")
 elseif(MSVC)
   if (MSVC_VERSION GREATER_EQUAL "1900")
     include(CheckCXXCompilerFlag)
@@ -13,7 +13,7 @@ elseif(MSVC)
     message(FATAL_ERROR "Visual Studio versions earlier than VS2017 are not supported")
   endif()
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  # Nothing to see here yet
+  add_compile_options("-std=c++17")
 endif()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
