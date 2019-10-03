@@ -1977,9 +1977,14 @@ bool AirflowPath::setWPset(const std::string& wPset)
   return assign_if_valid<double>(wPset, m_impl->m_wPset);
 }
 
-double AirflowPath::wPmod() const
+template <> double AirflowPath::wPmod() const
 {
   return to<double>(m_impl->m_wPmod);
+}
+
+template <> std::string PRJMODEL_API AirflowPath::wPmod() const
+{
+  return PRJFLOAT_TO_STR(m_impl->m_wPmod);
 }
 
 bool AirflowPath::setWPmod(const double wPmod)

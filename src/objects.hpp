@@ -853,7 +853,7 @@ public:
   /** Sets the constant wind pressure [Pa] (pw==NULL). */
   bool setWPset(const std::string &wPset);
   /** Returns the wind speed modifier (pw!=NULL). */
-  double wPmod() const;
+  template <typename T> T wPmod() const;
   /** Sets the wind speed modifier (pw!=NULL). */
   bool setWPmod(const double wPmod);
   /** Sets the wind speed modifier (pw!=NULL). */

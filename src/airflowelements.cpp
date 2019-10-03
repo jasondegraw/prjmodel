@@ -752,22 +752,11 @@ void PlrOrf::PlrOrfImpl::setU_D(const int u_D)
   m_u_D = u_D;
 }
 
-PlrLeak::PlrLeak() :
-  m_impl(std::shared_ptr<PlrLeakImpl>(new PlrLeakImpl()))
+PlrLeak::Impl::Impl() : m_nr(0), m_icon(0), m_lam(PRJFLOAT("0.0")), m_turb(PRJFLOAT("0.0")), m_expt(PRJFLOAT("0.0")), m_coef(PRJFLOAT("0.0")),
+m_pres(PRJFLOAT("0.0")), m_area1(PRJFLOAT("0.0")), m_area2(PRJFLOAT("0.0")), m_area3(PRJFLOAT("0.0")), m_u_A1(0), m_u_A2(0), m_u_A3(0), m_u_dP(0)
 {}
 
-PlrLeak::PlrLeak(int nr,int icon,std::string name,std::string desc) :
-  m_impl(std::shared_ptr<PlrLeakImpl>(new PlrLeakImpl(nr,icon,name,desc)))
-{}
-
-PlrLeak::PlrLeak(int nr,int icon,std::string name,std::string desc,double lam,double turb,double expt,double coef,
-                 double pres,double area1,double area2,double area3,int u_A1,int u_A2,int u_A3,int u_dP) :
-  m_impl(std::shared_ptr<PlrLeakImpl>(new PlrLeakImpl(nr,icon,name,desc,lam,turb,expt,coef,pres,area1,area2,area3,u_A1,u_A2,u_A3,u_dP)))
-{}
-
-PlrLeak::PlrLeak(int nr,int icon,std::string name,std::string desc,std::string lam,std::string turb,std::string expt,std::string coef,
-                 std::string pres,std::string area1,std::string area2,std::string area3,int u_A1,int u_A2,int u_A3,int u_dP) :
-  m_impl(std::shared_ptr<PlrLeakImpl>(new PlrLeakImpl(nr,icon,name,desc,lam,turb,expt,coef,pres,area1,area2,area3,u_A1,u_A2,u_A3,u_dP)))
+PlrLeak::PlrLeak() : m_impl(std::shared_ptr<Impl>(new Impl))
 {}
 
 PlrLeak::PlrLeak(const PlrLeak &other) : m_impl(other.m_impl)
@@ -792,226 +781,7 @@ bool PlrLeak::operator!=(const PlrLeak &other) const
   return m_impl != other.m_impl;
 }
 
-std::string PlrLeak::write()
-{
-  return m_impl->write(dataType());
-}
-
-void PlrLeak::read(Reader &input)
-{
-  m_impl->read(input);
-}
-
-void PlrLeak::readDetails(Reader &input)
-{
-  m_impl->readDetails(input);
-}
-
-int PlrLeak::nr() const
-{
-  return m_impl->nr();
-}
-
-void PlrLeak::setNr(const int nr)
-{
-  m_impl->setNr(nr);
-}
-
-int PlrLeak::icon() const
-{
-  return m_impl->icon();
-}
-
-void PlrLeak::setIcon(const int icon)
-{
-  m_impl->setIcon(icon);
-}
-
-std::string PlrLeak::name() const
-{
-  return m_impl->name();
-}
-
-void PlrLeak::setName(const std::string &name)
-{
-  m_impl->setName(name);
-}
-
-std::string PlrLeak::desc() const
-{
-  return m_impl->desc();
-}
-
-void PlrLeak::setDesc(const std::string &desc)
-{
-  m_impl->setDesc(desc);
-}
-
-double PlrLeak::lam() const
-{
-  return m_impl->lam();
-}
-
-bool PlrLeak::setLam(const double lam)
-{
-  return m_impl->setLam(lam);
-}
-
-bool PlrLeak::setLam(const std::string &lam)
-{
-  return m_impl->setLam(lam);
-}
-
-double PlrLeak::turb() const
-{
-  return m_impl->turb();
-}
-
-bool PlrLeak::setTurb(const double turb)
-{
-  return m_impl->setTurb(turb);
-}
-
-bool PlrLeak::setTurb(const std::string &turb)
-{
-  return m_impl->setTurb(turb);
-}
-
-double PlrLeak::expt() const
-{
-  return m_impl->expt();
-}
-
-bool PlrLeak::setExpt(const double expt)
-{
-  return m_impl->setExpt(expt);
-}
-
-bool PlrLeak::setExpt(const std::string &expt)
-{
-  return m_impl->setExpt(expt);
-}
-
-double PlrLeak::coef() const
-{
-  return m_impl->coef();
-}
-
-bool PlrLeak::setCoef(const double coef)
-{
-  return m_impl->setCoef(coef);
-}
-
-bool PlrLeak::setCoef(const std::string &coef)
-{
-  return m_impl->setCoef(coef);
-}
-
-double PlrLeak::pres() const
-{
-  return m_impl->pres();
-}
-
-bool PlrLeak::setPres(const double pres)
-{
-  return m_impl->setPres(pres);
-}
-
-bool PlrLeak::setPres(const std::string &pres)
-{
-  return m_impl->setPres(pres);
-}
-
-double PlrLeak::area1() const
-{
-  return m_impl->area1();
-}
-
-bool PlrLeak::setArea1(const double area1)
-{
-  return m_impl->setArea1(area1);
-}
-
-bool PlrLeak::setArea1(const std::string &area1)
-{
-  return m_impl->setArea1(area1);
-}
-
-double PlrLeak::area2() const
-{
-  return m_impl->area2();
-}
-
-bool PlrLeak::setArea2(const double area2)
-{
-  return m_impl->setArea2(area2);
-}
-
-bool PlrLeak::setArea2(const std::string &area2)
-{
-  return m_impl->setArea2(area2);
-}
-
-double PlrLeak::area3() const
-{
-  return m_impl->area3();
-}
-
-bool PlrLeak::setArea3(const double area3)
-{
-  return m_impl->setArea3(area3);
-}
-
-bool PlrLeak::setArea3(const std::string &area3)
-{
-  return m_impl->setArea3(area3);
-}
-
-int PlrLeak::u_A1() const
-{
-  return m_impl->u_A1();
-}
-
-void PlrLeak::setU_A1(const int u_A1)
-{
-  m_impl->setU_A1(u_A1);
-}
-
-int PlrLeak::u_A2() const
-{
-  return m_impl->u_A2();
-}
-
-void PlrLeak::setU_A2(const int u_A2)
-{
-  m_impl->setU_A2(u_A2);
-}
-
-int PlrLeak::u_A3() const
-{
-  return m_impl->u_A3();
-}
-
-void PlrLeak::setU_A3(const int u_A3)
-{
-  m_impl->setU_A3(u_A3);
-}
-
-int PlrLeak::u_dP() const
-{
-  return m_impl->u_dP();
-}
-
-void PlrLeak::setU_dP(const int u_dP)
-{
-  m_impl->setU_dP(u_dP);
-}
-
-PlrLeak::PlrLeakImpl::PlrLeakImpl() : m_nr(0), m_icon(0), m_lam(PRJFLOAT("0.0")), m_turb(PRJFLOAT("0.0")), m_expt(PRJFLOAT("0.0")), m_coef(PRJFLOAT("0.0")),
-m_pres(PRJFLOAT("0.0")), m_area1(PRJFLOAT("0.0")), m_area2(PRJFLOAT("0.0")), m_area3(PRJFLOAT("0.0")), m_u_A1(0), m_u_A2(0), m_u_A3(0), m_u_dP(0)
-{}
-
-PlrLeak::PlrLeakImpl::PlrLeakImpl(int nr, int icon, std::string name, std::string desc) : PlrLeak::PlrLeakImpl()
+PlrLeak::PlrLeak(int nr, int icon, std::string name, std::string desc) : m_impl(std::shared_ptr<Impl>(new Impl))
 {
   setNr(nr);
   setIcon(icon);
@@ -1019,9 +789,9 @@ PlrLeak::PlrLeakImpl::PlrLeakImpl(int nr, int icon, std::string name, std::strin
   setDesc(desc);
 }
 
-PlrLeak::PlrLeakImpl::PlrLeakImpl(int nr, int icon, std::string name, std::string desc, double lam, double turb, double expt,
+PlrLeak::PlrLeak(int nr, int icon, std::string name, std::string desc, double lam, double turb, double expt,
   double coef, double pres, double area1, double area2, double area3, int u_A1, int u_A2,
-  int u_A3, int u_dP) : PlrLeak::PlrLeakImpl()
+  int u_A3, int u_dP) : m_impl(std::shared_ptr<Impl>(new Impl))
 {
   setNr(nr);
   setIcon(icon);
@@ -1041,9 +811,9 @@ PlrLeak::PlrLeakImpl::PlrLeakImpl(int nr, int icon, std::string name, std::strin
   setU_dP(u_dP);
 }
 
-PlrLeak::PlrLeakImpl::PlrLeakImpl(int nr, int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt,
+PlrLeak::PlrLeak(int nr, int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt,
   std::string coef, std::string pres, std::string area1, std::string area2, std::string area3, int u_A1, int u_A2,
-  int u_A3, int u_dP) : PlrLeak::PlrLeakImpl()
+  int u_A3, int u_dP) : m_impl(std::shared_ptr<Impl>(new Impl))
 {
   setNr(nr);
   setIcon(icon);
@@ -1063,7 +833,7 @@ PlrLeak::PlrLeakImpl::PlrLeakImpl(int nr, int icon, std::string name, std::strin
   setU_dP(u_dP);
 }
 
-void PlrLeak::PlrLeakImpl::read(Reader& input)
+void PlrLeak::read(Reader& input)
 {
   setNr(input.read<int>());
   setIcon(input.read<int>());
@@ -1084,19 +854,19 @@ void PlrLeak::PlrLeakImpl::read(Reader& input)
   setU_dP(input.read<int>());
 }
 
-std::string PlrLeak::PlrLeakImpl::write(std::string datatype)
+std::string PlrLeak::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_icon) + ' ' + datatype + ' ' + m_name + '\n';
-  string += m_desc + '\n';
-  string += PRJFLOAT_TO_STR(m_lam) + ' ' + PRJFLOAT_TO_STR(m_turb) + ' ' + PRJFLOAT_TO_STR(m_expt) + ' '
-    + PRJFLOAT_TO_STR(m_coef) + ' ' + PRJFLOAT_TO_STR(m_pres) + ' ' + PRJFLOAT_TO_STR(m_area1) + ' '
-    + PRJFLOAT_TO_STR(m_area2) + ' ' + PRJFLOAT_TO_STR(m_area3) + ' ' + ANY_TO_STR(m_u_A1) + ' '
-    + ANY_TO_STR(m_u_A2) + ' ' + ANY_TO_STR(m_u_A3) + ' ' + ANY_TO_STR(m_u_dP) + '\n';
+  string += ANY_TO_STR(m_impl->m_nr) + ' ' + ANY_TO_STR(m_impl->m_icon) + ' ' + dataType() + ' ' + m_impl->m_name + '\n';
+  string += m_impl->m_desc + '\n';
+  string += PRJFLOAT_TO_STR(m_impl->m_lam) + ' ' + PRJFLOAT_TO_STR(m_impl->m_turb) + ' ' + PRJFLOAT_TO_STR(m_impl->m_expt) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_coef) + ' ' + PRJFLOAT_TO_STR(m_impl->m_pres) + ' ' + PRJFLOAT_TO_STR(m_impl->m_area1) + ' '
+    + PRJFLOAT_TO_STR(m_impl->m_area2) + ' ' + PRJFLOAT_TO_STR(m_impl->m_area3) + ' ' + ANY_TO_STR(m_impl->m_u_A1) + ' '
+    + ANY_TO_STR(m_impl->m_u_A2) + ' ' + ANY_TO_STR(m_impl->m_u_A3) + ' ' + ANY_TO_STR(m_impl->m_u_dP) + '\n';
   return string;
 }
 
-void PlrLeak::PlrLeakImpl::readDetails(Reader& input)
+void PlrLeak::readDetails(Reader& input)
 {
   setLam(input.readNumber<std::string>());
   setTurb(input.readNumber<std::string>());
@@ -1112,212 +882,252 @@ void PlrLeak::PlrLeakImpl::readDetails(Reader& input)
   setU_dP(input.read<int>());
 }
 
-int PlrLeak::PlrLeakImpl::nr() const
+int PlrLeak::nr() const
 {
-  return m_nr;
+  return m_impl->m_nr;
 }
 
-void PlrLeak::PlrLeakImpl::setNr(const int nr)
+void PlrLeak::setNr(const int nr)
 {
-  m_nr = nr;
+  m_impl->m_nr = nr;
 }
 
-int PlrLeak::PlrLeakImpl::icon() const
+int PlrLeak::icon() const
 {
-  return m_icon;
+  return m_impl->m_icon;
 }
 
-void PlrLeak::PlrLeakImpl::setIcon(const int icon)
+void PlrLeak::setIcon(const int icon)
 {
-  m_icon = icon;
+  m_impl->m_icon = icon;
 }
 
-std::string PlrLeak::PlrLeakImpl::name() const
+std::string PlrLeak::name() const
 {
-  return m_name;
+  return m_impl->m_name;
 }
 
-void PlrLeak::PlrLeakImpl::setName(const std::string& name)
+void PlrLeak::setName(const std::string& name)
 {
-  m_name = name;
+  m_impl->m_name = name;
 }
 
-std::string PlrLeak::PlrLeakImpl::desc() const
+std::string PlrLeak::desc() const
 {
-  return m_desc;
+  return m_impl->m_desc;
 }
 
-void PlrLeak::PlrLeakImpl::setDesc(const std::string& desc)
+void PlrLeak::setDesc(const std::string& desc)
 {
-  m_desc = desc;
+  m_impl->m_desc = desc;
 }
 
-double PlrLeak::PlrLeakImpl::lam() const
+template<> double PRJMODEL_API PlrLeak::lam() const
 {
-  return to<double>(m_lam);
+  return to<double>(m_impl->m_lam);
 }
 
-bool PlrLeak::PlrLeakImpl::setLam(const double lam)
+template<> std::string PRJMODEL_API PlrLeak::lam() const
 {
-  m_lam = to_float(lam);
+  return m_impl->m_lam;
+}
+
+bool PlrLeak::setLam(const double lam)
+{
+  m_impl->m_lam = to_float(lam);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setLam(const std::string& lam)
+bool PlrLeak::setLam(const std::string& lam)
 {
-  return assign_if_valid<double>(lam, m_lam);
+  return assign_if_valid<double>(lam, m_impl->m_lam);
 }
 
-double PlrLeak::PlrLeakImpl::turb() const
+template<> double PRJMODEL_API PlrLeak::turb() const
 {
-  return to<double>(m_turb);
+  return to<double>(m_impl->m_turb);
 }
 
-bool PlrLeak::PlrLeakImpl::setTurb(const double turb)
+template<> std::string PRJMODEL_API PlrLeak::turb() const
 {
-  m_turb = to_float(turb);
+  return m_impl->m_turb;
+}
+
+bool PlrLeak::setTurb(const double turb)
+{
+  m_impl->m_turb = to_float(turb);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setTurb(const std::string& turb)
+bool PlrLeak::setTurb(const std::string& turb)
 {
-  return assign_if_valid<double>(turb, m_turb);
+  return assign_if_valid<double>(turb, m_impl->m_turb);
 }
 
-double PlrLeak::PlrLeakImpl::expt() const
+template<> double PRJMODEL_API PlrLeak::expt() const
 {
-  return to<double>(m_expt);
+  return to<double>(m_impl->m_expt);
 }
 
-bool PlrLeak::PlrLeakImpl::setExpt(const double expt)
+template<> std::string PRJMODEL_API PlrLeak::expt() const
 {
-  m_expt = to_float(expt);
+  return m_impl->m_expt;
+}
+
+bool PlrLeak::setExpt(const double expt)
+{
+  m_impl->m_expt = to_float(expt);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setExpt(const std::string& expt)
+bool PlrLeak::setExpt(const std::string& expt)
 {
-  return assign_if_valid<double>(expt, m_expt);
+  return assign_if_valid<double>(expt, m_impl->m_expt);
 }
 
-double PlrLeak::PlrLeakImpl::coef() const
+template<> double PRJMODEL_API PlrLeak::coef() const
 {
-  return to<double>(m_coef);
+  return to<double>(m_impl->m_coef);
 }
 
-bool PlrLeak::PlrLeakImpl::setCoef(const double coef)
+template<> std::string PRJMODEL_API PlrLeak::coef() const
 {
-  m_coef = to_float(coef);
+  return m_impl->m_coef;
+}
+
+bool PlrLeak::setCoef(const double coef)
+{
+  m_impl->m_coef = to_float(coef);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setCoef(const std::string& coef)
+bool PlrLeak::setCoef(const std::string& coef)
 {
-  return assign_if_valid<double>(coef, m_coef);
+  return assign_if_valid<double>(coef, m_impl->m_coef);
 }
 
-double PlrLeak::PlrLeakImpl::pres() const
+template<> double PRJMODEL_API PlrLeak::pres() const
 {
-  return to<double>(m_pres);
+  return to<double>(m_impl->m_pres);
 }
 
-bool PlrLeak::PlrLeakImpl::setPres(const double pres)
+template<> std::string PRJMODEL_API PlrLeak::pres() const
 {
-  m_pres = to_float(pres);
+  return m_impl->m_pres;
+}
+
+bool PlrLeak::setPres(const double pres)
+{
+  m_impl->m_pres = to_float(pres);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setPres(const std::string& pres)
+bool PlrLeak::setPres(const std::string& pres)
 {
-  return assign_if_valid<double>(pres, m_pres);
+  return assign_if_valid<double>(pres, m_impl->m_pres);
 }
 
-double PlrLeak::PlrLeakImpl::area1() const
+template<> double PRJMODEL_API PlrLeak::area1() const
 {
-  return to<double>(m_area1);
+  return to<double>(m_impl->m_area1);
 }
 
-bool PlrLeak::PlrLeakImpl::setArea1(const double area1)
+template<> std::string PRJMODEL_API PlrLeak::area1() const
 {
-  m_area1 = to_float(area1);
+  return m_impl->m_area1;
+}
+
+bool PlrLeak::setArea1(const double area1)
+{
+  m_impl->m_area1 = to_float(area1);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setArea1(const std::string& area1)
+bool PlrLeak::setArea1(const std::string& area1)
 {
-  return assign_if_valid<double>(area1, m_area1);
+  return assign_if_valid<double>(area1, m_impl->m_area1);
 }
 
-double PlrLeak::PlrLeakImpl::area2() const
+template<> double PRJMODEL_API PlrLeak::area2() const
 {
-  return to<double>(m_area2);
+  return to<double>(m_impl->m_area2);
 }
 
-bool PlrLeak::PlrLeakImpl::setArea2(const double area2)
+template<> std::string PRJMODEL_API PlrLeak::area2() const
 {
-  m_area2 = to_float(area2);
+  return m_impl->m_area2;
+}
+
+bool PlrLeak::setArea2(const double area2)
+{
+  m_impl->m_area2 = to_float(area2);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setArea2(const std::string& area2)
+bool PlrLeak::setArea2(const std::string& area2)
 {
-  return assign_if_valid<double>(area2, m_area2);
+  return assign_if_valid<double>(area2, m_impl->m_area2);
 }
 
-double PlrLeak::PlrLeakImpl::area3() const
+template<> double PRJMODEL_API PlrLeak::area3() const
 {
-  return to<double>(m_area3);
+  return to<double>(m_impl->m_area3);
 }
 
-bool PlrLeak::PlrLeakImpl::setArea3(const double area3)
+template<> std::string  PlrLeak::area3() const
 {
-  m_area3 = to_float(area3);
+  return m_impl->m_area3;
+}
+
+bool PlrLeak::setArea3(const double area3)
+{
+  m_impl->m_area3 = to_float(area3);
   return true;
 }
 
-bool PlrLeak::PlrLeakImpl::setArea3(const std::string& area3)
+bool PlrLeak::setArea3(const std::string& area3)
 {
-  return assign_if_valid<double>(area3, m_area3);
+  return assign_if_valid<double>(area3, m_impl->m_area3);
 }
 
-int PlrLeak::PlrLeakImpl::u_A1() const
+int PlrLeak::u_A1() const
 {
-  return m_u_A1;
+  return m_impl->m_u_A1;
 }
 
-void PlrLeak::PlrLeakImpl::setU_A1(const int u_A1)
+void PlrLeak::setU_A1(const int u_A1)
 {
-  m_u_A1 = u_A1;
+  m_impl->m_u_A1 = u_A1;
 }
 
-int PlrLeak::PlrLeakImpl::u_A2() const
+int PlrLeak::u_A2() const
 {
-  return m_u_A2;
+  return m_impl->m_u_A2;
 }
 
-void PlrLeak::PlrLeakImpl::setU_A2(const int u_A2)
+void PlrLeak::setU_A2(const int u_A2)
 {
-  m_u_A2 = u_A2;
+  m_impl->m_u_A2 = u_A2;
 }
 
-int PlrLeak::PlrLeakImpl::u_A3() const
+int PlrLeak::u_A3() const
 {
-  return m_u_A3;
+  return m_impl->m_u_A3;
 }
 
-void PlrLeak::PlrLeakImpl::setU_A3(const int u_A3)
+void PlrLeak::setU_A3(const int u_A3)
 {
-  m_u_A3 = u_A3;
+  m_impl->m_u_A3 = u_A3;
 }
 
-int PlrLeak::PlrLeakImpl::u_dP() const
+int PlrLeak::u_dP() const
 {
-  return m_u_dP;
+  return m_impl->m_u_dP;
 }
 
-void PlrLeak::PlrLeakImpl::setU_dP(const int u_dP)
+void PlrLeak::setU_dP(const int u_dP)
 {
-  m_u_dP = u_dP;
+  m_impl->m_u_dP = u_dP;
 }
 
 PlrLeak1::PlrLeak1() : PlrLeak()

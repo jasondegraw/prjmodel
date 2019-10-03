@@ -342,7 +342,7 @@ public:
   /** Read object details from a Reader. */
   void readDetails(Reader &input);
   /** Write the object to a string. */
-  std::string write() override;
+  virtual std::string write() override;
 
   //@}
   /** @name Getters and Setters */
@@ -367,49 +367,49 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the flow coefficient. */
-  double coef() const;
+  template <typename T> T coef() const;
   /** Sets the flow coefficient. */
   bool setCoef(const double coef);
   /** Sets the flow coefficient. */
   bool setCoef(const std::string &coef);
   /** Returns the reference pressure drop [Pa]. */
-  double pres() const;
+  template <typename T> T pres() const;
   /** Sets the reference pressure drop [Pa]. */
   bool setPres(const double pres);
   /** Sets the reference pressure drop [Pa]. */
   bool setPres(const std::string &pres);
   /** Returns the leakage area per item [m^2]. */
-  double area1() const;
+  template <typename T> T area1() const;
   /** Sets the leakage area per item [m^2]. */
   bool setArea1(const double area1);
   /** Sets the leakage area per item [m^2]. */
   bool setArea1(const std::string &area1);
   /** Returns the leakage area per unit length [m^2/m]. */
-  double area2() const;
+  template <typename T> T area2() const;
   /** Sets the leakage area per unit length [m^2/m]. */
   bool setArea2(const double area2);
   /** Sets the leakage area per unit length [m^2/m]. */
   bool setArea2(const std::string &area2);
   /** Returns the leakage area per unit area [m^2/m^2]. */
-  double area3() const;
+  template <typename T> T area3() const;
   /** Sets the leakage area per unit area [m^2/m^2]. */
   bool setArea3(const double area3);
   /** Sets the leakage area per unit area [m^2/m^2]. */
@@ -432,101 +432,10 @@ public:
   void setU_dP(const int u_dP);
   //@}
 private:
-  class PlrLeakImpl
+  struct Impl
   {
-  public:
-    PlrLeakImpl();
-    PlrLeakImpl(int nr, int icon, std::string name, std::string desc);
-    PlrLeakImpl(int nr, int icon, std::string name, std::string desc, double lam, double turb, double expt, double coef,
-      double pres, double area1, double area2, double area3, int u_A1, int u_A2, int u_A3, int u_dP);
-    PlrLeakImpl(int nr, int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt, std::string coef,
-      std::string pres, std::string area1, std::string area2, std::string area3, int u_A1, int u_A2, int u_A3, int u_dP);
-    void read(Reader& reader);
-    std::string write(std::string datatype);
-    void readDetails(Reader& input);
+    Impl();
 
-    /** Returns the element number, in order from 1 to the number of airflow elements. */
-    int nr() const;
-    /** Sets the elemt number. This should only be done with care. */
-    void setNr(const int nr);
-    /** Returns the icon used to represent flow path. */
-    int icon() const;
-    /** Sets the icon used to represent flow path. */
-    void setIcon(const int icon);
-    /** Returns the element name. */
-    std::string name() const;
-    /** Sets the element name. */
-    void setName(const std::string& name);
-    /** Returns the element description. */
-    std::string desc() const;
-    /** Sets the element description. */
-    void setDesc(const std::string& desc);
-    /** Returns the laminar flow coefficient. */
-    double lam() const;
-    /** Sets the laminar flow coefficient. */
-    bool setLam(const double lam);
-    /** Sets the laminar flow coefficient. */
-    bool setLam(const std::string& lam);
-    /** Returns the turbulent flow coefficient. */
-    double turb() const;
-    /** Sets the turbulent flow coefficient. */
-    bool setTurb(const double turb);
-    /** Sets the turbulent flow coefficient. */
-    bool setTurb(const std::string& turb);
-    /** Returns the pressure exponent. */
-    double expt() const;
-    /** Sets the pressure exponent. */
-    bool setExpt(const double expt);
-    /** Sets the pressure exponent. */
-    bool setExpt(const std::string& expt);
-    /** Returns the flow coefficient. */
-    double coef() const;
-    /** Sets the flow coefficient. */
-    bool setCoef(const double coef);
-    /** Sets the flow coefficient. */
-    bool setCoef(const std::string& coef);
-    /** Returns the reference pressure drop [Pa]. */
-    double pres() const;
-    /** Sets the reference pressure drop [Pa]. */
-    bool setPres(const double pres);
-    /** Sets the reference pressure drop [Pa]. */
-    bool setPres(const std::string& pres);
-    /** Returns the leakage area per item [m^2]. */
-    double area1() const;
-    /** Sets the leakage area per item [m^2]. */
-    bool setArea1(const double area1);
-    /** Sets the leakage area per item [m^2]. */
-    bool setArea1(const std::string& area1);
-    /** Returns the leakage area per unit length [m^2/m]. */
-    double area2() const;
-    /** Sets the leakage area per unit length [m^2/m]. */
-    bool setArea2(const double area2);
-    /** Sets the leakage area per unit length [m^2/m]. */
-    bool setArea2(const std::string& area2);
-    /** Returns the leakage area per unit area [m^2/m^2]. */
-    double area3() const;
-    /** Sets the leakage area per unit area [m^2/m^2]. */
-    bool setArea3(const double area3);
-    /** Sets the leakage area per unit area [m^2/m^2]. */
-    bool setArea3(const std::string& area3);
-    /** Returns the display units of area 1. */
-    int u_A1() const;
-    /** Sets the display units of area 1. */
-    void setU_A1(const int u_A1);
-    /** Returns the display units of area 2. */
-    int u_A2() const;
-    /** Sets the display units of area 2. */
-    void setU_A2(const int u_A2);
-    /** Returns the display units of area 3. */
-    int u_A3() const;
-    /** Sets the display units of area 3. */
-    void setU_A3(const int u_A3);
-    /** Returns the display units of pressure. */
-    int u_dP() const;
-    /** Sets the display units of pressure. */
-    void setU_dP(const int u_dP);
-
-  private:
     int m_nr;  // element number (IX); in order from 1 to _nafe
     int m_icon;  // icon used to represent flow path (I2) {W}
     std::string m_name;  // element name (CS) {W}
@@ -546,7 +455,7 @@ private:
   };
 
 
-  std::shared_ptr<PlrLeakImpl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 /** The PlrLeak1 object is an airflow element representing a leakage area on a per-item basis. */
@@ -1055,9 +964,9 @@ public:
   PlrTest1(int nr,int icon,std::string name,std::string desc,std::string lam,std::string turb,std::string expt,std::string dP,std::string Flow,
     int u_P,int u_F);
   /** Create a new object. */
-  PlrTest1(int icon, std::string name, std::string desc, double lam, double turb, double expt, double dP, double Flow);
+  //PlrTest1(int icon, std::string name, std::string desc, double lam, double turb, double expt, double dP, double Flow);
   /** Create a new object. */
-  PlrTest1(int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt, std::string dP, std::string Flow);
+  //PlrTest1(int icon, std::string name, std::string desc, std::string lam, std::string turb, std::string expt, std::string dP, std::string Flow);
   /** Create a new object from another object. */
   PlrTest1(const PlrTest1 &other);
   /** Destroy the object. */
@@ -1153,9 +1062,9 @@ private:
   {
     Impl();
     
-    void read(Reader& reader);
-    std::string write();
-    void readDetails(Reader& input);
+    //void read(Reader& reader);
+    //std::string write();
+    //void readDetails(Reader& input);
 
     int m_nr;  // element number (IX); in order from 1 to _nafe
     int m_icon;  // icon used to represent flow path (I2) {W}
