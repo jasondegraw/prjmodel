@@ -76,14 +76,20 @@ int main(int argc, char* argv[])
 
   // Need to check that wind parameters are set?
   xml << "  <GlobalParameters>" << std::endl;
-  xml << "    <WindParameters>" << std::endl;
+  xml << "    <Weather>" << std::endl;
   auto ss_weather = model.ssWeather();
-  xml << "      <Speed units=\"m/s\">" << ss_weather.windspd() << "</Speed>" << std::endl;
-  xml << "      <Direction units=\"degrees\">" << ss_weather.winddir() << "</Direction>" << std::endl;
-  xml << "      <ReferenceElevation units=\"m\">" << model.wind_H() << "</ReferenceElevation>" << std::endl;
-  xml << "      <LocalTerrainConstant>" << model.wind_Ao() << "</LocalTerrainConstant>" << std::endl;
-  xml << "      <ProfileExponent>" << model.wind_a() << "</ProfileExponent>" << std::endl;
-  xml << "    </WindParameters>" << std::endl;
+  xml << "      <Wind>" << std::endl;
+  xml << "        <Speed units=\"m/s\">" << ss_weather.windspd<std::string>() << "</Speed>" << std::endl;
+  xml << "        <Direction units=\"degrees\">" << ss_weather.winddir<std::string>() << "</Direction>" << std::endl;
+  xml << "      </Wind>" << std::endl;
+  xml << "      <Air>" << std::endl;
+  xml << "        <Temperature units=\"K\">" << ss_weather.Tambt<std::string>() << "</Temperature>" << std::endl;
+  xml << "        <Pressure units=\"Pag\">" << ss_weather.barpres<std::string>() << "</Pressure>" << std::endl;
+  xml << "      </Air>" << std::endl;
+  //xml << "      <ReferenceElevation units=\"m\">" << model.wind_H() << "</ReferenceElevation>" << std::endl;
+  //xml << "      <LocalTerrainConstant>" << model.wind_Ao() << "</LocalTerrainConstant>" << std::endl;
+  //xml << "      <ProfileExponent>" << model.wind_a() << "</ProfileExponent>" << std::endl;
+  xml << "    </Weather>" << std::endl;
   xml << "  </GlobalParameters>" << std::endl;
 
   if (model.airflowElements().size() > 0) {
@@ -135,6 +141,7 @@ int main(int argc, char* argv[])
     xml << "  <Tables>" << std::endl;
     for (auto& wpp : model.windPressureProfiles()) {
       xml << "    <Table ID=\"" << wpp.name() << "\">" << std::endl;
+      xml << "      <Periodic/>" << std::endl;
       xml << "      <Points>" << std::endl;
       for (auto& coeff : wpp.coeffs()) {
         xml << "        <Point>" << std::endl;

@@ -87,31 +87,31 @@ public:
   //@{
 
   /** Returns the ambient temperature [K] */
-  double Tambt() const;
+  template <typename T> T Tambt() const;
   /** Sets the ambient temperature [K] */
   bool setTambt(const double Tambt);
   /** Sets the ambient temperature [K] */
   bool setTambt(const std::string &Tambt);
   /** Returns the barometric pressure [Pa] NOT corrected to sea level */
-  double barpres() const;
+  template <typename T> T barpres() const;
   /** Sets the barometric pressure [Pa] NOT corrected to sea level */
   bool setBarpres(const double barpres);
   /** Sets the barometric pressure [Pa] NOT corrected to sea level */
   bool setBarpres(const std::string &barpres);
   /** Returns the wind speed [m/s] */
-  double windspd() const;
+  template <typename T> T windspd() const;
   /** Sets the wind speed [m/s] */
   bool setWindspd(const double windspd);
   /** Sets the wind speed [m/s] */
   bool setWindspd(const std::string &windspd);
   /** Returns the wind direction: 0 = N, 90 = E, 180 = S, ... */
-  double winddir() const;
+  template <typename T> T winddir() const;
   /** Sets the wind direction: 0 = N, 90 = E, 180 = S, ... */
   bool setWinddir(const double winddir);
   /** Sets the wind direction: 0 = N, 90 = E, 180 = S, ... */
   bool setWinddir(const std::string &winddir);
   /** Returns the relative humidity: 0.0 to 1.0 */
-  double relhum() const;
+  template <typename T> T relhum() const;
   /** Sets the relative humidity: 0.0 to 1.0 */
   bool setRelhum(const double relhum);
   /** Sets the relative humidity: 0.0 to 1.0 */
@@ -140,68 +140,10 @@ public:
 
 private:
 
-  class WeatherDataImpl
+  struct Impl
   {
-  public:
-    WeatherDataImpl();
-    WeatherDataImpl(std::string Tambt, std::string barpres, std::string windspd, std::string winddir, std::string relhum, int daytyp,
-      int uTa, int ubP, int uws, int uwd);
-    WeatherDataImpl(double Tambt, double barpres, double windspd, double winddir, double relhum, int daytyp,
-      int uTa, int ubP, int uws, int uwd);
-    void read(Reader& reader);
-    std::string write();
-    /** Returns the ambient temperature [K] */
-    double Tambt() const;
-    /** Sets the ambient temperature [K] */
-    bool setTambt(const double Tambt);
-    /** Sets the ambient temperature [K] */
-    bool setTambt(const std::string& Tambt);
-    /** Returns the barometric pressure [Pa] NOT corrected to sea level */
-    double barpres() const;
-    /** Sets the barometric pressure [Pa] NOT corrected to sea level */
-    bool setBarpres(const double barpres);
-    /** Sets the barometric pressure [Pa] NOT corrected to sea level */
-    bool setBarpres(const std::string& barpres);
-    /** Returns the wind speed [m/s] */
-    double windspd() const;
-    /** Sets the wind speed [m/s] */
-    bool setWindspd(const double windspd);
-    /** Sets the wind speed [m/s] */
-    bool setWindspd(const std::string& windspd);
-    /** Returns the wind direction: 0 = N, 90 = E, 180 = S, ... */
-    double winddir() const;
-    /** Sets the wind direction: 0 = N, 90 = E, 180 = S, ... */
-    bool setWinddir(const double winddir);
-    /** Sets the wind direction: 0 = N, 90 = E, 180 = S, ... */
-    bool setWinddir(const std::string& winddir);
-    /** Returns the relative humidity: 0.0 to 1.0 */
-    double relhum() const;
-    /** Sets the relative humidity: 0.0 to 1.0 */
-    bool setRelhum(const double relhum);
-    /** Sets the relative humidity: 0.0 to 1.0 */
-    bool setRelhum(const std::string& relhum);
-    /** Returns the type of day (1-12) */
-    int daytyp() const;
-    /** Sets the type of day (1-12) */
-    void setDaytyp(const int daytyp);
-    /** Returns the units for Tambt */
-    int uTa() const;
-    /** Sets the units for Tambt */
-    void setUTa(const int uTa);
-    /** Returns the units for barometric pressure */
-    int ubP() const;
-    /** Sets the units for barometric pressure */
-    void setUbP(const int ubP);
-    /** Returns the units for wind speed */
-    int uws() const;
-    /** Sets the units for wind speed */
-    void setUws(const int uws);
-    /** Returns the units for wind direction */
-    int uwd() const;
-    /** Sets the units for wind speed */
-    void setUwd(const int uwd);
+    Impl();
 
-  private:
     PRJFLOAT m_Tambt;  // ambient temperature [K] (R4)
     PRJFLOAT m_barpres;  // barometric pressure [Pa] NOT corrected to sea level (R4)
     PRJFLOAT m_windspd;  // wind speed [m/s] (R4)
@@ -214,7 +156,7 @@ private:
     int m_uwd;  // units for winddir (I2) {W}
   };
 
-  std::shared_ptr<WeatherDataImpl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 /** The Icon object contains basic information about sketchpad icons. This object
