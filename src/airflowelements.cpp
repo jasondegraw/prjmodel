@@ -426,9 +426,14 @@ void PlrOrf::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrOrf::lam() const
+template<> double PRJMODEL_API PlrOrf::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrOrf::setLam(const double lam)
@@ -442,9 +447,14 @@ bool PlrOrf::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrOrf::turb() const
+template<> double PRJMODEL_API PlrOrf::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::turb() const
+{
+  return m_impl->turb;
 }
 
 bool PlrOrf::setTurb(const double turb)
@@ -458,9 +468,14 @@ bool PlrOrf::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrOrf::expt() const
+template<> double PRJMODEL_API PlrOrf::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrOrf::setExpt(const double expt)
@@ -474,9 +489,14 @@ bool PlrOrf::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double PlrOrf::area() const
+template<> double PRJMODEL_API PlrOrf::area() const
 {
   return to<double>(m_impl->area);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::area() const
+{
+  return m_impl->area;
 }
 
 bool PlrOrf::setArea(const double area)
@@ -490,9 +510,14 @@ bool PlrOrf::setArea(const std::string& area)
   return assign_if_valid<double>(area, m_impl->area);
 }
 
-double PlrOrf::dia() const
+template<> double PRJMODEL_API PlrOrf::dia() const
 {
   return to<double>(m_impl->dia);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::dia() const
+{
+  return m_impl->dia;
 }
 
 bool PlrOrf::setDia(const double dia)
@@ -506,9 +531,14 @@ bool PlrOrf::setDia(const std::string& dia)
   return assign_if_valid<double>(dia, m_impl->dia);
 }
 
-double PlrOrf::coef() const
+template<> double PRJMODEL_API PlrOrf::coef() const
 {
   return to<double>(m_impl->coef);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::coef() const
+{
+  return m_impl->coef;
 }
 
 bool PlrOrf::setCoef(const double coef)
@@ -522,9 +552,14 @@ bool PlrOrf::setCoef(const std::string& coef)
   return assign_if_valid<double>(coef, m_impl->coef);
 }
 
-double PlrOrf::Re() const
+template<> double PRJMODEL_API PlrOrf::Re() const
 {
   return to<double>(m_impl->Re);
+}
+
+template<> std::string PRJMODEL_API PlrOrf::Re() const
+{
+  return m_impl->Re;
 }
 
 bool PlrOrf::setRe(const double Re)
@@ -1146,9 +1181,14 @@ void PlrConn::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrConn::lam() const
+template<> double PRJMODEL_API PlrConn::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrConn::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrConn::setLam(const double lam)
@@ -1162,9 +1202,14 @@ bool PlrConn::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrConn::turb() const
+template<> double PRJMODEL_API PlrConn::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API PlrConn::turb() const
+{
+  return m_impl->turb;
 }
 
 bool PlrConn::setTurb(const double turb)
@@ -1178,9 +1223,14 @@ bool PlrConn::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrConn::expt() const
+template<> double PRJMODEL_API PlrConn::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API PlrConn::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrConn::setExpt(const double expt)
@@ -1194,9 +1244,14 @@ bool PlrConn::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double PlrConn::area() const
+template<> double PRJMODEL_API PlrConn::area() const
 {
   return to<double>(m_impl->area);
+}
+
+template<> std::string PRJMODEL_API PlrConn::area() const
+{
+  return m_impl->area;
 }
 
 bool PlrConn::setArea(const double area)
@@ -1210,9 +1265,14 @@ bool PlrConn::setArea(const std::string& area)
   return assign_if_valid<double>(area, m_impl->area);
 }
 
-double PlrConn::coef() const
+template<> double PRJMODEL_API PlrConn::coef() const
 {
   return to<double>(m_impl->coef);
+}
+
+template<> std::string PRJMODEL_API PlrConn::coef() const
+{
+  return m_impl->coef;
 }
 
 bool PlrConn::setCoef(const double coef)
@@ -1363,9 +1423,14 @@ void PlrGeneral::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrGeneral::lam() const
+template<> double PRJMODEL_API PlrGeneral::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrGeneral::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrGeneral::setLam(const double lam)
@@ -1379,7 +1444,7 @@ bool PlrGeneral::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrGeneral::turb() const
+template<> double PRJMODEL_API PlrGeneral::turb() const
 {
   return to<double>(m_impl->turb);
 }
@@ -1395,9 +1460,14 @@ bool PlrGeneral::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrGeneral::expt() const
+template<> double PRJMODEL_API PlrGeneral::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string  PlrGeneral::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrGeneral::setExpt(const double expt)
@@ -1886,9 +1956,14 @@ void PlrTest2::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrTest2::lam() const
+template<> double PRJMODEL_API PlrTest2::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrTest2::setLam(const double lam)
@@ -1902,9 +1977,14 @@ bool PlrTest2::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrTest2::turb() const
+template<> double PRJMODEL_API PlrTest2::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::turb() const
+{
+  return m_impl->turb;
 }
 
 bool PlrTest2::setTurb(const double turb)
@@ -1918,9 +1998,14 @@ bool PlrTest2::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrTest2::expt() const
+template<> double PRJMODEL_API PlrTest2::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrTest2::setExpt(const double expt)
@@ -1934,9 +2019,14 @@ bool PlrTest2::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double PlrTest2::dP1() const
+template<> double PRJMODEL_API PlrTest2::dP1() const
 {
   return to<double>(m_impl->dP1);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::dP1() const
+{
+  return m_impl->dP1;
 }
 
 bool PlrTest2::setDP1(const double dP1)
@@ -1950,9 +2040,14 @@ bool PlrTest2::setDP1(const std::string& dP1)
   return assign_if_valid<double>(dP1, m_impl->dP1);
 }
 
-double PlrTest2::F1() const
+template<> double PRJMODEL_API PlrTest2::F1() const
 {
   return to<double>(m_impl->F1);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::F1() const
+{
+  return m_impl->F1;
 }
 
 bool PlrTest2::setF1(const double F1)
@@ -1966,9 +2061,14 @@ bool PlrTest2::setF1(const std::string& F1)
   return assign_if_valid<double>(F1, m_impl->F1);
 }
 
-double PlrTest2::dP2() const
+template<> double PRJMODEL_API PlrTest2::dP2() const
 {
   return to<double>(m_impl->dP2);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::dP2() const
+{
+  return m_impl->dP2;
 }
 
 bool PlrTest2::setDP2(const double dP2)
@@ -1982,9 +2082,14 @@ bool PlrTest2::setDP2(const std::string& dP2)
   return assign_if_valid<double>(dP2, m_impl->dP2);
 }
 
-double PlrTest2::F2() const
+template<> double PRJMODEL_API PlrTest2::F2() const
 {
   return to<double>(m_impl->F2);
+}
+
+template<> std::string PRJMODEL_API PlrTest2::F2() const
+{
+  return m_impl->F2;
 }
 
 bool PlrTest2::setF2(const double F2)
@@ -2187,9 +2292,14 @@ void PlrCrack::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrCrack::lam() const
+template<> double PRJMODEL_API PlrCrack::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrCrack::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrCrack::setLam(const double lam)
@@ -2203,9 +2313,14 @@ bool PlrCrack::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrCrack::turb() const
+template<> double PRJMODEL_API PlrCrack::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API PlrCrack::turb() const
+{
+  return m_impl->turb;
 }
 
 bool PlrCrack::setTurb(const double turb)
@@ -2219,9 +2334,14 @@ bool PlrCrack::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrCrack::expt() const
+template<> double PRJMODEL_API PlrCrack::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API PlrCrack::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrCrack::setExpt(const double expt)
@@ -2235,9 +2355,14 @@ bool PlrCrack::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double PlrCrack::length() const
+template<> double PRJMODEL_API PlrCrack::length() const
 {
   return to<double>(m_impl->length);
+}
+
+template<> std::string PRJMODEL_API PlrCrack::length() const
+{
+  return m_impl->length;
 }
 
 bool PlrCrack::setLength(const double length)
@@ -2251,9 +2376,14 @@ bool PlrCrack::setLength(const std::string& length)
   return assign_if_valid<double>(length, m_impl->length);
 }
 
-double PlrCrack::width() const
+template<> double PRJMODEL_API PlrCrack::width() const
 {
   return to<double>(m_impl->width);
+}
+
+template<> std::string PRJMODEL_API PlrCrack::width() const
+{
+  return m_impl->width;
 }
 
 bool PlrCrack::setWidth(const double width)
@@ -2445,9 +2575,14 @@ void PlrStair::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrStair::lam() const
+template<> double PRJMODEL_API PlrStair::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrStair::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrStair::setLam(const double lam)
@@ -2461,9 +2596,14 @@ bool PlrStair::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrStair::turb() const
+template<> double PRJMODEL_API PlrStair::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API PlrStair::turb() const
+{
+  return m_impl->turb;
 }
 
 bool PlrStair::setTurb(const double turb)
@@ -2477,9 +2617,14 @@ bool PlrStair::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrStair::expt() const
+template<> double PRJMODEL_API PlrStair::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API PlrStair::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrStair::setExpt(const double expt)
@@ -2493,9 +2638,14 @@ bool PlrStair::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double PlrStair::Ht() const
+template<> double PRJMODEL_API PlrStair::Ht() const
 {
   return to<double>(m_impl->Ht);
+}
+
+template<> std::string PRJMODEL_API PlrStair::Ht() const
+{
+  return m_impl->Ht;
 }
 
 bool PlrStair::setHt(const double Ht)
@@ -2509,9 +2659,14 @@ bool PlrStair::setHt(const std::string& Ht)
   return assign_if_valid<double>(Ht, m_impl->Ht);
 }
 
-double PlrStair::area() const
+template<> double PRJMODEL_API PlrStair::area() const
 {
   return to<double>(m_impl->Area);
+}
+
+template<> std::string PRJMODEL_API PlrStair::area() const
+{
+  return m_impl->Area;
 }
 
 bool PlrStair::setArea(const double Area)
@@ -2525,9 +2680,14 @@ bool PlrStair::setArea(const std::string& Area)
   return assign_if_valid<double>(Area, m_impl->Area);
 }
 
-double PlrStair::people() const
+template<> double PRJMODEL_API PlrStair::people() const
 {
   return to<double>(m_impl->peo);
+}
+
+template<> std::string PRJMODEL_API PlrStair::people() const
+{
+  return m_impl->peo;
 }
 
 bool PlrStair::setPeople(const double peo)
@@ -2736,9 +2896,14 @@ void PlrShaft::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrShaft::lam() const
+template<> double PRJMODEL_API PlrShaft::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrShaft::setLam(const double lam)
@@ -2752,9 +2917,14 @@ bool PlrShaft::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrShaft::turb() const
+template<> double PRJMODEL_API PlrShaft::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::turb() const
+{
+  return m_impl->turb;
 }
 
 bool PlrShaft::setTurb(const double turb)
@@ -2768,9 +2938,14 @@ bool PlrShaft::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double PlrShaft::expt() const
+template<> double PRJMODEL_API PlrShaft::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::expt() const
+{
+  return m_impl->expt;
 }
 
 bool PlrShaft::setExpt(const double expt)
@@ -2784,9 +2959,14 @@ bool PlrShaft::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double PlrShaft::Ht() const
+template<> double PRJMODEL_API PlrShaft::Ht() const
 {
   return to<double>(m_impl->Ht);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::Ht() const
+{
+  return m_impl->Ht;
 }
 
 bool PlrShaft::setHt(const double Ht)
@@ -2800,9 +2980,14 @@ bool PlrShaft::setHt(const std::string& Ht)
   return assign_if_valid<double>(Ht, m_impl->Ht);
 }
 
-double PlrShaft::area() const
+template<> double PRJMODEL_API PlrShaft::area() const
 {
   return to<double>(m_impl->area);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::area() const
+{
+  return m_impl->area;
 }
 
 bool PlrShaft::setArea(const double area)
@@ -2816,9 +3001,14 @@ bool PlrShaft::setArea(const std::string& area)
   return assign_if_valid<double>(area, m_impl->area);
 }
 
-double PlrShaft::perim() const
+template<> double PRJMODEL_API PlrShaft::perim() const
 {
   return to<double>(m_impl->perim);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::perim() const
+{
+  return m_impl->perim;
 }
 
 bool PlrShaft::setPerim(const double perim)
@@ -2832,9 +3022,14 @@ bool PlrShaft::setPerim(const std::string& perim)
   return assign_if_valid<double>(perim, m_impl->perim);
 }
 
-double PlrShaft::rough() const
+template<> double PRJMODEL_API PlrShaft::rough() const
 {
   return to<double>(m_impl->rough);
+}
+
+template<> std::string PRJMODEL_API PlrShaft::rough() const
+{
+  return m_impl->rough;
 }
 
 bool PlrShaft::setRough(const double rough)
@@ -3026,9 +3221,14 @@ void PlrBackDamper::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double PlrBackDamper::lam() const
+template<> double PRJMODEL_API PlrBackDamper::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API PlrBackDamper::lam() const
+{
+  return m_impl->lam;
 }
 
 bool PlrBackDamper::setLam(const double lam)
@@ -3042,9 +3242,14 @@ bool PlrBackDamper::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double PlrBackDamper::Cp() const
+template<> double PRJMODEL_API PlrBackDamper::Cp() const
 {
   return to<double>(m_impl->Cp);
+}
+
+template<> std::string PRJMODEL_API PlrBackDamper::Cp() const
+{
+  return m_impl->Cp;
 }
 
 bool PlrBackDamper::setCp(const double Cp)
@@ -3058,9 +3263,14 @@ bool PlrBackDamper::setCp(const std::string& Cp)
   return assign_if_valid<double>(Cp, m_impl->Cp);
 }
 
-double PlrBackDamper::xp() const
+template<> double PRJMODEL_API PlrBackDamper::xp() const
 {
   return to<double>(m_impl->xp);
+}
+
+template<> std::string PRJMODEL_API PlrBackDamper::xp() const
+{
+  return m_impl->xp;
 }
 
 bool PlrBackDamper::setXp(const double xp)
@@ -3074,9 +3284,14 @@ bool PlrBackDamper::setXp(const std::string& xp)
   return assign_if_valid<double>(xp, m_impl->xp);
 }
 
-double PlrBackDamper::Cn() const
+template<> double PRJMODEL_API PlrBackDamper::Cn() const
 {
   return to<double>(m_impl->Cn);
+}
+
+template<> std::string PRJMODEL_API PlrBackDamper::Cn() const
+{
+  return m_impl->Cn;
 }
 
 bool PlrBackDamper::setCn(const double Cn)
@@ -3090,9 +3305,14 @@ bool PlrBackDamper::setCn(const std::string& Cn)
   return assign_if_valid<double>(Cn, m_impl->Cn);
 }
 
-double PlrBackDamper::xn() const
+template<> double PRJMODEL_API PlrBackDamper::xn() const
 {
   return to<double>(m_impl->xn);
+}
+
+template<> std::string PRJMODEL_API PlrBackDamper::xn() const
+{
+  return m_impl->xn;
 }
 
 bool PlrBackDamper::setXn(const double xn)
@@ -3266,9 +3486,14 @@ void QfrGeneral::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double QfrGeneral::a() const
+template<> double PRJMODEL_API QfrGeneral::a() const
 {
   return to<double>(m_impl->a);
+}
+
+template<> std::string PRJMODEL_API QfrGeneral::a() const
+{
+  return m_impl->a;
 }
 
 bool QfrGeneral::setA(const double a)
@@ -3282,9 +3507,14 @@ bool QfrGeneral::setA(const std::string& a)
   return assign_if_valid<double>(a, m_impl->a);
 }
 
-double QfrGeneral::b() const
+template<> double PRJMODEL_API QfrGeneral::b() const
 {
   return to<double>(m_impl->b);
+}
+
+template<> std::string PRJMODEL_API QfrGeneral::b() const
+{
+  return m_impl->b;
 }
 
 bool QfrGeneral::setB(const double b)
@@ -3488,9 +3718,14 @@ void QfrCrack::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double QfrCrack::a() const
+template<> double PRJMODEL_API QfrCrack::a() const
 {
   return to<double>(m_impl->a);
+}
+
+template<> std::string PRJMODEL_API QfrCrack::a() const
+{
+  return m_impl->a;
 }
 
 bool QfrCrack::setA(const double a)
@@ -3504,9 +3739,14 @@ bool QfrCrack::setA(const std::string& a)
   return assign_if_valid<double>(a, m_impl->a);
 }
 
-double QfrCrack::b() const
+template<> double PRJMODEL_API QfrCrack::b() const
 {
   return to<double>(m_impl->b);
+}
+
+template<> std::string PRJMODEL_API QfrCrack::b() const
+{
+  return m_impl->b;
 }
 
 bool QfrCrack::setB(const double b)
@@ -3520,9 +3760,14 @@ bool QfrCrack::setB(const std::string& b)
   return assign_if_valid<double>(b, m_impl->b);
 }
 
-double QfrCrack::length() const
+template<> double PRJMODEL_API QfrCrack::length() const
 {
   return to<double>(m_impl->length);
+}
+
+template<> std::string PRJMODEL_API QfrCrack::length() const
+{
+  return m_impl->length;
 }
 
 bool QfrCrack::setLength(const double length)
@@ -3536,9 +3781,14 @@ bool QfrCrack::setLength(const std::string& length)
   return assign_if_valid<double>(length, m_impl->length);
 }
 
-double QfrCrack::width() const
+template<> double PRJMODEL_API QfrCrack::width() const
 {
   return to<double>(m_impl->width);
+}
+
+template<> std::string PRJMODEL_API QfrCrack::width() const
+{
+  return m_impl->width;
 }
 
 bool QfrCrack::setWidth(const double width)
@@ -3552,9 +3802,14 @@ bool QfrCrack::setWidth(const std::string& width)
   return assign_if_valid<double>(width, m_impl->width);
 }
 
-double QfrCrack::depth() const
+template<> double PRJMODEL_API QfrCrack::depth() const
 {
   return to<double>(m_impl->depth);
+}
+
+template<> std::string PRJMODEL_API QfrCrack::depth() const
+{
+  return m_impl->depth;
 }
 
 bool QfrCrack::setDepth(const double depth)
@@ -3768,9 +4023,14 @@ void QfrTest2::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double QfrTest2::a() const
+template<> double PRJMODEL_API QfrTest2::a() const
 {
   return to<double>(m_impl->a);
+}
+
+template<> std::string PRJMODEL_API QfrTest2::a() const
+{
+  return m_impl->a;
 }
 
 bool QfrTest2::setA(const double a)
@@ -3784,9 +4044,14 @@ bool QfrTest2::setA(const std::string& a)
   return assign_if_valid<double>(a, m_impl->a);
 }
 
-double QfrTest2::b() const
+template<> double PRJMODEL_API QfrTest2::b() const
 {
   return to<double>(m_impl->b);
+}
+
+template<> std::string PRJMODEL_API QfrTest2::b() const
+{
+  return m_impl->b;
 }
 
 bool QfrTest2::setB(const double b)
@@ -3800,9 +4065,14 @@ bool QfrTest2::setB(const std::string& b)
   return assign_if_valid<double>(b, m_impl->b);
 }
 
-double QfrTest2::dP1() const
+template<> double PRJMODEL_API QfrTest2::dP1() const
 {
   return to<double>(m_impl->dP1);
+}
+
+template<> std::string PRJMODEL_API QfrTest2::dP1() const
+{
+  return m_impl->dP1;
 }
 
 bool QfrTest2::setDP1(const double dP1)
@@ -3816,9 +4086,14 @@ bool QfrTest2::setDP1(const std::string& dP1)
   return assign_if_valid<double>(dP1, m_impl->dP1);
 }
 
-double QfrTest2::F1() const
+template<> double PRJMODEL_API QfrTest2::F1() const
 {
   return to<double>(m_impl->F1);
+}
+
+template<> std::string PRJMODEL_API QfrTest2::F1() const
+{
+  return m_impl->F1;
 }
 
 bool QfrTest2::setF1(const double F1)
@@ -3832,9 +4107,14 @@ bool QfrTest2::setF1(const std::string& F1)
   return assign_if_valid<double>(F1, m_impl->F1);
 }
 
-double QfrTest2::dP2() const
+template<> double PRJMODEL_API QfrTest2::dP2() const
 {
   return to<double>(m_impl->dP2);
+}
+
+template<> std::string PRJMODEL_API QfrTest2::dP2() const
+{
+  return m_impl->dP2;
 }
 
 bool QfrTest2::setDP2(const double dP2)
@@ -3848,9 +4128,14 @@ bool QfrTest2::setDP2(const std::string& dP2)
   return assign_if_valid<double>(dP2, m_impl->dP2);
 }
 
-double QfrTest2::F2() const
+template<> double PRJMODEL_API QfrTest2::F2() const
 {
   return to<double>(m_impl->F2);
+}
+
+template<> std::string PRJMODEL_API QfrTest2::F2() const
+{
+  return m_impl->F2;
 }
 
 bool QfrTest2::setF2(const double F2)
@@ -4065,9 +4350,14 @@ void AfeDor::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double AfeDor::lam() const
+template<> double PRJMODEL_API AfeDor::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API AfeDor::lam() const
+{
+  return m_impl->lam;
 }
 
 bool AfeDor::setLam(const double lam)
@@ -4081,9 +4371,14 @@ bool AfeDor::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double AfeDor::turb() const
+template<> double PRJMODEL_API AfeDor::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API AfeDor::turb() const
+{
+  return m_impl->turb;
 }
 
 bool AfeDor::setTurb(const double turb)
@@ -4097,9 +4392,14 @@ bool AfeDor::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double AfeDor::expt() const
+template<> double PRJMODEL_API AfeDor::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API AfeDor::expt() const
+{
+  return m_impl->expt;
 }
 
 bool AfeDor::setExpt(const double expt)
@@ -4113,9 +4413,14 @@ bool AfeDor::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double AfeDor::dTmin() const
+template<> double PRJMODEL_API AfeDor::dTmin() const
 {
   return to<double>(m_impl->dTmin);
+}
+
+template<> std::string PRJMODEL_API AfeDor::dTmin() const
+{
+  return m_impl->dTmin;
 }
 
 bool AfeDor::setDTmin(const double dTmin)
@@ -4129,9 +4434,14 @@ bool AfeDor::setDTmin(const std::string& dTmin)
   return assign_if_valid<double>(dTmin, m_impl->dTmin);
 }
 
-double AfeDor::height() const
+template<> double PRJMODEL_API AfeDor::height() const
 {
   return to<double>(m_impl->ht);
+}
+
+template<> std::string PRJMODEL_API AfeDor::height() const
+{
+  return m_impl->ht;
 }
 
 bool AfeDor::setHeight(const double ht)
@@ -4145,9 +4455,14 @@ bool AfeDor::setHeight(const std::string& ht)
   return assign_if_valid<double>(ht, m_impl->ht);
 }
 
-double AfeDor::width() const
+template<> double PRJMODEL_API AfeDor::width() const
 {
   return to<double>(m_impl->wd);
+}
+
+template<> std::string PRJMODEL_API AfeDor::width() const
+{
+  return m_impl->wd;
 }
 
 bool AfeDor::setWidth(const double wd)
@@ -4161,7 +4476,7 @@ bool AfeDor::setWidth(const std::string& wd)
   return assign_if_valid<double>(wd, m_impl->wd);
 }
 
-double AfeDor::cd() const
+template<> double PRJMODEL_API AfeDor::cd() const
 {
   return to<double>(m_impl->cd);
 }
@@ -4363,9 +4678,14 @@ void DrPl2::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double DrPl2::lam() const
+template<> double PRJMODEL_API DrPl2::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API DrPl2::lam() const
+{
+  return m_impl->lam;
 }
 
 bool DrPl2::setLam(const double lam)
@@ -4379,9 +4699,14 @@ bool DrPl2::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double DrPl2::turb() const
+template<> double PRJMODEL_API DrPl2::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API DrPl2::turb() const
+{
+  return m_impl->turb;
 }
 
 bool DrPl2::setTurb(const double turb)
@@ -4395,9 +4720,14 @@ bool DrPl2::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double DrPl2::expt() const
+template<> double PRJMODEL_API DrPl2::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API DrPl2::expt() const
+{
+  return m_impl->expt;
 }
 
 bool DrPl2::setExpt(const double expt)
@@ -4411,9 +4741,14 @@ bool DrPl2::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double DrPl2::dH() const
+template<> double PRJMODEL_API DrPl2::dH() const
 {
   return to<double>(m_impl->dH);
+}
+
+template<> std::string PRJMODEL_API DrPl2::dH() const
+{
+  return m_impl->dH;
 }
 
 bool DrPl2::setDH(const double dH)
@@ -4427,9 +4762,14 @@ bool DrPl2::setDH(const std::string& dH)
   return assign_if_valid<double>(dH, m_impl->dH);
 }
 
-double DrPl2::height() const
+template<> double PRJMODEL_API DrPl2::height() const
 {
   return to<double>(m_impl->ht);
+}
+
+template<> std::string PRJMODEL_API DrPl2::height() const
+{
+  return m_impl->ht;
 }
 
 bool DrPl2::setHeight(const double ht)
@@ -4443,9 +4783,14 @@ bool DrPl2::setHeight(const std::string& ht)
   return assign_if_valid<double>(ht, m_impl->ht);
 }
 
-double DrPl2::width() const
+template<> double PRJMODEL_API DrPl2::width() const
 {
   return to<double>(m_impl->wd);
+}
+
+template<> std::string PRJMODEL_API DrPl2::width() const
+{
+  return m_impl->wd;
 }
 
 bool DrPl2::setWidth(const double wd)
@@ -4459,9 +4804,14 @@ bool DrPl2::setWidth(const std::string& wd)
   return assign_if_valid<double>(wd, m_impl->wd);
 }
 
-double DrPl2::cd() const
+template<> double PRJMODEL_API DrPl2::cd() const
 {
   return to<double>(m_impl->cd);
+}
+
+template<> std::string PRJMODEL_API DrPl2::cd() const
+{
+  return m_impl->cd;
 }
 
 bool DrPl2::setCd(const double cd)
@@ -4617,9 +4967,14 @@ void AfeFlow::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double AfeFlow::Flow() const
+template<> double PRJMODEL_API AfeFlow::Flow() const
 {
   return to<double>(m_impl->Flow);
+}
+
+template<> std::string PRJMODEL_API AfeFlow::Flow() const
+{
+  return m_impl->Flow;
 }
 
 bool AfeFlow::setFlow(const double Flow)
@@ -4872,9 +5227,14 @@ void AfeFan::setDesc(const std::string& desc)
   m_impl->desc = desc;
 }
 
-double AfeFan::lam() const
+template<> double PRJMODEL_API AfeFan::lam() const
 {
   return to<double>(m_impl->lam);
+}
+
+template<> std::string PRJMODEL_API AfeFan::lam() const
+{
+  return m_impl->lam;
 }
 
 bool AfeFan::setLam(const double lam)
@@ -4888,9 +5248,14 @@ bool AfeFan::setLam(const std::string& lam)
   return assign_if_valid<double>(lam, m_impl->lam);
 }
 
-double AfeFan::turb() const
+template<> double PRJMODEL_API AfeFan::turb() const
 {
   return to<double>(m_impl->turb);
+}
+
+template<> std::string PRJMODEL_API AfeFan::turb() const
+{
+  return m_impl->turb;
 }
 
 bool AfeFan::setTurb(const double turb)
@@ -4904,9 +5269,14 @@ bool AfeFan::setTurb(const std::string& turb)
   return assign_if_valid<double>(turb, m_impl->turb);
 }
 
-double AfeFan::expt() const
+template<> double PRJMODEL_API AfeFan::expt() const
 {
   return to<double>(m_impl->expt);
+}
+
+template<> std::string PRJMODEL_API AfeFan::expt() const
+{
+  return m_impl->expt;
 }
 
 bool AfeFan::setExpt(const double expt)
@@ -4920,9 +5290,14 @@ bool AfeFan::setExpt(const std::string& expt)
   return assign_if_valid<double>(expt, m_impl->expt);
 }
 
-double AfeFan::rdens() const
+template<> double PRJMODEL_API AfeFan::rdens() const
 {
   return to<double>(m_impl->rdens);
+}
+
+template<> std::string PRJMODEL_API AfeFan::rdens() const
+{
+  return m_impl->rdens;
 }
 
 bool AfeFan::setRdens(const double rdens)
@@ -4936,9 +5311,14 @@ bool AfeFan::setRdens(const std::string& rdens)
   return assign_if_valid<double>(rdens, m_impl->rdens);
 }
 
-double AfeFan::fdf() const
+template<> double PRJMODEL_API AfeFan::fdf() const
 {
   return to<double>(m_impl->fdf);
+}
+
+template<> std::string PRJMODEL_API AfeFan::fdf() const
+{
+  return m_impl->fdf;
 }
 
 bool AfeFan::setFdf(const double fdf)
@@ -4952,9 +5332,14 @@ bool AfeFan::setFdf(const std::string& fdf)
   return assign_if_valid<double>(fdf, m_impl->fdf);
 }
 
-double AfeFan::sop() const
+template<> double PRJMODEL_API AfeFan::sop() const
 {
   return to<double>(m_impl->sop);
+}
+
+template<> std::string PRJMODEL_API AfeFan::sop() const
+{
+  return m_impl->sop;
 }
 
 bool AfeFan::setSop(const double sop)
@@ -4968,9 +5353,14 @@ bool AfeFan::setSop(const std::string& sop)
   return assign_if_valid<double>(sop, m_impl->sop);
 }
 
-double AfeFan::off() const
+template<> double PRJMODEL_API AfeFan::off() const
 {
   return to<double>(m_impl->off);
+}
+
+template<> std::string PRJMODEL_API AfeFan::off() const
+{
+  return m_impl->off;
 }
 
 bool AfeFan::setOff(const double off)
@@ -5011,9 +5401,14 @@ bool AfeFan::setFpc(const std::vector<std::string>& fpc)
   }
 }
 
-double AfeFan::Sarea() const
+template<> double PRJMODEL_API AfeFan::Sarea() const
 {
   return to<double>(m_impl->Sarea);
+}
+
+template<> std::string PRJMODEL_API AfeFan::Sarea() const
+{
+  return m_impl->Sarea;
 }
 
 bool AfeFan::setSarea(const double Sarea)

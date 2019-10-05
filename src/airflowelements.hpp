@@ -147,43 +147,43 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the actual area [m^2]. */
-  double area() const;
+  template <typename T> T area() const;
   /** Sets the actual area [m^2]. */
   bool setArea(const double area);
   /** Sets the actual area [m^2]. */
   bool setArea(const std::string &area);
   /** Returns the hydraulic diameter [m]. */
-  double dia() const;
+  template <typename T> T dia() const;
   /** Sets the hydraulic diameter [m]. */
   bool setDia(const double dia);
   /** Sets the hydraulic diameter [m]. */
   bool setDia(const std::string &dia);
   /** Returns the flow coefficient. */
-  double coef() const;
+  template <typename T> T coef() const;
   /** Sets the flow coefficient. */
   bool setCoef(const double coef);
   /** Sets the flow coefficient. */
   bool setCoef(const std::string &coef);
   /** Returns the laminar/turbulet transition Reynolds number. */
-  double Re() const;
+  template <typename T> T Re() const;
   /** Sets the laminar/turbulet transition Reynolds number. */
   bool setRe(const double Re);
   /** Sets the laminar/turbulet transition Reynolds number. */
@@ -545,31 +545,31 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the actual area [m^2]. */
-  double area() const;
+  template <typename T> T area() const;
   /** Sets the actual area [m^2]. */
   bool setArea(const double area1);
   /** Sets the actual area [m^2]. */
   bool setArea(const std::string &area1);
   /** Returns the flow coefficient. */
-  double coef() const;
+  template <typename T> T coef() const;
   /** Sets the flow coefficient. */
   bool setCoef(const double coef);
   /** Sets the flow coefficient. */
@@ -666,19 +666,19 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
@@ -965,43 +965,43 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the point 1 pressure drop [Pa]. */
-  double dP1() const;
+  template <typename T> T dP1() const;
   /** Sets the point 1 pressure drop [Pa]. */
   bool setDP1(const double dP);
   /** Sets the point 1 pressure drop [Pa]. */
   bool setDP1(const std::string &dP);
   /** Returns the point 1 flow rate [kg/s].*/
-  double F1() const;
+  template <typename T> T F1() const;
   /** Sets the point 1 flow rate [kg/s].*/
   bool setF1(const double Flow);
   /** Sets the point 1 flow rate [kg/s].*/
   bool setF1(const std::string &Flow);
   /** Returns the point 2 pressure drop [Pa]. */
-  double dP2() const;
+  template <typename T> T dP2() const;
   /** Sets the point 2 pressure drop [Pa]. */
   bool setDP2(const double dP);
   /** Sets the point 2 pressure drop [Pa]. */
   bool setDP2(const std::string &dP);
   /** Returns the point 2 flow rate [kg/s].*/
-  double F2() const;
+  template <typename T> T F2() const;
   /** Sets the point 2 flow rate [kg/s].*/
   bool setF2(const double Flow);
   /** Sets the point 2 flow rate [kg/s].*/
@@ -1117,31 +1117,31 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the crack length [m]. */
-  double length() const;
+  template <typename T> T length() const;
   /** Sets the crack length [m]. */
   bool setLength(const double length);
   /** Sets the crack length [m]. */
   bool setLength(const std::string &length);
   /** Returns the crack width [m].*/
-  double width() const;
+  template <typename T> T width() const;
   /** Sets the crack width [m].*/
   bool setWidth(const double width);
   /** Sets the crack width [m].*/
@@ -1245,37 +1245,37 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the distance between levels [m]. */
-  double Ht() const;
+  template <typename T> T Ht() const;
   /** Sets the distance between levels [m]. */
   bool setHt(const double Ht);
   /** Sets the distance between levels [m]. */
   bool setHt(const std::string &Ht);
   /** Returns the cross-sectional area [m^2]. */
-  double area() const;
+  template <typename T> T area() const;
   /** Sets the cross-sectional area [m^2]. */
   bool setArea(const double Area);
   /** Sets the cross-sectional area [m^2]. */
   bool setArea(const std::string &Area);
   /** Returns the density of people [pers/m^2]. */
-  double people() const;
+  template <typename T> T people() const;
   /** Sets the density of people [pers/m^2]. */
   bool setPeople(const double peo);
   /** Sets the density of people [pers/m^2]. */
@@ -1386,43 +1386,43 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the distance between levels [m]. */
-  double Ht() const;
+  template <typename T> T Ht() const;
   /** Sets the distance between levels [m]. */
   bool setHt(const double Ht);
   /** Sets the distance between levels [m]. */
   bool setHt(const std::string &Ht);
   /** Returns the cross-sectional area [m^2]. */
-  double area() const;
+  template <typename T> T area() const;
   /** Sets the cross-sectional area [m^2]. */
   bool setArea(const double Area);
   /** Sets the cross-sectional area [m^2]. */
   bool setArea(const std::string &Area);
   /** Returns the perimeter [m]. */
-  double perim() const;
+  template <typename T> T perim() const;
   /** Sets the perimeter [m]. */
   bool setPerim(const double perim);
   /** Sets the perimeter [m]. */
   bool setPerim(const std::string &perim);
   /** Returns the roughness [m]. */
-  double rough() const;
+  template <typename T> T rough() const;
   /** Sets the roughness [m]. */
   bool setRough(const double rough);
   /** Sets the roughness [m]. */
@@ -1535,31 +1535,31 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient (dP > 0). */
-  double Cp() const;
+  template <typename T> T Cp() const;
   /** Sets the turbulent flow coefficient (dP > 0). */
   bool setCp(const double Cp);
   /** Sets the turbulent flow coefficient (dP > 0). */
   bool setCp(const std::string &Cp);
   /** Returns the pressure exponent (dP > 0). */
-  double xp() const;
+  template <typename T> T xp() const;
   /** Sets the pressure exponent (dP > 0). */
   bool setXp(const double xp);
   /** Sets the pressure exponent (dP > 0). */
   bool setXp(const std::string &xp);
   /** Returns the turbulent flow coefficient (dP < 0). */
-  double Cn() const;
+  template <typename T> T Cn() const;
   /** Sets the turbulent flow coefficient (dP < 0). */
   bool setCn(const double Cn);
   /** Sets the turbulent flow coefficient (dP < 0). */
   bool setCn(const std::string &Cn);
   /** Returns the pressure exponent (dP < 0). */
-  double xn() const;
+  template <typename T> T xn() const;
   /** Sets the pressure exponent (dP < 0). */
   bool setXn(const double xn);
   /** Sets the pressure exponent (dP < 0). */
@@ -1705,13 +1705,13 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the flow rate coefficient. */
-  double a() const;
+  template <typename T> T a() const;
   /** Sets the flow rate coefficient. */
   bool setA(const double a);
   /** Sets the flow rate coefficient. */
   bool setA(const std::string &a);
   /** Returns the flow rate^2 coefficient. */
-  double b() const;
+  template <typename T> T b() const;
   /** Sets the flow rate^2 coefficient. */
   bool setB(const double b);
   /** Sets the flow rate^2 coefficient. */
@@ -1858,31 +1858,31 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the flow rate coefficient. */
-  double a() const;
+  template <typename T> T a() const;
   /** Sets the flow rate coefficient. */
   bool setA(const double a);
   /** Sets the flow rate coefficient. */
   bool setA(const std::string &a);
   /** Returns the flow rate^2 coefficient. */
-  double b() const;
+  template <typename T> T b() const;
   /** Sets the flow rate^2 coefficient. */
   bool setB(const double b);
   /** Sets the flow rate^2 coefficient. */
   bool setB(const std::string &b);
   /** Returns the crack length [m]. */
-  double length() const;
+  template <typename T> T length() const;
   /** Sets the crack length [m]. */
   bool setLength(const double length);
   /** Sets the crack length [m]. */
   bool setLength(const std::string &length);
   /** Returns the crack width [m].*/
-  double width() const;
+  template <typename T> T width() const;
   /** Sets the crack width [m].*/
   bool setWidth(const double width);
   /** Sets the crack width [m].*/
   bool setWidth(const std::string &width);
   /** Sets the crack depth [m].*/
-  double depth() const;
+  template <typename T> T depth() const;
   /** Sets the crack depth [m].*/
   bool setDepth(const double depth);
   /** Sets the crack depth [m].*/
@@ -1994,37 +1994,37 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the flow rate coefficient. */
-  double a() const;
+  template <typename T> T a() const;
   /** Sets the flow rate coefficient. */
   bool setA(const double a);
   /** Sets the flow rate coefficient. */
   bool setA(const std::string &a);
   /** Returns the flow rate^2 coefficient. */
-  double b() const;
+  template <typename T> T b() const;
   /** Sets the flow rate^2 coefficient. */
   bool setB(const double b);
   /** Sets the flow rate^2 coefficient. */
   bool setB(const std::string &b);
   /** Returns the point 1 pressure drop [Pa]. */
-  double dP1() const;
+  template <typename T> T dP1() const;
   /** Sets the point 1 pressure drop [Pa]. */
   bool setDP1(const double dP);
   /** Sets the point 1 pressure drop [Pa]. */
   bool setDP1(const std::string &dP);
   /** Returns the point 1 flow rate [kg/s].*/
-  double F1() const;
+  template <typename T> T F1() const;
   /** Sets the point 1 flow rate [kg/s].*/
   bool setF1(const double Flow);
   /** Sets the point 1 flow rate [kg/s].*/
   bool setF1(const std::string &Flow);
   /** Returns the point 2 pressure drop [Pa]. */
-  double dP2() const;
+  template <typename T> T dP2() const;
   /** Sets the point 2 pressure drop [Pa]. */
   bool setDP2(const double dP);
   /** Sets the point 2 pressure drop [Pa]. */
   bool setDP2(const std::string &dP);
   /** Returns the point 2 flow rate [kg/s].*/
-  double F2() const;
+  template <typename T> T F2() const;
   /** Sets the point 2 flow rate [kg/s].*/
   bool setF2(const double Flow);
   /** Sets the point 2 flow rate [kg/s].*/
@@ -2137,43 +2137,43 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the minimum temperature difference for two-way flow [C]. */
-  double dTmin() const;
+  template <typename T> T dTmin() const;
   /** Sets the minimum temperature difference for two-way flow [C]. */
   bool setDTmin(const double dTmin);
   /** Sets the minimum temperature difference for two-way flow [C]. */
   bool setDTmin(const std::string &dTmin);
   /** Returns the height of doorway [m]. */
-  double height() const;
+  template <typename T> T height() const;
   /** Sets the height of doorway [m]. */
   bool setHeight(const double ht);
   /** Sets the height of doorway [m]. */
   bool setHeight(const std::string &ht);
   /** Sets the width of doorway [m]. */
-  double width() const;
+  template <typename T> T width() const;
   /** Sets the width of doorway [m]. */
   bool setWidth(const double wd);
   /** Sets the width of doorway [m]. */
   bool setWidth(const std::string &wd);
   /** Returns the discharge coefficient. */
-  double cd() const;
+  template <typename T> T cd() const;
   /** Sets the discharge coefficient. */
   bool setCd(const double cd);
   /** Sets the discharge coefficient. */
@@ -2282,43 +2282,43 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the distance above/below midpoint [m]. */
-  double dH() const;
+  template <typename T> T dH() const;
   /** Sets the distance above/below midpoint [m]. */
   bool setDH(const double dH);
   /** Sets the distance above/below midpoint [m]. */
   bool setDH(const std::string &dH);
   /** Returns the height of doorway [m]. */
-  double height() const;
+  template <typename T> T height() const;
   /** Sets the height of doorway [m]. */
   bool setHeight(const double ht);
   /** Sets the height of doorway [m]. */
   bool setHeight(const std::string &ht);
   /** Sets the width of doorway [m]. */
-  double width() const;
+  template <typename T> T width() const;
   /** Sets the width of doorway [m]. */
   bool setWidth(const double wd);
   /** Sets the width of doorway [m]. */
   bool setWidth(const std::string &wd);
   /** Returns the discharge coefficient. */
-  double cd() const;
+  template <typename T> T cd() const;
   /** Sets the discharge coefficient. */
   bool setCd(const double cd);
   /** Sets the discharge coefficient. */
@@ -2420,7 +2420,7 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the design flow rate [kg/s or m^3/s]. */
-  double Flow() const;
+  template <typename T> T Flow() const;
   /** Sets the design flow rate [kg/s or m^3/s]. */
   bool setFlow(const double Flow);
   /** Sets the design flow rate [kg/s or m^3/s]. */
@@ -2572,43 +2572,43 @@ public:
   /** Sets the element description. */
   void setDesc(const std::string &desc) override;
   /** Returns the laminar flow coefficient. */
-  double lam() const;
+  template <typename T> T lam() const;
   /** Sets the laminar flow coefficient. */
   bool setLam(const double lam);
   /** Sets the laminar flow coefficient. */
   bool setLam(const std::string &lam);
   /** Returns the turbulent flow coefficient. */
-  double turb() const;
+  template <typename T> T turb() const;
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const double turb);
   /** Sets the turbulent flow coefficient. */
   bool setTurb(const std::string &turb);
   /** Returns the pressure exponent. */
-  double expt() const;
+  template <typename T> T expt() const;
   /** Sets the pressure exponent. */
   bool setExpt(const double expt);
   /** Sets the pressure exponent. */
   bool setExpt(const std::string &expt);
   /** Returns the reference fluid density [kg/m^3]. */
-  double rdens() const;
+  template <typename T> T rdens() const;
   /** Sets the reference fluid density [kg/m^3]. */
   bool setRdens(const double rdens);
   /** Sets the reference fluid density [kg/m^3]. */
   bool setRdens(const std::string &rdens);
   /** Returns the free delivery flow (prise = 0) [kg/s]. */
-  double fdf() const;
+  template <typename T> T fdf() const;
   /** Returns the free delivery flow (prise = 0) [kg/s]. */
   bool setFdf(const double fdf);
   /** Returns the free delivery flow (prise = 0) [kg/s]. */
   bool setFdf(const std::string &fdf);
   /** Returns the shut-off pressure (flow = 0) [Pa]. */
-  double sop() const;
+  template <typename T> T sop() const;
   /** Sets the shut-off pressure (flow = 0) [Pa]. */
   bool setSop(const double sop);
   /** Sets the shut-off pressure (flow = 0) [Pa]. */
   bool setSop(const std::string &sop);
   /** Returns the minimum RPM fraction: fan is off if (RPM/rated RPM) < off. */
-  double off() const;
+  template <typename T> T off() const;
   /** Returns the minimum RPM fraction: fan is off if (RPM/rated RPM) < off. */
   bool setOff(const double off);
   /** Returns the minimum RPM fraction: fan is off if (RPM/rated RPM) < off. */
@@ -2620,7 +2620,7 @@ public:
   /** Sets the fan performance polynomial coefficients. */
   bool setFpc(const std::vector<std::string> &fpc);
   /** Returns the shut-off orifice area [m^2]. */
-  double Sarea() const;
+  template <typename T> T Sarea() const;
   /** Returns the shut-off orifice area [m^2]. */
   bool setSarea(const double Sarea);
   /** Returns the shut-off orifice area [m^2]. */
