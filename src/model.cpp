@@ -1772,7 +1772,7 @@ void IndexModel::IndexModelImpl::addSpecies(Species& species)
 
 bool IndexModel::IndexModelImpl::removeSpecies(const Species & species)
 {
-  unsigned originalSize = m_species.size();
+  auto originalSize = m_species.size();
   m_species.erase(std::remove_if(m_species.begin(), m_species.end(), [&](Species s) { return s == species; }), m_species.end());
   // There's probably a better way to do this
   if (m_species.size() != originalSize) {
@@ -1890,7 +1890,7 @@ void IndexModel::IndexModelImpl::readZoneIc(Reader & input)
 {
   unsigned int nn = input.readUInt();
   if (nn != 0) {
-    unsigned int nctm = contaminants().size();
+    auto nctm = contaminants().size();
     if (nn != nctm * m_zones.size()) {
       LOG_FATAL("Mismatch between number of zones, contaminants, and initial conditions");
     }
@@ -1900,7 +1900,7 @@ void IndexModel::IndexModelImpl::readZoneIc(Reader & input)
         LOG_FATAL("Mismatch between zone IC number and zone number at line " + std::to_string(input.lineNumber()));
       }
       std::vector<std::string> ic;
-      for (unsigned int j = 0; j < nctm; j++) {
+      for (auto j = 0; j < nctm; j++) {
         ic.push_back(input.readNumber<std::string>());
       }
       m_zones[i].setIc(ic);
@@ -1915,13 +1915,13 @@ std::string IndexModel::IndexModelImpl::writeZoneIc(int start)
   if (start != 0) {
     offset = 1 - start;
   }
-  int ncontaminants = contaminants().size();
-  int nctm = ncontaminants * (m_zones.size() - start);
+  auto ncontaminants = contaminants().size();
+  auto nctm = ncontaminants * (m_zones.size() - start);
   std::string string = ANY_TO_STR(nctm) + " ! initial zone concentrations:\n";
   if (nctm) {
     for (unsigned i = start; i < m_zones.size(); i++) {
       string += ANY_TO_STR(i + offset);
-      for (unsigned j = 0; j < (unsigned)ncontaminants; j++) {
+      for (auto j = 0; j < ncontaminants; j++) {
         string += ' ' + ANY_TO_STR(m_zones[i].ic(j));
       }
       string += '\n';

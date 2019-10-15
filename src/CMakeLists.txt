@@ -9,6 +9,7 @@ set(${target_name}_src
   prjmodel_api.hpp
   #contam/ForwardTranslator.hpp
   #contam/ForwardTranslator.cpp
+  connector.hpp
   logging.hpp
   reader.hpp
   reader.cpp

@@ -889,13 +889,13 @@ private:
 template <class T> std::string IndexModel::IndexModelImpl::writeSectionVector(std::vector<T> vector, std::string label, int start)
 {
   std::string string;
-  int number = vector.size() - start;
+  auto number = vector.size() - start;
   if (label.empty()) {
     string += std::to_string(number) + '\n';
   } else {
     string += std::to_string(number) + " ! " + label + '\n';
   }
-  for (unsigned int i = start; i < vector.size(); i++) {
+  for (auto i = start; i < vector.size(); i++) {
     string += vector[i].write();
   }
   string += "-999\n";
@@ -905,7 +905,7 @@ template <class T> std::string IndexModel::IndexModelImpl::writeSectionVector(st
 template <class T> std::string IndexModel::IndexModelImpl::writeSectionVector(std::vector<std::shared_ptr<T> > vector, std::string label, int start)
 {
   std::string string;
-  int number = vector.size() - start;
+  auto number = vector.size() - start;
   if (label.empty()) {
     string += std::to_string(number) + '\n';
   } else {
@@ -921,13 +921,13 @@ template <class T> std::string IndexModel::IndexModelImpl::writeSectionVector(st
 template <class T> std::string IndexModel::IndexModelImpl::writeArray(std::vector<T> vector, std::string label, int start)
 {
   std::string string;
-  int number = vector.size() - start;
+  auto number = vector.size() - start;
   if (label.empty()) {
     string += std::to_string(number) + '\n';
   } else {
     string += std::to_string(number) + " ! " + label + '\n';
   }
-  for (unsigned int i = start; i < vector.size(); i++) {
+  for (auto i = start; i < vector.size(); i++) {
     string += ' ' + std::to_string(vector[i]);
   }
   return string + '\n';
