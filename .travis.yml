@@ -7,14 +7,14 @@ matrix:
       dist: xenial
       compiler: gcc
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
-          packages: ['clang-6.0', 'libstdc++-8-dev']
+#    - os: linux
+#      compiler: clang
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#            - llvm-toolchain-trusty-6.0
+#          packages: ['clang-6.0', 'libstdc++-8-dev']
 
     - os: osx
       compiler: gcc
