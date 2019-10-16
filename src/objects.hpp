@@ -32,6 +32,7 @@
 
 #include "defines.hpp"
 #include "subobjects.hpp"
+#include "connector.hpp"
 #include "prjmodel_api.hpp"
 #include <vector>
 
@@ -963,20 +964,9 @@ private:
   {
     Impl();
 
-    //void setWindPressure(bool b);
-    //bool windPressure();
-    //void setSystem(bool b);
-    //bool system();
-    //void setExhaust(bool b);
-    //bool exhaust();
-    //void setRecirculation(bool b);
-    //bool recirculation();
-    //void setOutsideAir(bool b);
-    //bool outsideAir();
-
     int m_nr;  // path number (IX); in order from 1 to _npath
     int m_flags;  // airflow path flag values (I2)
-    int m_pzn;  // zone N index (IX); converted to pointer
+    Connector<int, Zone> m_pzn;  // zone N index (IX); converted to pointer
     int m_pzm;  // zone M index (IX); converted to pointer
     int m_pe;  // flow element index (IX); converted to pointer
     int m_pf;  // filter index (IX); converted to pointer
