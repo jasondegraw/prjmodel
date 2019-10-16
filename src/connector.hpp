@@ -29,7 +29,6 @@
 #include <vector>
 #include <list>
 #include <memory>
-#include <optional>
 
 #include "prjmodel_api.hpp"
 
@@ -48,9 +47,20 @@ public:
   {
     return m_i;
   }
+
   operator I() const
   {
     return m_i;
+  }
+
+  void connect(T* t)
+  {
+    m_t = t;
+  }
+
+  T* object()
+  {
+    return m_t;
   }
 
 private:

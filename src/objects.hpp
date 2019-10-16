@@ -967,7 +967,7 @@ private:
     int m_nr;  // path number (IX); in order from 1 to _npath
     int m_flags;  // airflow path flag values (I2)
     Connector<int, Zone> m_pzn;  // zone N index (IX); converted to pointer
-    int m_pzm;  // zone M index (IX); converted to pointer
+    Connector<int, Zone> m_pzm;  // zone M index (IX); converted to pointer
     int m_pe;  // flow element index (IX); converted to pointer
     int m_pf;  // filter index (IX); converted to pointer
     int m_pw;  // wind coefficients index (IX); converted to pointer
