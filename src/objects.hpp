@@ -371,49 +371,49 @@ public:
   /** Sets the non-trace contaminant flag: true = non-trace, false = trace species. */
   void setNtflag(const bool ntflag);
   /** Returns the molar mass [kg/kmol] for gas contaminants. */
-  double molwt() const;
+  template <typename T> T molwt() const;
   /** Sets the molar mass [kg/kmol] for gas contaminants. */
   bool setMolwt(const double molwt);
   /** Sets the molar mass [kg/kmol] for gas contaminants. */
   bool setMolwt(const std::string &molwt);
   /** Returns the mean diameter [m] for particle contaminants. */
-  double mdiam() const;
+  template <typename T> T mdiam() const;
   /** Sets the mean diameter [m] for particle contaminants. */
   bool setMdiam(const double mdiam);
   /** Sets the mean diameter [m] for particle contaminants. */
   bool setMdiam(const std::string &mdiam);
   /** Returns the effective density [kg/m^3] for particle contaminants. */
-  double edens() const;
+  template <typename T> T edens() const;
   /** Sets the effective density [kg/m^3] for particle contaminants. */
   bool setEdens(const double edens);
   /** Sets the effective density [kg/m^3] for particle contaminants. */
   bool setEdens(const std::string &edens);
   /** Returns the contaminant decay constant [1/s]. */
-  double decay() const;
+  template <typename T> T decay() const;
   /** Sets the contaminant decay constant [1/s]. */
   bool setDecay(const double decay);
   /** Sets the contaminant decay constant [1/s]. */
   bool setDecay(const std::string &decay);
   /** Returns the contaminant molecular diffusion coefficient [m^2/s]. */
-  double Dm() const;
+  template <typename T> T Dm() const;
   /** Sets the contaminant molecular diffusion coefficient [m^2/s]. */
   bool setDm(const double Dm);
   /** Sets the contaminant molecular diffusion coefficient [m^2/s]. */
   bool setDm(const std::string &Dm);
   /** Returns the default contaminant concentration [kg/kg air]. */
-  double ccdef() const;
+  template <typename T> T ccdef() const;
   /** Sets the default contaminant concentration [kg/kg air]. */
   bool setCcdef(const double ccdef);
   /** Sets the default contaminant concentration [kg/kg air]. */
   bool setCcdef(const std::string &ccdef);
   /** Returns the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
-  double Cp() const;
+  template <typename T> T Cp() const;
   /** Sets the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
   bool setCp(const double Cp);
   /** Sets the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
   bool setCp(const std::string &Cp);
   /** Returns the UVGI susceptability constant [m2/J]. */
-  double Kuv() const;
+  template <typename T> T Kuv() const;
   /** Sets the UVGI susceptability constant [m2/J]. */
   bool setKuv(const double K);
   /** Sets the UVGI susceptability constant [m2/J]. */
@@ -449,144 +449,32 @@ public:
   //@}
 private:
 
-  class SpeciesImpl
+  struct Impl
   {
-  public:
-    /** @name Constructors */
-    //@{
-    SpeciesImpl();
-    SpeciesImpl(int nr, int sflag, int ntflag, std::string molwt, std::string mdiam, std::string edens, std::string decay, std::string Dm,
-      std::string ccdef, std::string Cp, std::string K, int uc, int umd, int ued, int udm, int ucp, std::string name, std::string desc);
-    SpeciesImpl(int nr, int sflag, int ntflag, double molwt, double mdiam, double edens, double decay,
-      double Dm, double ccdef, double Cp, double K, int ucc, int umd, int ued, int udm, int ucp, std::string name,
-      std::string desc);
 
-    //@}
-    /** @name Input and Output */
-    //@{
+    Impl();
 
-    /** Read an object from a Reader. */
-    void read(Reader& input);
-    /** Write the object to a string. */
-    std::string write();
-
-    //@}
-    /** @name Getters and Setters */
-    //@{
-
-    /** Returns the species number, in order from 1 to the number of species. */
-    int nr() const;
-    /** Sets the species number. This should only be done with care. */
-    void setNr(const int nr);
-    /** Returns the simulation flag: true = simulated, false = unsimulated species. */
-    bool sflag() const;
-    /** Sets the simulation flag: true = simulated, false = unsimulated species. */
-    void setSflag(const bool sflag);
-    /** Returns the non-trace contaminant flag: true = non-trace, false = trace species. */
-    bool ntflag() const;
-    /** Sets the non-trace contaminant flag: true = non-trace, false = trace species. */
-    void setNtflag(const bool ntflag);
-    /** Returns the molar mass [kg/kmol] for gas contaminants. */
-    double molwt() const;
-    /** Sets the molar mass [kg/kmol] for gas contaminants. */
-    bool setMolwt(const double molwt);
-    /** Sets the molar mass [kg/kmol] for gas contaminants. */
-    bool setMolwt(const std::string& molwt);
-    /** Returns the mean diameter [m] for particle contaminants. */
-    double mdiam() const;
-    /** Sets the mean diameter [m] for particle contaminants. */
-    bool setMdiam(const double mdiam);
-    /** Sets the mean diameter [m] for particle contaminants. */
-    bool setMdiam(const std::string& mdiam);
-    /** Returns the effective density [kg/m^3] for particle contaminants. */
-    double edens() const;
-    /** Sets the effective density [kg/m^3] for particle contaminants. */
-    bool setEdens(const double edens);
-    /** Sets the effective density [kg/m^3] for particle contaminants. */
-    bool setEdens(const std::string& edens);
-    /** Returns the contaminant decay constant [1/s]. */
-    double decay() const;
-    /** Sets the contaminant decay constant [1/s]. */
-    bool setDecay(const double decay);
-    /** Sets the contaminant decay constant [1/s]. */
-    bool setDecay(const std::string& decay);
-    /** Returns the contaminant molecular diffusion coefficient [m^2/s]. */
-    double Dm() const;
-    /** Sets the contaminant molecular diffusion coefficient [m^2/s]. */
-    bool setDm(const double Dm);
-    /** Sets the contaminant molecular diffusion coefficient [m^2/s]. */
-    bool setDm(const std::string& Dm);
-    /** Returns the default contaminant concentration [kg/kg air]. */
-    double ccdef() const;
-    /** Sets the default contaminant concentration [kg/kg air]. */
-    bool setCcdef(const double ccdef);
-    /** Sets the default contaminant concentration [kg/kg air]. */
-    bool setCcdef(const std::string& ccdef);
-    /** Returns the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
-    double Cp() const;
-    /** Sets the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
-    bool setCp(const double Cp);
-    /** Sets the contaminant specific heat at constant pressure [J/kgK]. This is not used by CONTAM. */
-    bool setCp(const std::string& Cp);
-
-    /** Returns the UVGI susceptability constant [m2/J]. */
-    double Kuv() const;
-    /** Sets the UVGI susceptability constant [m2/J]. */
-    bool setKuv(const double K);
-    /** Sets the UVGI susceptability constant [m2/J]. */
-    bool setKuv(const std::string& K);
-
-    /** Returns the concentration display units. */
-    int ucc() const;
-    /** Sets the concentration display units. */
-    void setUcc(const int ucc);
-    /** Returns the mean diameter display units. */
-    int umd() const;
-    /** Sets the mean diameter display units. */
-    void setUmd(const int umd);
-    /** Returns the effective density display units. */
-    int ued() const;
-    /** Sets the effective density display units. */
-    void setUed(const int ued);
-    /** Returns the diffusion coefficient display units. */
-    int udm() const;
-    /** Sets the diffusion coefficient display units. */
-    void setUdm(const int udm);
-    /** Returns the specific heat display units. */
-    int ucp() const;
-    /** Sets the specific heat display units. */
-    void setUcp(const int ucp);
-    /** Returns the species name. */
-    std::string name() const;
-    /** Sets the species name. */
-    void setName(const std::string& name);
-    /** Returns the species description. */
-    std::string desc() const;
-    /** Sets the species description. */
-    void setDesc(const std::string& desc);
-
-  private:
-    int m_nr;  // species number (IX), in order from 1 to _nspcs
-    int m_sflag;  // 1 = simulated, 0 = unsimulated species (I2) {W}
-    int m_ntflag;  // 1 = non-trace, 0 = trace species (I2) {W}
-    PRJFLOAT m_molwt;  // molar mass [kg/kmol] - gas (R4)
-    PRJFLOAT m_mdiam;  // mean diameter - particle [m] (R4)
-    PRJFLOAT m_edens;  // effective density - particle [kg/m^3] (R4)
-    PRJFLOAT m_decay;  // decay constant [1/s] (R4) {W}
-    PRJFLOAT m_Dm;  // molecular diffusion coefficient [m2/s] (R4)
-    PRJFLOAT m_ccdef;  // default concentration [kg/kg air] (R4)
-    PRJFLOAT m_Cp;  // (unused) specific heat at constant pressure [J/kgK] (R4)
-    PRJFLOAT m_Kuv; // UVGI susceptability constant [m2/J] (R4) {CONTAM 3.2}
-    int m_ucc;  // units to display concentration (I2) {W}
-    int m_umd;  // units to display mean diameter (I2) {W}
-    int m_ued;  // units to display effective density (I2) {W}
-    int m_udm;  // units to display diffusion coefficient (I2) {W}
-    int m_ucp;  // units to display specific heat (I2) {W}
-    std::string m_name;  // species name (CS)
-    std::string m_desc;  // species description (CS) {W}
+    int nr;  // species number (IX), in order from 1 to _nspcs
+    int sflag;  // 1 = simulated, 0 = unsimulated species (I2) {W}
+    int ntflag;  // 1 = non-trace, 0 = trace species (I2) {W}
+    PRJFLOAT molwt;  // molar mass [kg/kmol] - gas (R4)
+    PRJFLOAT mdiam;  // mean diameter - particle [m] (R4)
+    PRJFLOAT edens;  // effective density - particle [kg/m^3] (R4)
+    PRJFLOAT decay;  // decay constant [1/s] (R4) {W}
+    PRJFLOAT Dm;  // molecular diffusion coefficient [m2/s] (R4)
+    PRJFLOAT ccdef;  // default concentration [kg/kg air] (R4)
+    PRJFLOAT Cp;  // (unused) specific heat at constant pressure [J/kgK] (R4)
+    PRJFLOAT Kuv; // UVGI susceptability constant [m2/J] (R4) {CONTAM 3.2}
+    int ucc;  // units to display concentration (I2) {W}
+    int umd;  // units to display mean diameter (I2) {W}
+    int ued;  // units to display effective density (I2) {W}
+    int udm;  // units to display diffusion coefficient (I2) {W}
+    int ucp;  // units to display specific heat (I2) {W}
+    std::string name;  // species name (CS)
+    std::string desc;  // species description (CS) {W}
   };
 
-  std::shared_ptr<SpeciesImpl> m_impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 /** Ahs is a class that represents CONTAM's simple air handling system. These
