@@ -709,38 +709,28 @@ bool Zone::setIc(const std::vector<std::string>& ic)
 }
 
 Species::Species() :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl))
+  m_impl(std::shared_ptr<Species::Impl>(new Species::Impl))
 {}
 
 Species::Species(std::string molwt, std::string Dm, std::string ccdef, std::string Cp, std::string name, std::string desc) :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl))
+  m_impl(std::shared_ptr<Species::Impl>(new Species::Impl))
 {
-  m_impl->setMolwt(molwt);
-  m_impl->setDm(Dm);
-  m_impl->setCcdef(ccdef);
-  m_impl->setName(name);
-  m_impl->setDesc(desc);
+  setMolwt(molwt);
+  setDm(Dm);
+  setCcdef(ccdef);
+  setName(name);
+  setDesc(desc);
 }
 
 Species::Species(double molwt, double Dm, double ccdef, double Cp, std::string name, std::string desc) :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl))
+  m_impl(std::shared_ptr<Impl>(new Species::Impl))
 {
-  m_impl->setMolwt(molwt);
-  m_impl->setDm(Dm);
-  m_impl->setCcdef(ccdef);
-  m_impl->setName(name);
-  m_impl->setDesc(desc);
+  setMolwt(molwt);
+  setDm(Dm);
+  setCcdef(ccdef);
+  setName(name);
+  setDesc(desc);
 }
-
-Species::Species(int nr,int sflag,int ntflag,std::string molwt,std::string mdiam,std::string edens,std::string decay,std::string Dm,
-  std::string ccdef,std::string Cp, std::string K,int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc) :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl(nr,sflag,ntflag,molwt,mdiam,edens,decay,Dm,ccdef,Cp,K,ucc,umd,ued,udm,ucp,name,desc)))
-{}
-
-Species::Species(int nr,int sflag,int ntflag,double molwt,double mdiam,double edens,double decay,double Dm,
-  double ccdef,double Cp, double K, int ucc,int umd,int ued,int udm,int ucp,std::string name,std::string desc) :
-  m_impl(std::shared_ptr<SpeciesImpl>(new SpeciesImpl(nr,sflag,ntflag,molwt,mdiam,edens,decay,Dm,ccdef,Cp,K,ucc,umd,ued,udm,ucp,name,desc)))
-{}
 
 Species::Species(const Species &other) : m_impl(other.m_impl)
 {}
@@ -764,244 +754,14 @@ bool Species::operator!=(const Species &other) const
   return m_impl!=other.m_impl;
 }
 
-std::string Species::write()
-{
-  return m_impl->write();
-}
-
-void Species::read(Reader &input)
-{
-  m_impl->read(input);
-}
-
-int Species::nr() const
-{
-  return m_impl->nr();
-}
-
-void Species::setNr(const int nr)
-{
-  m_impl->setNr(nr);
-}
-
-bool Species::sflag() const
-{
-  return m_impl->sflag();
-}
-
-void Species::setSflag(const bool sflag)
-{
-  m_impl->setSflag(sflag);
-}
-
-bool Species::ntflag() const
-{
-  return m_impl->ntflag();
-}
-
-void Species::setNtflag(const bool ntflag)
-{
-  m_impl->setNtflag(ntflag);
-}
-
-double Species::molwt() const
-{
-  return m_impl->molwt();
-}
-
-bool Species::setMolwt(const double molwt)
-{
-  return m_impl->setMolwt(molwt);
-}
-
-bool Species::setMolwt(const std::string &molwt)
-{
-  return m_impl->setMolwt(molwt);
-}
-
-double Species::mdiam() const
-{
-  return m_impl->mdiam();
-}
-
-bool Species::setMdiam(const double mdiam)
-{
-  return m_impl->setMdiam(mdiam);
-}
-
-bool Species::setMdiam(const std::string &mdiam)
-{
-  return m_impl->setMdiam(mdiam);
-}
-
-double Species::edens() const
-{
-  return m_impl->edens();
-}
-
-bool Species::setEdens(const double edens)
-{
-  return m_impl->setEdens(edens);
-}
-
-bool Species::setEdens(const std::string &edens)
-{
-  return m_impl->setEdens(edens);
-}
-
-double Species::decay() const
-{
-  return m_impl->decay();
-}
-
-bool Species::setDecay(const double decay)
-{
-  return m_impl->setDecay(decay);
-}
-
-bool Species::setDecay(const std::string &decay)
-{
-  return m_impl->setDecay(decay);
-}
-
-double Species::Dm() const
-{
-  return m_impl->Dm();
-}
-
-bool Species::setDm(const double Dm)
-{
-  return m_impl->setDm(Dm);
-}
-
-bool Species::setDm(const std::string &Dm)
-{
-  return m_impl->setDm(Dm);
-}
-
-double Species::ccdef() const
-{
-  return m_impl->ccdef();
-}
-
-bool Species::setCcdef(const double ccdef)
-{
-  return m_impl->setCcdef(ccdef);
-}
-
-bool Species::setCcdef(const std::string &ccdef)
-{
-  return m_impl->setCcdef(ccdef);
-}
-
-double Species::Cp() const
-{
-  return m_impl->Cp();
-}
-
-bool Species::setCp(const double Cp)
-{
-  return m_impl->setCp(Cp);
-}
-
-bool Species::setCp(const std::string &Cp)
-{
-  return m_impl->setCp(Cp);
-}
-
-double Species::Kuv() const
-{
-  return m_impl->Kuv();
-}
-
-bool Species::setKuv(const double K)
-{
-  return m_impl->setKuv(K);
-}
-
-bool Species::setKuv(const std::string& K)
-{
-  return m_impl->setKuv(K);
-}
-
-int Species::ucc() const
-{
-  return m_impl->ucc();
-}
-
-void Species::setUcc(const int ucc)
-{
-  m_impl->setUcc(ucc);
-}
-
-int Species::umd() const
-{
-  return m_impl->umd();
-}
-
-void Species::setUmd(const int umd)
-{
-  m_impl->setUmd(umd);
-}
-
-int Species::ued() const
-{
-  return m_impl->ued();
-}
-
-void Species::setUed(const int ued)
-{
-  m_impl->setUed(ued);
-}
-
-int Species::udm() const
-{
-  return m_impl->udm();
-}
-
-void Species::setUdm(const int udm)
-{
-  m_impl->setUdm(udm);
-}
-
-int Species::ucp() const
-{
-  return m_impl->ucp();
-}
-
-void Species::setUcp(const int ucp)
-{
-  m_impl->setUcp(ucp);
-}
-
-std::string Species::name() const
-{
-  return m_impl->name();
-}
-
-void Species::setName(const std::string &name)
-{
-  m_impl->setName(name);
-}
-
-std::string Species::desc() const
-{
-  return m_impl->desc();
-}
-
-void Species::setDesc(const std::string &desc)
-{
-  m_impl->setDesc(desc);
-}
-
-Species::SpeciesImpl::SpeciesImpl() : m_nr(0), m_sflag(0), m_ntflag(0), m_molwt(PRJFLOAT("0.0")), m_mdiam(PRJFLOAT("0.0")),
-  m_edens(PRJFLOAT("0.0")), m_decay(PRJFLOAT("0.0")), m_Dm(PRJFLOAT("0.0")), m_ccdef(PRJFLOAT("0.0")), m_Cp(PRJFLOAT("0.0")),
-  m_Kuv(PRJFLOAT("0.0")), m_ucc(0), m_umd(0), m_ued(0), m_udm(0), m_ucp(0)
+Species::Impl::Impl() : nr(0), sflag(0), ntflag(0), molwt(PRJFLOAT("0.0")), mdiam(PRJFLOAT("0.0")),
+  edens(PRJFLOAT("0.0")), decay(PRJFLOAT("0.0")), Dm(PRJFLOAT("0.0")), ccdef(PRJFLOAT("0.0")), Cp(PRJFLOAT("0.0")),
+  Kuv(PRJFLOAT("0.0")), ucc(0), umd(0), ued(0), udm(0), ucp(0)
 {}
 
-Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, std::string molwt, std::string mdiam, std::string edens, std::string decay,
+Species::Species(int nr, int sflag, int ntflag, std::string molwt, std::string mdiam, std::string edens, std::string decay,
   std::string Dm, std::string ccdef, std::string Cp, std::string K, int ucc, int umd, int ued, int udm, int ucp, std::string name,
-  std::string desc) : Species::SpeciesImpl()
+  std::string desc) : m_impl(std::shared_ptr<Impl>(new Species::Impl))
 {
   setNr(nr);
   setSflag(sflag);
@@ -1023,9 +783,9 @@ Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, std::string mol
   setDesc(desc);
 }
 
-Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, double molwt, double mdiam, double edens, double decay,
+Species::Species(int nr, int sflag, int ntflag, double molwt, double mdiam, double edens, double decay,
   double Dm, double ccdef, double Cp, double K, int ucc, int umd, int ued, int udm, int ucp, std::string name,
-  std::string desc) : Species::SpeciesImpl()
+  std::string desc) : m_impl(std::shared_ptr<Impl>(new Species::Impl))
 {
   setNr(nr);
   setSflag(sflag);
@@ -1047,7 +807,7 @@ Species::SpeciesImpl::SpeciesImpl(int nr, int sflag, int ntflag, double molwt, d
   setDesc(desc);
 }
 
-void Species::SpeciesImpl::read(Reader& input)
+void Species::read(Reader& input)
 {
   setNr(input.read<int>());
   setSflag(input.read<int>());
@@ -1069,243 +829,283 @@ void Species::SpeciesImpl::read(Reader& input)
   setDesc(input.readLine());
 }
 
-std::string Species::SpeciesImpl::write()
+std::string Species::write()
 {
   std::string string;
-  string += ANY_TO_STR(m_nr) + ' ' + ANY_TO_STR(m_sflag) + ' ' + ANY_TO_STR(m_ntflag) + ' ' + PRJFLOAT_TO_STR(m_molwt) + ' ' 
-    + PRJFLOAT_TO_STR(m_mdiam) + ' ' + PRJFLOAT_TO_STR(m_edens) + ' ' + PRJFLOAT_TO_STR(m_decay) + ' ' + PRJFLOAT_TO_STR(m_Dm) + ' ' 
-    + PRJFLOAT_TO_STR(m_ccdef) + ' ' + PRJFLOAT_TO_STR(m_Cp) + ' ' + PRJFLOAT_TO_STR(m_Kuv) + ' ' + ANY_TO_STR(m_ucc) + ' ' + ANY_TO_STR(m_umd)
-    + ' ' + ANY_TO_STR(m_ued) + ' ' + ANY_TO_STR(m_udm) + ' ' + ANY_TO_STR(m_ucp) + ' ' + m_name + '\n';
-  string += m_desc + '\n';
+  string += ANY_TO_STR(m_impl->nr) + ' ' + ANY_TO_STR(m_impl->sflag) + ' ' + ANY_TO_STR(m_impl->ntflag) + ' ' + PRJFLOAT_TO_STR(m_impl->molwt) + ' '
+    + PRJFLOAT_TO_STR(m_impl->mdiam) + ' ' + PRJFLOAT_TO_STR(m_impl->edens) + ' ' + PRJFLOAT_TO_STR(m_impl->decay) + ' ' + PRJFLOAT_TO_STR(m_impl->Dm) + ' '
+    + PRJFLOAT_TO_STR(m_impl->ccdef) + ' ' + PRJFLOAT_TO_STR(m_impl->Cp) + ' ' + PRJFLOAT_TO_STR(m_impl->Kuv) + ' ' + ANY_TO_STR(m_impl->ucc) + ' ' + ANY_TO_STR(m_impl->umd)
+    + ' ' + ANY_TO_STR(m_impl->ued) + ' ' + ANY_TO_STR(m_impl->udm) + ' ' + ANY_TO_STR(m_impl->ucp) + ' ' + m_impl->name + '\n';
+  string += m_impl->desc + '\n';
   return string;
 }
 
-int Species::SpeciesImpl::nr() const
+int Species::nr() const
 {
-  return m_nr;
+  return m_impl->nr;
 }
 
-void Species::SpeciesImpl::setNr(const int nr)
+void Species::setNr(const int nr)
 {
-  m_nr = nr;
+  m_impl->nr = nr;
 }
 
-bool Species::SpeciesImpl::sflag() const
+bool Species::sflag() const
 {
-  return m_sflag == 1;
+  return m_impl->sflag == 1;
 }
 
-void Species::SpeciesImpl::setSflag(const bool sflag)
+void Species::setSflag(const bool sflag)
 {
-  m_sflag = sflag ? 1 : 0;
+  m_impl->sflag = sflag ? 1 : 0;
 }
 
-bool Species::SpeciesImpl::ntflag() const
+bool Species::ntflag() const
 {
-  return m_ntflag == 1;
+  return m_impl->ntflag == 1;
 }
 
-void Species::SpeciesImpl::setNtflag(const bool ntflag)
+void Species::setNtflag(const bool ntflag)
 {
-  m_ntflag = (int)ntflag;
+  m_impl->ntflag = (int)ntflag;
 }
 
-double Species::SpeciesImpl::molwt() const
+template<> double PRJMODEL_API Species::molwt() const
 {
-  return to<double>(m_molwt);
+  return to<double>(m_impl->molwt);
 }
 
-bool Species::SpeciesImpl::setMolwt(const double molwt)
+template<> std::string PRJMODEL_API Species::molwt() const
 {
-  m_molwt = to_float(molwt);
+  return m_impl->molwt;
+}
+
+bool Species::setMolwt(const double molwt)
+{
+  m_impl->molwt = to_float(molwt);
   return true;
 }
 
-bool Species::SpeciesImpl::setMolwt(const std::string& molwt)
+bool Species::setMolwt(const std::string& molwt)
 {
-  return assign_if_valid<double>(molwt, m_molwt);
+  return assign_if_valid<double>(molwt, m_impl->molwt);
 }
 
-double Species::SpeciesImpl::mdiam() const
+template<> double PRJMODEL_API Species::mdiam() const
 {
-  return to<double>(m_mdiam);
+  return to<double>(m_impl->mdiam);
 }
 
-bool Species::SpeciesImpl::setMdiam(const double mdiam)
+template<> std::string PRJMODEL_API Species::mdiam() const
 {
-  m_mdiam = to_float(mdiam);
+  return m_impl->mdiam;
+}
+
+bool Species::setMdiam(const double mdiam)
+{
+  m_impl->mdiam = to_float(mdiam);
   return true;
 }
 
-bool Species::SpeciesImpl::setMdiam(const std::string& mdiam)
+bool Species::setMdiam(const std::string& mdiam)
 {
-  return assign_if_valid<double>(mdiam, m_mdiam);
+  return assign_if_valid<double>(mdiam, m_impl->mdiam);
 }
 
-double Species::SpeciesImpl::edens() const
+template<> double PRJMODEL_API Species::edens() const
 {
-  return to<double>(m_edens);
+  return to<double>(m_impl->edens);
 }
 
-bool Species::SpeciesImpl::setEdens(const double edens)
+template<> std::string PRJMODEL_API Species::edens() const
 {
-  m_edens = to_float(edens);
+  return m_impl->edens;
+}
+
+bool Species::setEdens(const double edens)
+{
+  m_impl->edens = to_float(edens);
   return true;
 }
 
-bool Species::SpeciesImpl::setEdens(const std::string& edens)
+bool Species::setEdens(const std::string& edens)
 {
-  return assign_if_valid<double>(edens, m_edens);
+  return assign_if_valid<double>(edens, m_impl->edens);
 }
 
-double Species::SpeciesImpl::decay() const
+template<> double PRJMODEL_API Species::decay() const
 {
-  return to<double>(m_decay);
+  return to<double>(m_impl->decay);
 }
 
-bool Species::SpeciesImpl::setDecay(const double decay)
+template<> std::string PRJMODEL_API Species::decay() const
 {
-  m_decay = to_float(decay);
+  return m_impl->decay;
+}
+
+bool Species::setDecay(const double decay)
+{
+  m_impl->decay = to_float(decay);
   return true;
 }
 
-bool Species::SpeciesImpl::setDecay(const std::string& decay)
+bool Species::setDecay(const std::string& decay)
 {
-  return assign_if_valid<double>(decay, m_decay);
+  return assign_if_valid<double>(decay, m_impl->decay);
 }
 
-double Species::SpeciesImpl::Dm() const
+template<> double PRJMODEL_API Species::Dm() const
 {
-  return to<double>(m_Dm);
+  return to<double>(m_impl->Dm);
 }
 
-bool Species::SpeciesImpl::setDm(const double Dm)
+template<> std::string PRJMODEL_API Species::Dm() const
 {
-  m_Dm = to_float(Dm);
+  return m_impl->Dm;
+}
+
+bool Species::setDm(const double Dm)
+{
+  m_impl->Dm = to_float(Dm);
   return true;
 }
 
-bool Species::SpeciesImpl::setDm(const std::string& Dm)
+bool Species::setDm(const std::string& Dm)
 {
-  return assign_if_valid<double>(Dm, m_Dm);
+  return assign_if_valid<double>(Dm, m_impl->Dm);
 }
 
-double Species::SpeciesImpl::ccdef() const
+template<> double PRJMODEL_API Species::ccdef() const
 {
-  return to<double>(m_ccdef);
+  return to<double>(m_impl->ccdef);
 }
 
-bool Species::SpeciesImpl::setCcdef(const double ccdef)
+template<> std::string PRJMODEL_API Species::ccdef() const
 {
-  m_ccdef = to_float(ccdef);
+  return m_impl->ccdef;
+}
+
+bool Species::setCcdef(const double ccdef)
+{
+  m_impl->ccdef = to_float(ccdef);
   return true;
 }
 
-bool Species::SpeciesImpl::setCcdef(const std::string& ccdef)
+bool Species::setCcdef(const std::string& ccdef)
 {
-  return assign_if_valid<double>(ccdef, m_ccdef);
+  return assign_if_valid<double>(ccdef, m_impl->ccdef);
 }
 
-double Species::SpeciesImpl::Cp() const
+template<> double PRJMODEL_API Species::Cp() const
 {
-  return to<double>(m_Cp);
+  return to<double>(m_impl->Cp);
 }
 
-bool Species::SpeciesImpl::setCp(const double Cp)
+template<> std::string PRJMODEL_API Species::Cp() const
 {
-  m_Cp = to_float(Cp);
+  return m_impl->Cp;
+}
+
+bool Species::setCp(const double Cp)
+{
+  m_impl->Cp = to_float(Cp);
   return true;
 }
 
-bool Species::SpeciesImpl::setCp(const std::string& Cp)
+bool Species::setCp(const std::string& Cp)
 {
-  return assign_if_valid<double>(Cp, m_Cp);
+  return assign_if_valid<double>(Cp, m_impl->Cp);
 }
 
-double Species::SpeciesImpl::Kuv() const
+template<> double PRJMODEL_API Species::Kuv() const
 {
-  return to<double>(m_Kuv);
+  return to<double>(m_impl->Kuv);
 }
 
-bool Species::SpeciesImpl::setKuv(const double K)
+template<> std::string PRJMODEL_API Species::Kuv() const
 {
-  m_Kuv = to_float(K);
+  return m_impl->Kuv;
+}
+
+bool Species::setKuv(const double K)
+{
+  m_impl->Kuv = to_float(K);
   return true;
 }
 
-bool Species::SpeciesImpl::setKuv(const std::string& K)
+bool Species::setKuv(const std::string& K)
 {
-  return assign_if_valid<double>(K, m_Kuv);
+  return assign_if_valid<double>(K, m_impl->Kuv);
 }
 
-int Species::SpeciesImpl::ucc() const
+int Species::ucc() const
 {
-  return m_ucc;
+  return m_impl->ucc;
 }
 
-void Species::SpeciesImpl::setUcc(const int ucc)
+void Species::setUcc(const int ucc)
 {
-  m_ucc = ucc;
+  m_impl->ucc = ucc;
 }
 
-int Species::SpeciesImpl::umd() const
+int Species::umd() const
 {
-  return m_umd;
+  return m_impl->umd;
 }
 
-void Species::SpeciesImpl::setUmd(const int umd)
+void Species::setUmd(const int umd)
 {
-  m_umd = umd;
+  m_impl->umd = umd;
 }
 
-int Species::SpeciesImpl::ued() const
+int Species::ued() const
 {
-  return m_ued;
+  return m_impl->ued;
 }
 
-void Species::SpeciesImpl::setUed(const int ued)
+void Species::setUed(const int ued)
 {
-  m_ued = ued;
+  m_impl->ued = ued;
 }
 
-int Species::SpeciesImpl::udm() const
+int Species::udm() const
 {
-  return m_udm;
+  return m_impl->udm;
 }
 
-void Species::SpeciesImpl::setUdm(const int udm)
+void Species::setUdm(const int udm)
 {
-  m_udm = udm;
+  m_impl->udm = udm;
 }
 
-int Species::SpeciesImpl::ucp() const
+int Species::ucp() const
 {
-  return m_ucp;
+  return m_impl->ucp;
 }
 
-void Species::SpeciesImpl::setUcp(const int ucp)
+void Species::setUcp(const int ucp)
 {
-  m_ucp = ucp;
+  m_impl->ucp = ucp;
 }
 
-std::string Species::SpeciesImpl::name() const
+std::string Species::name() const
 {
-  return m_name;
+  return m_impl->name;
 }
 
-void Species::SpeciesImpl::setName(const std::string& name)
+void Species::setName(const std::string& name)
 {
-  m_name = name;
+  m_impl->name = name;
 }
 
-std::string Species::SpeciesImpl::desc() const
+std::string Species::desc() const
 {
-  return m_desc;
+  return m_impl->desc;
 }
 
-void Species::SpeciesImpl::setDesc(const std::string& desc)
+void Species::setDesc(const std::string& desc)
 {
-  m_desc = desc;
+  m_impl->desc = desc;
 }
 
 Ahs::Ahs() :

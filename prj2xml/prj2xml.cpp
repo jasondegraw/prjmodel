@@ -139,16 +139,51 @@ int main(int argc, char* argv[])
       if (!element.desc().empty()) {
         xml << "      <Description>" << element.desc() << "</Description>" << std::endl;
       }
-      xml << "      <Height>" << element.height<std::string>() << "</Height>" << std::endl;
-      xml << "      <Width>" << element.width<std::string>() << "</Width>" << std::endl;
+      xml << "      <Height units=\"m\">" << element.height<std::string>() << "</Height>" << std::endl;
+      xml << "      <Width units=\"m\">" << element.width<std::string>() << "</Width>" << std::endl;
       xml << "      <Coefficient>" << element.turb<std::string>() << "</Coefficient>" << std::endl;
       xml << "      <LaminarCoefficient>" << element.lam<std::string>() << "</LaminarCoefficient>" << std::endl;
       xml << "      <Exponent>" << element.expt<std::string>() << "</Exponent>" << std::endl;
-      xml << "      <DischargeCoefficient>" << element.cd<std::string>() << "</DischargeCoefficent>" << std::endl;
+      xml << "      <DischargeCoefficient>" << element.cd<std::string>() << "</DischargeCoefficient>" << std::endl;
       xml << "      <MinimumForTwoWayFlow><ContamDensityDifference/></MinimumForTwoWayFlow>" << std::endl;
       xml << "    </SimpleOpening>" << std::endl;
     }
     xml << "  </Elements>" << std::endl;
+  }
+
+  auto ctms = model.contaminants();
+
+  if (model.species().size() > 0) {
+    xml << "  <Materials>" << std::endl;
+    for (auto& spcs : model.species()) {
+      xml << "    <Material ID=\"" << sanitize_name(spcs.name()) << "\">" << std::endl;
+      xml << "      <Name>" << spcs.name() << "</Name>" << std::endl;
+      if (!spcs.desc().empty()) {
+        xml << "      <Description>" << spcs.desc() << "</Description>" << std::endl;
+      }
+      if (spcs.molwt<double>() > 0.0) {
+        xml << "      <MolarMass>" << spcs.molwt<std::string>() << "</MolarMass>" << std::endl;
+      }
+      if (spcs.edens<double>() > 0.0) {
+        xml << "      <Density units=\"kg/m^3\">" << spcs.edens<std::string>() << "</Density>" << std::endl;
+      }
+      if (spcs.Cp<double>() > 0.0) {
+        xml << "      <SpecificHeat units=\"J/kgK\">" << spcs.Cp<std::string>() << "</SpecificHeat>" << std::endl;
+      }
+      xml << "      <DefaultConcentration>" << spcs.ccdef<std::string>() << "</DefaultConcentration>" << std::endl;
+
+      if (spcs.ntflag()) {
+        xml << "      <NonTrace/>" << std::endl;
+      }
+
+      if (std::find(ctms.begin(), ctms.end(), spcs.nr()) != ctms.end()) {
+        xml << "      <Active/>" << std::endl;
+      }
+
+      xml << "    </Material>" << std::endl;
+    }
+    
+    xml << "  </Materials>" << std::endl;
   }
 
   if (model.windPressureProfiles().size() > 0) {
@@ -202,7 +237,7 @@ int main(int argc, char* argv[])
         ssxml << "    <Node ID=\"external_" << path.nr() << "\">" << std::endl;
         ssxml << "      <PressureHandling>" << std::endl;
         if (path.pw() == 0) {
-          ssxml << "        <Fixed units=\"Pa\">" << path.wPset<std::string>() << "</Fixed>" <<std::endl;
+          ssxml << "        <Fixed units=\"Pag\">" << path.wPset<std::string>() << "</Fixed>" <<std::endl;
         } else {
           ssxml << "        <Wind>" << std::endl;
           ssxml << "          <Modifier>" << path.wPmod<std::string>() << "</Modifier>" << std::endl;
