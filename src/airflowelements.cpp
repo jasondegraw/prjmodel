@@ -4481,6 +4481,11 @@ template<> double PRJMODEL_API AfeDor::cd() const
   return to<double>(m_impl->cd);
 }
 
+template<> std::string PRJMODEL_API AfeDor::cd() const
+{
+  return m_impl->cd;
+}
+
 bool AfeDor::setCd(const double cd)
 {
   m_impl->cd = to_float(cd);

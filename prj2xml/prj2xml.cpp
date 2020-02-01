@@ -134,6 +134,20 @@ int main(int argc, char* argv[])
       xml << "      <LaminarCoefficientCalculation><TransitionReynoldsNumber>30</TransitionReynoldsNumber></LaminarCoefficientCalculation>" << std::endl;
       xml << "    </PowerLaw>" << std::endl;
     }
+    for (auto& element : model.getAirflowElements<prjmodel::AfeDor>()) {
+      xml << "    <SimpleOpening ID=\"" << sanitize_name(element.name()) << "\">" << std::endl;
+      if (!element.desc().empty()) {
+        xml << "      <Description>" << element.desc() << "</Description>" << std::endl;
+      }
+      xml << "      <Height>" << element.height<std::string>() << "</Height>" << std::endl;
+      xml << "      <Width>" << element.width<std::string>() << "</Width>" << std::endl;
+      xml << "      <Coefficient>" << element.turb<std::string>() << "</Coefficient>" << std::endl;
+      xml << "      <LaminarCoefficient>" << element.lam<std::string>() << "</LaminarCoefficient>" << std::endl;
+      xml << "      <Exponent>" << element.expt<std::string>() << "</Exponent>" << std::endl;
+      xml << "      <DischargeCoefficient>" << element.cd<std::string>() << "</DischargeCoefficent>" << std::endl;
+      xml << "      <MinimumForTwoWayFlow><ContamDensityDifference/></MinimumForTwoWayFlow>" << std::endl;
+      xml << "    </SimpleOpening>" << std::endl;
+    }
     xml << "  </Elements>" << std::endl;
   }
 
